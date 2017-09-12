@@ -1,16 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { lgosRootComponent } from './lgos-root.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    lgosRootComponent
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [lgosRootComponent]
 })
-export class AppModule { }
+export class lgosModule { }
