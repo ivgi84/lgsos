@@ -18,7 +18,8 @@
         "testTsconfig": "tsconfig.spec.json",
         "prefix": "lgos",
         "styles": [
-            "styles.css"
+            "styles.css",
+            "lgos_theme.scss"
         ],
         "scripts": [],
         "environmentSource": "environments/environment.ts",
