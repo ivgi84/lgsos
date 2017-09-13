@@ -4,15 +4,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdInputModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule } from '@angular/material';
 import { lgosRootComponent } from './lgos-root.component';
 import { LoginFormComponent } from './views/login-form/login-form.component';
+import { RegisterFormComponent } from './views/register-form/register-form.component';
+import { DrawFormComponent } from './views/draw-form/draw-form.component';
 
 @NgModule({
   declarations: [
     lgosRootComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RegisterFormComponent,
+    DrawFormComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MdButtonModule,
     MdInputModule,
     MdMenuModule,
     MdCardModule,
