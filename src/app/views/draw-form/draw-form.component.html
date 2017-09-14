@@ -1,3 +1,26 @@
-<p>
-  draw-form works!
-</p>
+<md-card>
+    <md-card-title>
+        <h4>Overlay Form</h4>
+    </md-card-title>
+    <md-card-content>
+        <form>
+            <md-radio-group class="example-radio-group">
+                <md-radio-button *ngFor="let type of uploadTypes; let i = index;" [value]="type.value" [checked]="type.isSelected" (change)="onUploadTypeSelection(i)">{{type.text}}</md-radio-button>
+            </md-radio-group>
+            <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'">
+                <span class="nofiles">Choose file</span>
+                <span class="selected">Files selected</span>
+            </input-file>
+            <md-form-field class="example-full-width">
+                <textarea rows="2" cols="50" mdInput autocomplete="off"></textarea>
+            </md-form-field>
+        </form>
+        <div class="result">
+            <img [src]="graphics.src" alt="">
+            <img [src]="overlay.src" alt="">
+        </div>
+    </md-card-content>
+    <md-card-actions>
+        <button md-raised-button color="primary">Add text area</button>
+    </md-card-actions>
+</md-card>
