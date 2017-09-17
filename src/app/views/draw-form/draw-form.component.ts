@@ -1,3 +1,5 @@
+import { forEach } from '@angular/router/src/utils/collection';
+import { UploadType } from './models/upload-type';
 import { debug } from 'util';
 import { Component, OnInit } from '@angular/core';
 
@@ -6,41 +8,29 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './draw-form.component.html',
   styleUrls: ['./draw-form.component.css']
 })
-export class DrawFormComponent implements OnInit {
-
-  private uploadTypes: Object[] = [{
-    value:1,
-    text:'Graphics',
-    isSelected: true,
-    imgSrc:''
-  },{
-    value:2,
-    text:'Overlay',
-    isSelected:false,
-    imgSrc:''
-  }];
-
+export class DrawFormComponent{
+  
+  private graphics = new UploadType(1, 'Graphics',true, '');
+  private overlay = new UploadType(2, 'Overlay',false, '');
+  private uploadTypes = [this.graphics, this.overlay];
   private selectedType = this.uploadTypes[0];
 
-  private graphics:Object = {};
-  private overlay:Object = {};
-
   onFileSelect(file){
-  
-    this.uploadTypes;
     let reader = new FileReader();
     reader.onload = (e: any) => {
-      debugger
+  
       this.selectedType.imgSrc = e.target.result;
     }
     reader.readAsDataURL(file[0]);  
-  }
-
-  onUploadTypeSelection(ind){
     debugger;
   }
 
-  ngOnInit() {
+  onUploadTypeSelection(ind){
+    this.uploadTypes.forEach(function(elm){
+        elm.isSelected = false;
+    });
+    this.selectedType = this.uploadTypes[ind];
   }
+
 
 }
