@@ -16,11 +16,15 @@
             </md-form-field>
         </form>
         <div class="result">
-            <img [src]="graphics.imgSrc" alt="">
-            <img [src]="overlay.imgSrc" alt="">
+            <img width="400" #graphicsImg *ngIf="graphics.imgSrc" [src]="graphics.imgSrc" alt="">
+            <img width="400" #overlayImg *ngIf="overlay.imgSrc" [src]="overlay.imgSrc" alt="">
         </div>
+        <md-card-actions>
+            <button md-raised-button color="primary">Add text area</button>
+            <button md-raised-button color="primary" (click)="render();">Render</button>
+        </md-card-actions>
+        <canvas #canvas id="result" width="800" height="800" style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
     </md-card-content>
-    <md-card-actions>
-        <button md-raised-button color="primary">Add text area</button>
-    </md-card-actions>
 </md-card>
