@@ -24,8 +24,9 @@ export class DrawFormComponent{
   private graphicsImgElem: HTMLImageElement;
   private overlayImgElem: HTMLImageElement;
   
-  ngAfterViewChecked(){
+  ngAfterViewInit(){
     this.ctx = this.canvas.nativeElement.getContext('2d');
+    //this.render();
   }
 
   onFileSelect(file){
@@ -33,12 +34,11 @@ export class DrawFormComponent{
     reader.onload = (e: any) => {
       this.selectedType.imgSrc = e.target.result;
        setTimeout(()=>{
-         debugger
         if(this.selectedType.value == 1)
-        this.graphicsImgElem = this.graphicsImg.nativeElement;
+          this.graphicsImgElem = this.graphicsImg.nativeElement;
 
-      if(this.selectedType.value == 2)
-        this.overlayImgElem = this.overlayImg.nativeElement;
+        if(this.selectedType.value == 2)
+          this.overlayImgElem = this.overlayImg.nativeElement;
        },1000);
     }
     reader.readAsDataURL(file[0]);  
@@ -56,7 +56,10 @@ export class DrawFormComponent{
 }
 
   render() {
-    this.clear();
+    requestAnimationFrame(()=>{
+      this.render();
+    });
+    //this.clear();
     this.ctx.drawImage(this.graphicsImgElem, 0, 0);
     this.ctx.drawImage(this.overlayImgElem, 0, 0);
 }

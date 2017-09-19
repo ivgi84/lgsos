@@ -8,6 +8,7 @@ import { LoginFormComponent } from './views/login-form/login-form.component';
 import { RegisterFormComponent } from './views/register-form/register-form.component';
 import { DrawFormComponent } from './views/draw-form/draw-form.component';
 import { InputFileComponent } from './infrastract/input-file/input-file.component';
+import { DraggableDirective } from './views/draw-form/directives/draggable.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { InputFileComponent } from './infrastract/input-file/input-file.componen
     LoginFormComponent,
     RegisterFormComponent,
     DrawFormComponent,
-    InputFileComponent
+    InputFileComponent,
+    DraggableDirective
   ],
   imports: [
     BrowserModule,
