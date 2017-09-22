@@ -5,3 +5,12 @@ md-radio-group {
 md-radio-button {
     margin: 10px;
 }
+
+canvas {
+    border: none;
+    box-shadow: 0px 0px 3px 1px #ccc
+}
+
+.preview img {
+    width: 400px;
+}

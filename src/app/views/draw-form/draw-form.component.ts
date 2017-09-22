@@ -1,6 +1,8 @@
 import { ElementRef, ViewChild } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UploadType } from './models/upload-type';
+import { Shape } from './models/shape';
+import { CanvasState } from './models/canvas-state';
 import { debug } from 'util';
 import { Component, OnInit } from '@angular/core';
 
@@ -20,13 +22,12 @@ export class DrawFormComponent{
   private uploadTypes = [this.graphics, this.overlay];
   private selectedType = this.uploadTypes[0];
 
-  private ctx: CanvasRenderingContext2D;
-  private graphicsImgElem: HTMLImageElement;
-  private overlayImgElem: HTMLImageElement;
+  private canvasState: CanvasState;
+  private graphicsImgElem: Shape;
+  private overlayImgElem: Shape//HTMLImageElement;
   
   ngAfterViewInit(){
-    this.ctx = this.canvas.nativeElement.getContext('2d');
-    //this.render();
+    this.canvasState = new CanvasState(this.canvas.nativeElement);
   }
 
   onFileSelect(file){
@@ -35,11 +36,11 @@ export class DrawFormComponent{
       this.selectedType.imgSrc = e.target.result;
        setTimeout(()=>{
         if(this.selectedType.value == 1)
-          this.graphicsImgElem = this.graphicsImg.nativeElement;
+          this.graphicsImgElem = new Shape(this.canvasState,this.graphicsImg.nativeElement);
 
         if(this.selectedType.value == 2)
-          this.overlayImgElem = this.overlayImg.nativeElement;
-       },1000);
+          this.overlayImgElem = new Shape(this.canvasState, this.overlayImg.nativeElement);
+       },10);
     }
     reader.readAsDataURL(file[0]);  
   }
@@ -51,18 +52,25 @@ export class DrawFormComponent{
     this.selectedType = this.uploadTypes[ind];
   }
   
-  clear() {
-    this.ctx.clearRect(0, 0, 800, 800);
-}
 
   render() {
-    requestAnimationFrame(()=>{
-      this.render();
-    });
+    // requestAnimationFrame(()=>{
+    //   this.render();
+    // });
     //this.clear();
-    this.ctx.drawImage(this.graphicsImgElem, 0, 0);
-    this.ctx.drawImage(this.overlayImgElem, 0, 0);
+    this.graphicsImgElem.draw();
+    this.overlayImgElem.draw();
 }
+
+  onMouseDown(event){
+    this.canvasState.mouseDown(event);
+  }
+  onMouseMove(event){
+    
+  }
+  onMouseUp(event){
+    console.log(event);
+  }
 
 
 }
