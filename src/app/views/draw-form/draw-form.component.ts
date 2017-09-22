@@ -58,18 +58,21 @@ export class DrawFormComponent{
     //   this.render();
     // });
     //this.clear();
-    this.graphicsImgElem.draw();
-    this.overlayImgElem.draw();
+
+    // this.graphicsImgElem.draw();
+    // this.overlayImgElem.draw();
+    this.canvasState.draw();
+    
 }
 
   onMouseDown(event){
     this.canvasState.mouseDown(event);
   }
   onMouseMove(event){
-    
+    this.canvasState.mouseMove(event);
   }
   onMouseUp(event){
-    console.log(event);
+      this.canvasState.mouseUp(event);
   }
 
 

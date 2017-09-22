@@ -15,13 +15,13 @@ export class DraggableDirective {
   @Output() mouseUp:EventEmitter<Object> = new EventEmitter<Object>();
   @HostListener('mouseup', ['$event'])
   onMouseup(event) {
-    this.mouseUp.emit({'event':event,'message':'Mouse Up event'});
+    this.mouseUp.emit(event);
   }
 
   @Output() mouseMove:EventEmitter<Object> = new EventEmitter<Object>();
   @HostListener('mousemove', ['$event'])
   onMousemove(event) {
-    this.mouseMove.emit({'event':event,'message':'Mouse move event'});
+    this.mouseMove.emit(event);
   }
 
   constructor(public element: ElementRef) {
