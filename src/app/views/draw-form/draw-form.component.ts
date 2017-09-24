@@ -1,10 +1,12 @@
-import { ElementRef, ViewChild } from '@angular/core';
+import { ElementRef, ViewChild,Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
-import { UploadType } from './models/upload-type';
-import { Shape } from './models/shape';
-import { CanvasState } from './models/canvas-state';
+import { Upload } from './models/upload';
+import { SortableDirective } from './directives/sortable.directive';
 import { debug } from 'util';
-import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+import * as _ from 'lodash';
+
+import 'jqueryui';
 
 @Component({
   selector: 'lgos-draw-form',
@@ -13,67 +15,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrawFormComponent{
 
-  @ViewChild('canvas') canvas: ElementRef;
-  @ViewChild('graphicsImg') graphicsImg: ElementRef;
-  @ViewChild('overlayImg') overlayImg: ElementRef;
-    
-  private graphics = new UploadType(1, 'Graphics',true, '');
-  private overlay = new UploadType(2, 'Overlay',false, '');
-  private uploadTypes = [this.graphics, this.overlay];
-  private selectedType = this.uploadTypes[0];
+  constructor(private ref:ChangeDetectorRef){
 
-  private canvasState: CanvasState;
-  private graphicsImgElem: Shape;
-  private overlayImgElem: Shape//HTMLImageElement;
-  
-  ngAfterViewInit(){
-    this.canvasState = new CanvasState(this.canvas.nativeElement);
   }
 
+  @ViewChild(SortableDirective) thumbnails:SortableDirective;
+
+  private uploadImgs = [];
+
+  setDraggable(){
+      $('.draggable-wrap').draggable({
+        containment: "parent",
+        scroll: false
+      }).resizable({
+          aspectRatio: true
+        }
+      );
+  }
+  
   onFileSelect(file){
+    let fileName = file[0].name;
     let reader = new FileReader();
     reader.onload = (e: any) => {
-      this.selectedType.imgSrc = e.target.result;
-       setTimeout(()=>{
-        if(this.selectedType.value == 1)
-          this.graphicsImgElem = new Shape(this.canvasState,this.graphicsImg.nativeElement);
-
-        if(this.selectedType.value == 2)
-          this.overlayImgElem = new Shape(this.canvasState, this.overlayImg.nativeElement);
-       },10);
+      let img = new Upload(fileName,'',false, e.target.result, 100 + this.uploadImgs.length);
+      this.uploadImgs.unshift(img);
+      setTimeout(()=>{
+        this.setDraggable();
+        this.thumbnails.onImageUpload();
+      },500)
     }
     reader.readAsDataURL(file[0]);  
   }
 
-  onUploadTypeSelection(ind){
-    this.uploadTypes.forEach(function(elm){
-        elm.isSelected = false;
+  onOrderUpdate(list: Array<String>){
+    _.each(this.uploadImgs,(img)=>{      
+      let res = _.find(list,(val:any)=>{
+        return val.id == img.id
+      });
+      img.level = res.level;
     });
-    this.selectedType = this.uploadTypes[ind];
+    this.ref.detectChanges();
+    debugger
   }
-  
-
-  render() {
-    // requestAnimationFrame(()=>{
-    //   this.render();
-    // });
-    //this.clear();
-
-    // this.graphicsImgElem.draw();
-    // this.overlayImgElem.draw();
-    this.canvasState.draw();
-    
-}
-
-  onMouseDown(event){
-    this.canvasState.mouseDown(event);
-  }
-  onMouseMove(event){
-    this.canvasState.mouseMove(event);
-  }
-  onMouseUp(event){
-      this.canvasState.mouseUp(event);
-  }
-
 
 }

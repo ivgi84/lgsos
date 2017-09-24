@@ -13,7 +13,8 @@
             "node_modules/@types"
         ],
         "types": [
-            "hammerjs"
+            "hammerjs",
+            "lodash"
         ],
         "lib": [
             "es2016",

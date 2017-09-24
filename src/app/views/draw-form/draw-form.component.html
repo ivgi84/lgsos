@@ -1,30 +1,41 @@
-<md-card>
-    <md-card-title>
-        <!-- <h4>Overlay Form</h4> -->
-    </md-card-title>
-    <md-card-content>
-        <form>
-            <md-radio-group class="example-radio-group">
-                <md-radio-button *ngFor="let type of uploadTypes; let i = index;" [value]="type.value" [checked]="type.isSelected" (change)="onUploadTypeSelection(i)">{{type.text}}</md-radio-button>
-            </md-radio-group>
-            <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'">
-                <span class="nofiles">Choose file</span>
-                <span class="selected">Files selected</span>
-            </input-file>
-            <md-form-field class="example-full-width">
-                <textarea rows="2" cols="50" mdInput autocomplete="off"></textarea>
-            </md-form-field>
-        </form>
-        <div class="preview">
-            <img #graphicsImg *ngIf="graphics.imgSrc" [src]="graphics.imgSrc" alt="">
-            <img #overlayImg *ngIf="overlay.imgSrc" [src]="overlay.imgSrc" alt="">
+<md-sidenav-container class="sidenav-container">
+    <md-sidenav #sidenav class="sidenav" mode="side" [opened]="uploadImgs.length > 0" disableClose="true">
+        <div class="sidenav-content">
+            <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
+                <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of uploadImgs; let i = index;">
+                    <md-card-title>{{elm.id}}</md-card-title>
+                    <md-card-content>
+                        <div class="thumbnail">
+                            <img [src]="elm.src" alt="">
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
         </div>
-        <md-card-actions>
-            <button md-raised-button color="primary">Add text area</button>
-            <button md-raised-button color="primary" (click)="render();">Render</button>
-        </md-card-actions>
-        <canvas lgOsDraggableCanvas (mouseDown)="onMouseDown($event)" (mouseMove)="onMouseMove($event)" (mouseUp)="onMouseUp($event)" #canvas id="result" width="800" height="800" style="border:1px solid #d3d3d3;">
-            Your browser does not support the HTML5 canvas tag.
-        </canvas>
-    </md-card-content>
-</md-card>
+    </md-sidenav>
+    <md-card>
+        <md-card-title>
+            <!-- <h4>Overlay Form</h4> -->
+        </md-card-title>
+        <md-card-content>
+            <form>
+                <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'">
+                    <span class="nofiles">Choose file</span>
+                    <span class="selected">Files selected</span>
+                </input-file>
+            </form>
+            <div class="playground" #playground *ngIf="uploadImgs.length > 0">
+                <div [style.zIndex]="elm.level" class="draggable-wrap" *ngFor="let elm of uploadImgs">
+                    <img [src]="elm.src" alt="">
+                </div>
+            </div>
+            <md-card-actions>
+                <md-form-field class="example-full-width">
+                    <textarea rows="2" cols="50" mdInput autocomplete="off"></textarea>
+                </md-form-field>
+                <button md-raised-button color="primary">Add text</button>
+                <button md-raised-button color="primary" (click)="save();">Save</button>
+            </md-card-actions>
+        </md-card-content>
+    </md-card>
+</md-sidenav-container>

@@ -1,3 +1,4 @@
+@import 'http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css';
 md-radio-group {
     display: block;
 }
@@ -6,11 +7,37 @@ md-radio-button {
     margin: 10px;
 }
 
-canvas {
-    border: none;
-    box-shadow: 0px 0px 3px 1px #ccc
+.sidenav {
+    width: 220px;
+    background: #ccc;
 }
 
-.preview img {
-    width: 400px;
+.thumbnail-card {
+    margin: 0 4px 4px 4px;
+}
+
+.thumbnail-card img {
+    width: 100%;
+}
+
+.thumbnail-card md-card-title {
+    font-size: 16px;
+}
+
+.playground {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.draggable-wrap {
+    position: absolute;
+    display: inline-block;
+    z-index: 0;
+}
+
+.draggable-wrap img {
+    width: 100%;
 }
