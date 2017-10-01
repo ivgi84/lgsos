@@ -33,18 +33,20 @@ export class DrawFormComponent{
       );
   }
   
-  onFileSelect(file){
-    let fileName = file[0].name;
-    let reader = new FileReader();
-    reader.onload = (e: any) => {
-      let img = new Upload(fileName,'',false, e.target.result, 100 + this.uploadImgs.length);
-      this.uploadImgs.unshift(img);
-      setTimeout(()=>{
-        this.setDraggable();
-        this.thumbnails.onImageUpload();
-      },500)
-    }
-    reader.readAsDataURL(file[0]);  
+  onFileSelect(files:any){
+    _.each(files, (file:any)=>{
+      let fileName = file.name;
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+        let img = new Upload(fileName,'',false, e.target.result, 100 + this.uploadImgs.length);
+        this.uploadImgs.unshift(img);
+        setTimeout(()=>{
+          this.setDraggable();
+          this.thumbnails.onImageUpload();
+        },500)
+      }
+      reader.readAsDataURL(file);  
+    })
   }
 
   onOrderUpdate(list: Array<String>){

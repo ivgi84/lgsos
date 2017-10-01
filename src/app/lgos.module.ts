@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdInputModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdRadioModule, MdSidenavModule } from '@angular/material';
+import { MdInputModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdRadioModule, MdSidenavModule, MdTabsModule } from '@angular/material';
 import { lgosRootComponent } from './lgos-root.component';
 import { LoginFormComponent } from './views/login-form/login-form.component';
 import { RegisterFormComponent } from './views/register-form/register-form.component';
@@ -31,7 +31,8 @@ import { SortableDirective } from './views/draw-form/directives/sortable.directi
     MdToolbarModule,
     MdIconModule,
     MdRadioModule,
-    MdSidenavModule
+    MdSidenavModule,
+    MdTabsModule
   ],
   providers: [],
   bootstrap: [lgosRootComponent]

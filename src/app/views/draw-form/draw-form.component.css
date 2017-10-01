@@ -7,9 +7,34 @@ md-radio-button {
     margin: 10px;
 }
 
+md-sidenav {
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+}
+
+.sidenav-container {
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
 .sidenav {
-    width: 220px;
-    background: #ccc;
+    width: 400px;
+}
+
+.side-upload-btn {
+    margin: 20px auto;
+    max-width: 110px;
+}
+
+.draw-area {
+    width: 100%;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.side-layers {
+    width: 100%;
+    padding: 24px;
+    margin: 3px auto;
 }
 
 .thumbnail-card {
