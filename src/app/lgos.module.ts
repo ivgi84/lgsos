@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdInputModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdRadioModule, MdSidenavModule, MdTabsModule } from '@angular/material';
-import { lgosRootComponent } from './lgos-root.component';
+import { MdInputModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdRadioModule, MdSidenavModule, MdTabsModule, MdExpansionModule, MdListModule } from '@angular/material';import { lgosRootComponent } from './lgos-root.component';
 import { LoginFormComponent } from './views/login-form/login-form.component';
 import { RegisterFormComponent } from './views/register-form/register-form.component';
 import { DrawFormComponent } from './views/draw-form/draw-form.component';
@@ -24,6 +24,7 @@ import { SortableDirective } from './views/draw-form/directives/sortable.directi
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     MdButtonModule,
     MdInputModule,
     MdMenuModule,
@@ -32,7 +33,9 @@ import { SortableDirective } from './views/draw-form/directives/sortable.directi
     MdIconModule,
     MdRadioModule,
     MdSidenavModule,
-    MdTabsModule
+    MdTabsModule,
+    MdExpansionModule,
+    MdListModule
   ],
   providers: [],
   bootstrap: [lgosRootComponent]

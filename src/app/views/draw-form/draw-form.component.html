@@ -6,7 +6,78 @@
 <md-sidenav-container class="sidenav-container">
     <md-sidenav #sidenav class="sidenav" mode="side" opened="true">
         <div class="sidenav-content">
-            <md-tab-group class="side-tabs">
+            <md-accordion class="side-panel">
+                <md-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+                    <md-expansion-panel-header>
+                        <md-panel-title>
+                            Upload
+                        </md-panel-title>
+                        <md-panel-description>
+                            Upload your files here
+                        </md-panel-description>
+                        <span class="spacer"></span>
+                        <md-icon>file_upload</md-icon>
+                    </md-expansion-panel-header>
+                    <md-action-row class="lgos-side-panel-action-row">
+                        <div class="side-upload-btn">
+                            <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'"></input-file>
+                        </div>
+                    </md-action-row>
+                </md-expansion-panel>
+                <md-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+                    <md-expansion-panel-header>
+                        <md-panel-title>
+                            Layers
+                        </md-panel-title>
+                        <md-panel-description>
+                            Set up layers order by dragging
+                        </md-panel-description>
+                        <span class="spacer"></span>
+                        <md-icon>reorder</md-icon>
+                    </md-expansion-panel-header>
+                    <md-action-row>
+                        <!-- 
+                        <md-list class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
+                            <md-list-item *ngFor="let elm of uploadImgs; let i = index;">
+                                <img style="width:100px" mdListAvatar [src]="elm.src">
+                                <p mdLine>
+                                    <span> {{elm.id}} </span>
+                                </p>
+                            </md-list-item>
+                        </md-list> -->
+
+                        <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
+                            <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of uploadImgs; let i = index;">
+                                <md-card-content class="thumbnail-img">
+                                    <img [src]="elm.src" alt="">
+                                </md-card-content>
+                                <md-card-title class="thumbnail-name">{{elm.id}}</md-card-title>
+                            </md-card>
+                        </div>
+                    </md-action-row>
+                </md-expansion-panel>
+                <md-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+                    <md-expansion-panel-header>
+                        <md-panel-title>
+                            Free text
+                        </md-panel-title>
+                        <md-panel-description>
+                            Add free text
+                        </md-panel-description>
+                        <span class="spacer"></span>
+                        <md-icon>library_add</md-icon>
+                    </md-expansion-panel-header>
+                    <md-action-row>
+                        <md-form-field class="lgos-input-full-width">
+                            <textarea [(ngModel)]="userFreeText" placeholder="Your text" mdInput autocomplete="off"></textarea>
+                        </md-form-field>
+                    </md-action-row>
+                    <md-action-row>
+                        <button md-raised-button color="primary" (click)="addText()">Add text <md-icon>library_add</md-icon></button>
+                    </md-action-row>
+                </md-expansion-panel>
+            </md-accordion>
+            <!-- <md-tab-group class="side-tabs">
                 <md-tab label="upload" class="side-tab">
                     <div class="side-upload-btn">
                         <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'"></input-file>
@@ -20,7 +91,7 @@
                         <button md-raised-button color="primary">Add text</button>
                     </div>
                 </md-tab>
-                <md-tab label="Layers">
+                <md-tab label="Elements">
                     <div class="side-layers">
                         <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
                             <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of uploadImgs; let i = index;">
@@ -34,7 +105,7 @@
                         </div>
                     </div>
                 </md-tab>
-            </md-tab-group>
+            </md-tab-group> -->
         </div>
     </md-sidenav>
     <md-card class="draw-area">
@@ -43,6 +114,9 @@
                 <div [style.zIndex]="elm.level" class="draggable-wrap" *ngFor="let elm of uploadImgs">
                     <img [src]="elm.src" alt="">
                 </div>
+                <p *ngFor="let text of userTexts">
+                    {{text}}
+                </p>
             </div>
         </md-card-content>
     </md-card>

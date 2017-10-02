@@ -1,6 +1,6 @@
 export class Upload {
     constructor (
-        public id: number,
+        public id: string,
         public text: string,
         public isSelected: boolean,
         public src: string,

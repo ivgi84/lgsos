@@ -33,6 +33,16 @@ body {
     flex: 1 1 auto;
 }
 
+
+/* ANGULAR MATERIALS THEME FIXES  START*/
+
 .sidenav .mat-tab-label {
     min-width: 1px !important;
 }
+
+.mat-expansion-panel-body {
+    padding: 0!important;
+}
+
+
+/* ANGULAR MATERIALS THEME FIXES  END*/

@@ -5,7 +5,6 @@ import { SortableDirective } from './directives/sortable.directive';
 import { debug } from 'util';
 import * as $ from 'jquery';
 import * as _ from 'lodash';
-
 import 'jqueryui';
 
 @Component({
@@ -14,27 +13,39 @@ import 'jqueryui';
   styleUrls: ['./draw-form.component.css']
 })
 export class DrawFormComponent{
-
-  constructor(private ref:ChangeDetectorRef){
-
-  }
+  constructor(private ref:ChangeDetectorRef){}
 
   @ViewChild(SortableDirective) thumbnails:SortableDirective;
+  userFreeText: string = '';
+  step = 0;
+  setStep(index:number){
+    this.step = index
+  }
 
+  nextStep(){
+    this.step++;
+  }
+  prevStep(){
+    this.step--;
+  }
+
+  
   private uploadImgs = [];
+  private userTexts = [];
 
   setDraggable(){
       $('.draggable-wrap').draggable({
         containment: "parent",
         scroll: false
       }).resizable({
-          aspectRatio: true
+          aspectRatio: true,
+          animate: true
         }
       );
   }
   
-  onFileSelect(files:any){
-    _.each(files, (file:any)=>{
+  onFileSelect(files:FileList){
+    _.each(files, (file:File)=>{
       let fileName = file.name;
       let reader = new FileReader();
       reader.onload = (e: any) => {
@@ -57,7 +68,11 @@ export class DrawFormComponent{
       img.level = res.level;
     });
     this.ref.detectChanges();
-    debugger
+  }
+
+  addText(){
+    var text = this.userFreeText;
+    this.userTexts.push(text)
   }
 
 }
