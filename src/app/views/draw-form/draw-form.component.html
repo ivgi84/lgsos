@@ -36,16 +36,6 @@
                         <md-icon>reorder</md-icon>
                     </md-expansion-panel-header>
                     <md-action-row>
-                        <!-- 
-                        <md-list class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
-                            <md-list-item *ngFor="let elm of uploadImgs; let i = index;">
-                                <img style="width:100px" mdListAvatar [src]="elm.src">
-                                <p mdLine>
-                                    <span> {{elm.id}} </span>
-                                </p>
-                            </md-list-item>
-                        </md-list> -->
-
                         <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
                             <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of uploadImgs; let i = index;">
                                 <md-card-content class="thumbnail-img">

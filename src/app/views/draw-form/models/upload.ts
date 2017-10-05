@@ -1,3 +1,4 @@
+import {Element} from './element';
 export class Upload {
     constructor (
         public id: string,
