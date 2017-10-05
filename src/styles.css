@@ -33,6 +33,10 @@ body {
     flex: 1 1 auto;
 }
 
+.ui-resizable-helper {
+    border: 1px dotted #00F;
+}
+
 
 /* ANGULAR MATERIALS THEME FIXES  START*/
 

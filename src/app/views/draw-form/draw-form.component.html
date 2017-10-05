@@ -101,12 +101,14 @@
     <md-card class="draw-area">
         <md-card-content>
             <div class="playground" #playground *ngIf="uploadImgs.length > 0">
-                <div [style.zIndex]="elm.level" class="draggable-wrap" *ngFor="let elm of uploadImgs">
+                <div [style.zIndex]="elm.z" class="draggable-wrap" *ngFor="let elm of uploadImgs">
                     <img [src]="elm.src" alt="">
                 </div>
-                <p *ngFor="let text of userTexts">
-                    {{text}}
-                </p>
+                <div class="draggable-wrap">
+                    <p *ngFor="let input of userInputs; let i = index;" (click)="input.select(i)" [style.width]="input.width" [style.height]="input.height" [style.zIndex]="input.z">
+                        {{input.text}}
+                    </p>
+                </div>
             </div>
         </md-card-content>
     </md-card>

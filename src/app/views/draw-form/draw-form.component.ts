@@ -1,6 +1,7 @@
 import { ElementRef, ViewChild,Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Upload } from './models/upload';
+import { UserInput } from './models/user-input';
 import { SortableDirective } from './directives/sortable.directive';
 import { debug } from 'util';
 import * as $ from 'jquery';
@@ -31,15 +32,17 @@ export class DrawFormComponent{
 
   
   private uploadImgs = [];
-  private userTexts = [];
+  private userInputs   = [];
 
   setDraggable(){
       $('.draggable-wrap').draggable({
         containment: "parent",
+        cursor:"move",
         scroll: false
       }).resizable({
           aspectRatio: true,
-          animate: true
+          helper: "ui-resizable-helper",
+          animate:true
         }
       );
   }
@@ -49,30 +52,31 @@ export class DrawFormComponent{
       let fileName = file.name;
       let reader = new FileReader();
       reader.onload = (e: any) => {
-        let img = new Upload(fileName,'',false, e.target.result, 100 + this.uploadImgs.length);
+        let img  = new Upload(fileName,100 + this.uploadImgs.length, e.target.result,)
         this.uploadImgs.unshift(img);
         setTimeout(()=>{
           this.setDraggable();
           this.thumbnails.onImageUpload();
-        },500)
+        },100)
       }
       reader.readAsDataURL(file);  
     })
   }
 
   onOrderUpdate(list: Array<String>){
-    _.each(this.uploadImgs,(img)=>{      
+    _.each(this.uploadImgs,(img:Upload)=>{      
       let res = _.find(list,(val:any)=>{
         return val.id == img.id
       });
-      img.level = res.level;
+      img.z = res.z;
     });
     this.ref.detectChanges();
   }
 
   addText(){
-    var text = this.userFreeText;
-    this.userTexts.push(text)
+    var input = new UserInput('id' + this.userInputs.length,100+this.uploadImgs.length + this.userInputs.length+1,false,100,100,this.userFreeText);
+    this.userInputs.push(input);
+    this.setDraggable();
   }
 
 }

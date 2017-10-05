@@ -43,7 +43,7 @@ export class SortableDirective {
     $(this.sortableEl).children().each((ind, el)=>{
       let elInd = $(el).index();
       if(el.innerHTML != '')
-        elOrder.push({id:el.id, level:100 - elInd});
+        elOrder.push({id:el.id, z:100 - elInd});
     });
       
     return elOrder;

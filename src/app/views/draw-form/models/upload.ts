@@ -1,10 +1,14 @@
 import {Element} from './element';
-export class Upload {
+
+export class Upload extends Element{
     constructor (
         public id: string,
-        public text: string,
-        public isSelected: boolean,
+        public z: number,
         public src: string,
-        public level: number
-    ) {}
+        public width?: number,
+        public height?: number,
+    ) {
+        super(id, 0, false, width, height);
+    }
+
 }
