@@ -1,7 +1,8 @@
 <md-toolbar color="accent">
     <h2>Overlay Form</h2>
     <span class="spacer"></span>
-    <md-icon class="example-icon">delete</md-icon>
+    <lgos-draw-tools [list]="elementsList"></lgos-draw-tools>
+    <!-- <lgos-draw-tools [selectedEl]="selectedElement" ></lgos-draw-tools> -->
 </md-toolbar>
 <md-sidenav-container class="sidenav-container">
     <md-sidenav #sidenav class="sidenav" mode="side" opened="true">
@@ -102,10 +103,10 @@
         <md-card-content>
             <div class="playground" #playground *ngIf="uploadImgs.length > 0">
                 <div [style.zIndex]="elm.z" class="draggable-wrap" *ngFor="let elm of uploadImgs">
-                    <img [src]="elm.src" alt="">
+                    <img (click)="elm.select()" [src]="elm.src" alt="">
                 </div>
-                <div class="draggable-wrap">
-                    <p *ngFor="let input of userInputs; let i = index;" (click)="input.select(i)" [style.width]="input.width" [style.height]="input.height" [style.zIndex]="input.z">
+                <div class="draggable-wrap" *ngFor="let input of userInputs; let i = index;" [style.zIndex]="input.z">
+                    <p (click)="input.select()" [style.width]="input.width + 'px'" [style.height]="input.height + 'px'">
                         {{input.text}}
                     </p>
                 </div>

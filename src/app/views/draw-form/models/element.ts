@@ -4,9 +4,9 @@ export class Element {
         public z: number,
         public isSelected: boolean,
         public width?: number, 
-        public height?: number,
+        public height?: number,    
         public x?: number, 
-        public y?: number){
+        public y?: number){    
             this.id = id;
             this.width = width || 0;
             this.height = width || 0;
@@ -24,6 +24,7 @@ export class Element {
         }
         select(){
             debugger
+            this;
             this.isSelected = true;
         }
 }

@@ -16,6 +16,10 @@ import 'jqueryui';
 export class DrawFormComponent{
   constructor(private ref:ChangeDetectorRef){}
 
+  private uploadImgs = [];
+  private userInputs   = [];
+  private elementsList = [];
+
   @ViewChild(SortableDirective) thumbnails:SortableDirective;
   userFreeText: string = '';
   step = 0;
@@ -30,21 +34,31 @@ export class DrawFormComponent{
     this.step--;
   }
 
-  
-  private uploadImgs = [];
-  private userInputs   = [];
+
+  filterImages(){
+    this.uploadImgs = _.filter(this.elementsList,(el)=>{
+      return el instanceof Upload;
+    })
+  }
+  filterInputs(){
+    this.userInputs = _.filter(this.elementsList,(el)=>{
+      return el instanceof UserInput;
+    })
+  }
 
   setDraggable(){
-      $('.draggable-wrap').draggable({
-        containment: "parent",
-        cursor:"move",
-        scroll: false
-      }).resizable({
-          aspectRatio: true,
-          helper: "ui-resizable-helper",
-          animate:true
-        }
-      );
+      setTimeout(()=>{
+        $('.draggable-wrap').draggable({
+          containment: "parent",
+          cursor:"move",
+          scroll: false
+        }).resizable({
+            aspectRatio: true,
+            helper: "ui-resizable-helper",
+            animate:true
+          }
+        );
+      },50)
   }
   
   onFileSelect(files:FileList){
@@ -52,19 +66,20 @@ export class DrawFormComponent{
       let fileName = file.name;
       let reader = new FileReader();
       reader.onload = (e: any) => {
-        let img  = new Upload(fileName,100 + this.uploadImgs.length, e.target.result,)
-        this.uploadImgs.unshift(img);
-        setTimeout(()=>{
-          this.setDraggable();
-          this.thumbnails.onImageUpload();
-        },100)
+        let img  = new Upload(fileName,100 + this.elementsList.length, e.target.result);
+        this.elementsList.unshift(img);
+        this.elementsList = this.elementsList.slice();
+        this.setDraggable();
+        this.thumbnails.onImageUpload();
+        this.setStep(1);
+        this.filterImages();
       }
       reader.readAsDataURL(file);  
     })
   }
 
   onOrderUpdate(list: Array<String>){
-    _.each(this.uploadImgs,(img:Upload)=>{      
+    _.each(this.elementsList,(img:Upload)=>{      
       let res = _.find(list,(val:any)=>{
         return val.id == img.id
       });
@@ -74,9 +89,10 @@ export class DrawFormComponent{
   }
 
   addText(){
-    var input = new UserInput('id' + this.userInputs.length,100+this.uploadImgs.length + this.userInputs.length+1,false,100,100,this.userFreeText);
-    this.userInputs.push(input);
+    var input = new UserInput('id' + this.elementsList.length,100+this.elementsList.length + this.elementsList.length+1,false,100,100,this.userFreeText);
+    this.elementsList.push(input);
     this.setDraggable();
+    this.filterInputs();
   }
 
 }

@@ -1,4 +1,4 @@
-import {Element} from './element';
+import { Element } from './element';
 
 export class UserInput extends Element{
     constructor(public id:string, public z:number, isSelected, public width:number, public height:number, public text:string){
