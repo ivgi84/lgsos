@@ -10,14 +10,15 @@ import * as _ from 'lodash';
 export class DeleteComponent{
 
   @Input() list:Array<Element>;
-  //@Output() deleted = new EventEmitter();
+  @Output() delete:EventEmitter<number> = new EventEmitter<number>();
 
   action(){
-    debugger
     let elInd = _.findIndex(this.list, (el:Element)=>{
-      return el.isSelected = true;
+      return el.isSelected == true;
     });
-    this.list.splice(elInd,1);
+    if(elInd > -1){
+      this.delete.emit(elInd);
+    }
   }
 
 }

@@ -10,7 +10,7 @@ import { DrawFormComponent } from './views/draw-form/draw-form.component';
 import { InputFileComponent } from './infrastract/input-file/input-file.component';
 import { LgosDraggableDirective } from './views/draw-form/directives/lgos-draggable.directive';
 import { SortableDirective } from './views/draw-form/directives/sortable.directive';
-import { ToolsComponent } from './views/draw-form/tools/tools.component';
+//import { ToolsComponent } from './views/draw-form/tools/tools.component';
 import { DeleteComponent } from './views/draw-form/tools/delete/delete.component';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { DeleteComponent } from './views/draw-form/tools/delete/delete.component
     InputFileComponent,
     LgosDraggableDirective,
     SortableDirective,
-    ToolsComponent,
+    //ToolsComponent,
     DeleteComponent
   ],
   imports: [

@@ -1,3 +1,4 @@
+//TODO: transfer selected to draw form, remove it from class or find solution, when selecting an element all others have do be deselected.
 import { ElementRef, ViewChild,Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Upload } from './models/upload';
@@ -16,8 +17,6 @@ import 'jqueryui';
 export class DrawFormComponent{
   constructor(private ref:ChangeDetectorRef){}
 
-  private uploadImgs = [];
-  private userInputs   = [];
   private elementsList = [];
 
   @ViewChild(SortableDirective) thumbnails:SortableDirective;
@@ -34,16 +33,10 @@ export class DrawFormComponent{
     this.step--;
   }
 
-
-  filterImages(){
-    this.uploadImgs = _.filter(this.elementsList,(el)=>{
-      return el instanceof Upload;
-    })
-  }
-  filterInputs(){
-    this.userInputs = _.filter(this.elementsList,(el)=>{
-      return el instanceof UserInput;
-    })
+  clearSelection(){
+    // _.each(this.elementsList, (el)=>{
+    //   el.isSelected = false;
+    // })
   }
 
   setDraggable(){
@@ -72,7 +65,6 @@ export class DrawFormComponent{
         this.setDraggable();
         this.thumbnails.onImageUpload();
         this.setStep(1);
-        this.filterImages();
       }
       reader.readAsDataURL(file);  
     })
@@ -91,8 +83,14 @@ export class DrawFormComponent{
   addText(){
     var input = new UserInput('id' + this.elementsList.length,100+this.elementsList.length + this.elementsList.length+1,false,100,100,this.userFreeText);
     this.elementsList.push(input);
+    this.elementsList = this.elementsList.slice();
     this.setDraggable();
-    this.filterInputs();
+  }
+
+
+
+  onDelete(ind){
+    this.elementsList.splice(ind, 1);
   }
 
 }

@@ -22,9 +22,7 @@ export class Element {
         zIndexDown(){
             this.z--;
         }
-        select(){
-            debugger
-            this;
+        select(e){
             this.isSelected = true;
         }
 }

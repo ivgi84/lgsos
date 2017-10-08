@@ -1,7 +1,10 @@
 <md-toolbar color="accent">
     <h2>Overlay Form</h2>
     <span class="spacer"></span>
-    <lgos-draw-tools [list]="elementsList"></lgos-draw-tools>
+    <div class="tools">
+        <lgos-delete-tool [(list)]="elementsList" (delete)="onDelete($event)"></lgos-delete-tool>
+    </div>
+    <!-- <lgos-draw-tools [(list)]="elementsList"></lgos-draw-tools> -->
     <!-- <lgos-draw-tools [selectedEl]="selectedElement" ></lgos-draw-tools> -->
 </md-toolbar>
 <md-sidenav-container class="sidenav-container">
@@ -37,8 +40,8 @@
                         <md-icon>reorder</md-icon>
                     </md-expansion-panel-header>
                     <md-action-row>
-                        <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
-                            <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of uploadImgs; let i = index;">
+                        <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="elementsList" (updateOrder)="onOrderUpdate($event)">
+                            <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of elementsList; let i = index;">
                                 <md-card-content class="thumbnail-img">
                                     <img [src]="elm.src" alt="">
                                 </md-card-content>
@@ -68,46 +71,15 @@
                     </md-action-row>
                 </md-expansion-panel>
             </md-accordion>
-            <!-- <md-tab-group class="side-tabs">
-                <md-tab label="upload" class="side-tab">
-                    <div class="side-upload-btn">
-                        <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'"></input-file>
-                    </div>
-                </md-tab>
-                <md-tab label="add text">
-                    <div>
-                        <md-form-field class="example-full-width">
-                            <textarea rows="2" cols="50" mdInput autocomplete="off"></textarea>
-                        </md-form-field>
-                        <button md-raised-button color="primary">Add text</button>
-                    </div>
-                </md-tab>
-                <md-tab label="Elements">
-                    <div class="side-layers">
-                        <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="uploadImgs" (updateOrder)="onOrderUpdate($event)">
-                            <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of uploadImgs; let i = index;">
-                                <md-card-title>{{elm.id}}</md-card-title>
-                                <md-card-content>
-                                    <div class="thumbnail">
-                                        <img [src]="elm.src" alt="">
-                                    </div>
-                                </md-card-content>
-                            </md-card>
-                        </div>
-                    </div>
-                </md-tab>
-            </md-tab-group> -->
         </div>
     </md-sidenav>
-    <md-card class="draw-area">
+    <md-card class="draw-area" (click)="clearSelection()">
         <md-card-content>
-            <div class="playground" #playground *ngIf="uploadImgs.length > 0">
-                <div [style.zIndex]="elm.z" class="draggable-wrap" *ngFor="let elm of uploadImgs">
-                    <img (click)="elm.select()" [src]="elm.src" alt="">
-                </div>
-                <div class="draggable-wrap" *ngFor="let input of userInputs; let i = index;" [style.zIndex]="input.z">
-                    <p (click)="input.select()" [style.width]="input.width + 'px'" [style.height]="input.height + 'px'">
-                        {{input.text}}
+            <div class="playground" #playground *ngIf="elementsList.length > 0">
+                <div class="draggable-wrap" [style.zIndex]="elm.z" *ngFor="let elm of elementsList">
+                    <img *ngIf="elm.type == 'upload'" (click)="elm.select($event)" [src]="elm.src" [ngClass]="{'isSelected':elm.isSelected}" alt="">
+                    <p *ngIf="elm.type == 'userInput'" (click)="elm.select($event)" [style.width]="elm.width + 'px'" [style.height]="elm.height + 'px'" [ngClass]="{'isSelected':elm.isSelected}">
+                        {{elm.text}}
                     </p>
                 </div>
             </div>

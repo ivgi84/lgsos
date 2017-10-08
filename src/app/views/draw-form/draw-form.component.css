@@ -12,6 +12,14 @@ md-sidenav {
     width: 400px;
 }
 
+.tools {
+    height: 24px;
+}
+
+.tools>* {
+    cursor: pointer;
+}
+
 .sidenav-container {
     margin: 0 auto;
     padding: 20px 0;
@@ -24,12 +32,6 @@ md-sidenav {
 
 .lgos-input-full-width {
     width: 100%;
-}
-
-.draw-area {
-    width: 100%;
-    margin: 0 auto;
-    display: inline-block;
 }
 
 .side-layers {
@@ -71,6 +73,12 @@ md-sidenav {
     overflow: hidden;
 }
 
+.draw-area {
+    width: 100%;
+    margin: 0 auto;
+    display: inline-block;
+}
+
 .draggable-wrap {
     position: absolute;
     display: inline-block;
@@ -79,4 +87,8 @@ md-sidenav {
 
 .draggable-wrap img {
     width: 100%;
+}
+
+.isSelected {
+    border: 1px solid red;
 }
