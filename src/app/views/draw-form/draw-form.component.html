@@ -73,12 +73,12 @@
             </md-accordion>
         </div>
     </md-sidenav>
-    <md-card class="draw-area" (click)="clearSelection()">
+    <md-card class="draw-area" (click)="clearSelection($event)">
         <md-card-content>
             <div class="playground" #playground *ngIf="elementsList.length > 0">
                 <div class="draggable-wrap" [style.zIndex]="elm.z" *ngFor="let elm of elementsList">
-                    <img *ngIf="elm.type == 'upload'" (click)="elm.select($event)" [src]="elm.src" [ngClass]="{'isSelected':elm.isSelected}" alt="">
-                    <p *ngIf="elm.type == 'userInput'" (click)="elm.select($event)" [style.width]="elm.width + 'px'" [style.height]="elm.height + 'px'" [ngClass]="{'isSelected':elm.isSelected}">
+                    <img *ngIf="elm.type == 'upload'" (click)="selectElement(elm)" [src]="elm.src" [ngClass]="{'isSelected':elm.isSelected}" alt="">
+                    <p *ngIf="elm.type == 'userInput'" (click)="selectElement(elm)" [style.width]="elm.width + 'px'" [style.height]="elm.height + 'px'" [ngClass]="{'isSelected':elm.isSelected}">
                         {{elm.text}}
                     </p>
                 </div>

@@ -1,6 +1,7 @@
 //TODO: transfer selected to draw form, remove it from class or find solution, when selecting an element all others have do be deselected.
 import { ElementRef, ViewChild,Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
+import { Element } from './models/element';
 import { Upload } from './models/upload';
 import { UserInput } from './models/user-input';
 import { SortableDirective } from './directives/sortable.directive';
@@ -18,6 +19,7 @@ export class DrawFormComponent{
   constructor(private ref:ChangeDetectorRef){}
 
   private elementsList = [];
+  private selectedElm: Element = null;
 
   @ViewChild(SortableDirective) thumbnails:SortableDirective;
   userFreeText: string = '';
@@ -33,10 +35,18 @@ export class DrawFormComponent{
     this.step--;
   }
 
-  clearSelection(){
-    // _.each(this.elementsList, (el)=>{
-    //   el.isSelected = false;
-    // })
+  selectElement(elm:Element){
+    if(this.selectedElm)
+        this.selectedElm.isSelected = false;
+      this.selectedElm = elm;
+      this.selectedElm.isSelected = true;
+  }
+  clearSelection(e){
+    debugger;
+    if(e.target.classList[0] == 'playground'){ //change to regex search by value
+      this.selectedElm.isSelected = false;
+      this.selectedElm = null;
+    }
   }
 
   setDraggable(){
