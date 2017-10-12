@@ -3,7 +3,11 @@
     <span class="spacer"></span>
     <div class="tools">
         <lgos-delete-tool [(list)]="elementsList" (delete)="onDelete($event)"></lgos-delete-tool>
+        <lgos-resize-tool></lgos-resize-tool>
     </div>
+    <!-- <div class="tools">
+    
+    </div> -->
     <!-- <lgos-draw-tools [(list)]="elementsList"></lgos-draw-tools> -->
     <!-- <lgos-draw-tools [selectedEl]="selectedElement" ></lgos-draw-tools> -->
 </md-toolbar>
@@ -75,10 +79,10 @@
     </md-sidenav>
     <md-card class="draw-area" (click)="clearSelection($event)">
         <md-card-content>
-            <div class="playground" #playground *ngIf="elementsList.length > 0">
-                <div class="draggable-wrap" [style.zIndex]="elm.z" *ngFor="let elm of elementsList">
-                    <img *ngIf="elm.type == 'upload'" (click)="selectElement(elm)" [src]="elm.src" [ngClass]="{'isSelected':elm.isSelected}" alt="">
-                    <p *ngIf="elm.type == 'userInput'" (click)="selectElement(elm)" [style.width]="elm.width + 'px'" [style.height]="elm.height + 'px'" [ngClass]="{'isSelected':elm.isSelected}">
+            <div class="playground someClass" #playground *ngIf="elementsList.length > 0">
+                <div class="draggable-wrap" [ngClass]="{'isSelected':elm.isSelected}" [style.zIndex]="elm.z" *ngFor="let elm of elementsList">
+                    <img *ngIf="elm.type == 'upload'" (click)="selectElement(elm)" [src]="elm.src" alt="">
+                    <p *ngIf="elm.type == 'userInput'" (click)="selectElement(elm)">
                         {{elm.text}}
                     </p>
                 </div>

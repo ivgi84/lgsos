@@ -22,8 +22,10 @@ export class DrawFormComponent{
   private selectedElm: Element = null;
 
   @ViewChild(SortableDirective) thumbnails:SortableDirective;
+
   userFreeText: string = '';
   step = 0;
+
   setStep(index:number){
     this.step = index
   }
@@ -35,16 +37,22 @@ export class DrawFormComponent{
     this.step--;
   }
 
+  fontSize = '';
+  openFontSize(){
+    debugger;
+    this.fontSize = 'open';
+  }
+
   selectElement(elm:Element){
     if(this.selectedElm)
-        this.selectedElm.isSelected = false;
+        this.selectedElm.toggleSelection();
       this.selectedElm = elm;
-      this.selectedElm.isSelected = true;
+      this.selectedElm.toggleSelection();
   }
   clearSelection(e){
-    debugger;
-    if(e.target.classList[0] == 'playground'){ //change to regex search by value
-      this.selectedElm.isSelected = false;
+    const regex = /playground/g;
+    if(regex.test(e.target.classList.value) && this.selectedElm){
+      this.selectedElm.deSelect();
       this.selectedElm = null;
     }
   }
@@ -56,12 +64,14 @@ export class DrawFormComponent{
           cursor:"move",
           scroll: false
         }).resizable({
-            aspectRatio: true,
             helper: "ui-resizable-helper",
             animate:true
           }
         );
       },50)
+  }
+  shouldSaveAspectRatio(elm){
+    debugger
   }
   
   onFileSelect(files:FileList){

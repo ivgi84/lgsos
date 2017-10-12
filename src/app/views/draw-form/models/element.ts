@@ -2,7 +2,7 @@ export class Element {
     constructor(
         public id:string,
         public z: number,
-        public isSelected: boolean,
+        private isSelected: boolean,
         public width?: number, 
         public height?: number,    
         public x?: number, 
@@ -22,7 +22,21 @@ export class Element {
         zIndexDown(){
             this.z--;
         }
-        select(e){
+        get selection(){
+            return this.isSelected;
+        }
+        select(){
             this.isSelected = true;
         }
+        deSelect(){
+            this.isSelected = false;
+        }
+        toggleSelection(){
+            if(this.isSelected){
+                this.isSelected = false;
+                return;
+            }
+            this.isSelected = true;
+        }
+        
 }

@@ -14,6 +14,8 @@ md-sidenav {
 
 .tools {
     height: 24px;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .tools>* {
@@ -83,6 +85,7 @@ md-sidenav {
     position: absolute;
     display: inline-block;
     z-index: 0;
+    overflow: hidden;
 }
 
 .draggable-wrap img {
@@ -91,4 +94,22 @@ md-sidenav {
 
 .isSelected {
     border: 1px solid red;
+}
+
+.text-resize {
+    display: block;
+    margin: 0;
+    width: 50px;
+}
+
+.text-resize .mat-expansion-panel-header {
+    padding: 0;
+}
+
+.text-resize .mat-expansion-panel-header-title {
+    margin: 0;
+}
+
+.text-resize .mat-icon {
+    margin: 0 auto;
 }

@@ -14,7 +14,7 @@ export class DeleteComponent{
 
   action(){
     let elInd = _.findIndex(this.list, (el:Element)=>{
-      return el.isSelected == true;
+      return el.selection == true;
     });
     if(elInd > -1){
       this.delete.emit(elInd);

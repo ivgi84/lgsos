@@ -12,6 +12,7 @@ import { LgosDraggableDirective } from './views/draw-form/directives/lgos-dragga
 import { SortableDirective } from './views/draw-form/directives/sortable.directive';
 //import { ToolsComponent } from './views/draw-form/tools/tools.component';
 import { DeleteComponent } from './views/draw-form/tools/delete/delete.component';
+import { ResizeToolComponent } from './views/draw-form/tools/resize/lgos-resize-tool.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DeleteComponent } from './views/draw-form/tools/delete/delete.component
     LgosDraggableDirective,
     SortableDirective,
     //ToolsComponent,
-    DeleteComponent
+    DeleteComponent,
+    ResizeToolComponent
   ],
   imports: [
     BrowserModule,
