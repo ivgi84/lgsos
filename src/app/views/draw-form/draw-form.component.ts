@@ -1,4 +1,3 @@
-//TODO: transfer selected to draw form, remove it from class or find solution, when selecting an element all others have do be deselected.
 import { ElementRef, ViewChild,Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Element } from './models/element';
@@ -37,21 +36,23 @@ export class DrawFormComponent{
     this.step--;
   }
 
-  fontSize = '';
-  openFontSize(){
-    debugger;
-    this.fontSize = 'open';
-  }
 
-  selectElement(elm:Element){
-    if(this.selectedElm)
-        this.selectedElm.toggleSelection();
-      this.selectedElm = elm;
+  selectElement(elm:Element, e){
+    if(this.selectedElm && this.selectedElm.id == elm.id)
+      return;
+    if(this.selectedElm){
       this.selectedElm.toggleSelection();
+      return;
+    }
+
+    this.selectedElm = elm;
+    this.selectedElm.toggleSelection();
+    this.disableDrag();
   }
   clearSelection(e){
     const regex = /playground/g;
     if(regex.test(e.target.classList.value) && this.selectedElm){
+      this.enableDrag();
       this.selectedElm.deSelect();
       this.selectedElm = null;
     }
@@ -64,15 +65,21 @@ export class DrawFormComponent{
           cursor:"move",
           scroll: false
         }).resizable({
-            helper: "ui-resizable-helper",
-            animate:true
+            helper: "ui-resizable-helper"
           }
         );
       },50)
   }
-  shouldSaveAspectRatio(elm){
-    debugger
+
+  enableDrag(){
+    $('.playground #'+this.selectedElm.id).draggable({ disabled: false })
   }
+
+  disableDrag(){
+    $('.playground #'+this.selectedElm.id).draggable({ disabled: true })
+  }
+
+
   
   onFileSelect(files:FileList){
     _.each(files, (file:File)=>{
@@ -101,10 +108,11 @@ export class DrawFormComponent{
   }
 
   addText(){
-    var input = new UserInput('id' + this.elementsList.length,100+this.elementsList.length + this.elementsList.length+1,false,100,100,this.userFreeText);
+    let input = new UserInput('id_' + this.elementsList.length,100+this.elementsList.length + this.elementsList.length+1,false,100,100,this.userFreeText);
     this.elementsList.push(input);
     this.elementsList = this.elementsList.slice();
     this.setDraggable();
+    this.userFreeText = '';
   }
 
 

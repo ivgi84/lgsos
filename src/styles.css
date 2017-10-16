@@ -33,8 +33,30 @@ body {
     flex: 1 1 auto;
 }
 
+.tool-button:hover {
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+    transition: .7s ease all;
+}
+
 .ui-resizable-helper {
     border: 1px dotted #00F;
+}
+
+.ui-resizable-se {
+    right: -5px!important;
+    bottom: -5px!important;
+}
+
+.ui-resizable-s {
+    cursor: ns-resize!important;
+}
+
+.ui-resizable-e {
+    cursor: ew-resize!important;
+}
+
+.ui-icon-gripsmall-diagonal-se {
+    background-image: none!important;
 }
 
 

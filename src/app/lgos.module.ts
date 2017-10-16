@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdInputModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdRadioModule, MdSidenavModule, MdTabsModule, MdExpansionModule, MdListModule } from '@angular/material';import { lgosRootComponent } from './lgos-root.component';
+import { MdInputModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdRadioModule, MdSidenavModule, MdTabsModule, MdExpansionModule, MdListModule, MdTooltipModule, MdSliderModule } from '@angular/material';import { lgosRootComponent } from './lgos-root.component';
 import { LoginFormComponent } from './views/login-form/login-form.component';
 import { RegisterFormComponent } from './views/register-form/register-form.component';
 import { DrawFormComponent } from './views/draw-form/draw-form.component';
@@ -41,7 +41,9 @@ import { ResizeToolComponent } from './views/draw-form/tools/resize/lgos-resize-
     MdSidenavModule,
     MdTabsModule,
     MdExpansionModule,
-    MdListModule
+    MdListModule,
+    MdTooltipModule,
+    MdSliderModule
   ],
   providers: [],
   bootstrap: [lgosRootComponent]

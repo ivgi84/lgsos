@@ -1,7 +1,6 @@
-<md-icon>format_size</md-icon>
-<!-- <md-expansion-panel hideToggle="true" class="text-resize">
-    <md-icon>exposure_neg_2</md-icon>
-    <md-icon>exposure_neg_1</md-icon>
-    <md-icon>exposure_plus_1</md-icon>
-    <md-icon>exposure_plus_2</md-icon>
-</md-expansion-panel> -->
+<button class="tool-button" md-icon-button><md-icon mdTooltip="change font size" (click)="open()">format_size</md-icon></button>
+<div class="font-size-selector" [ngClass]="{'isOpen':isOpen}">
+    <div class="font-size-slider">
+        <md-slider (input)="onInputChange($event)" vertical invert thumbLabel min="6" max="144" step="2" value="14"></md-slider>
+    </div>
+</div>

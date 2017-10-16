@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { UserInput } from '../../models/user-input';
 
 @Component({
   selector: 'lgos-resize-tool',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResizeToolComponent implements OnInit {
 
-  constructor() { }
+  @Input() elm:UserInput = null;
 
+  styles = {};
+  isOpen = false;
+  
   ngOnInit() {
+      this.styles = this.elm.styles;
+  }  
+  
+  changeSize(size){
+      this.elm.addStyle({'fontSize':size});
   }
+
+  onInputChange(event: any) {
+    this.changeSize(event.value);
+  }
+
+  open(){
+    this.isOpen = true;
+  }
+
 
 }
