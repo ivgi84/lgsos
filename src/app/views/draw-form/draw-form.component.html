@@ -80,7 +80,7 @@
     <md-card class="draw-area" (click)="clearSelection($event)">
         <md-card-content>
             <div class="playground" #playground *ngIf="elementsList.length > 0">
-                <div id="{{elm.id}}" class="draggable-wrap" [ngClass]="{'isSelected':elm.isSelected}" [style.zIndex]="elm.z" *ngFor="let elm of elementsList" (click)="selectElement(elm, $event)">
+                <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [style.zIndex]="elm.z" *ngFor="let elm of elementsList" (mousedown)="selectElement(elm, $event)" >
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
                     <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px'}" contenteditable="true" *ngIf="elm.type == 'userInput'">
                         {{elm.text}}

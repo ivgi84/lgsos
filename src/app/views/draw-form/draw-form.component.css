@@ -23,7 +23,7 @@ md-sidenav {
 
 .sidenav-container {
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 0;
 }
 
 .side-upload-btn {
@@ -78,6 +78,7 @@ md-sidenav {
     width: 100%;
     margin: 0 auto;
     display: inline-block;
+    background: #ebeced;
 }
 
 .draggable-wrap {
@@ -103,7 +104,8 @@ md-sidenav {
 }
 
 .isSelected {
-    border: 1px dashed #777;
+    border: 2px dashed #fff;
+    height:auto!important;
 }
 
 .text-resize {

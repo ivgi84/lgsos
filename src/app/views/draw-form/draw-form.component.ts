@@ -8,6 +8,7 @@ import { debug } from 'util';
 import * as $ from 'jquery';
 import * as _ from 'lodash';
 import 'jqueryui';
+//TODO: add image size on upload
 
 @Component({
   selector: 'lgos-draw-form',
@@ -38,58 +39,42 @@ export class DrawFormComponent{
 
 
   selectElement(elm:Element, e){
-    if(this.selectedElm && this.selectedElm.id == elm.id)
-      return;
-    if(this.selectedElm){
+    if(this.selectedElm)
       this.selectedElm.toggleSelection();
-      return;
-    }
 
     this.selectedElm = elm;
     this.selectedElm.toggleSelection();
-    this.disableDrag();
+    this.enableDrag();
   }
+
   clearSelection(e){
     const regex = /playground/g;
     if(regex.test(e.target.classList.value) && this.selectedElm){
-      this.enableDrag();
       this.selectedElm.deSelect();
       this.selectedElm = null;
     }
   }
 
-  setDraggable(){
-      setTimeout(()=>{
-        $('.draggable-wrap').draggable({
-          containment: "parent",
-          cursor:"move",
-          scroll: false
-        }).resizable({
-            helper: "ui-resizable-helper"
-          }
-        );
-      },50)
-  }
-
   enableDrag(){
-    $('.playground #'+this.selectedElm.id).draggable({ disabled: false })
+    $('.playground #' + this.selectedElm.id)
+    .resizable({
+        helper: "ui-resizable-helper"
+      }).draggable({
+      cursor:"move",
+    });
   }
-
   disableDrag(){
-    $('.playground #'+this.selectedElm.id).draggable({ disabled: true })
+    $('#'+this.selectedElm.id).draggable({disabled:true});
   }
-
-
   
   onFileSelect(files:FileList){
     _.each(files, (file:File)=>{
-      let fileName = file.name;
+      let fileName = file.name.split('.')[0];
       let reader = new FileReader();
       reader.onload = (e: any) => {
         let img  = new Upload(fileName,100 + this.elementsList.length, e.target.result);
         this.elementsList.unshift(img);
         this.elementsList = this.elementsList.slice();
-        this.setDraggable();
         this.thumbnails.onImageUpload();
         this.setStep(1);
       }
@@ -111,7 +96,6 @@ export class DrawFormComponent{
     let input = new UserInput('id_' + this.elementsList.length,100+this.elementsList.length + this.elementsList.length+1,false,100,100,this.userFreeText);
     this.elementsList.push(input);
     this.elementsList = this.elementsList.slice();
-    this.setDraggable();
     this.userFreeText = '';
   }
 

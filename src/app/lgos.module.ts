@@ -9,7 +9,7 @@ import { RegisterFormComponent } from './views/register-form/register-form.compo
 import { DrawFormComponent } from './views/draw-form/draw-form.component';
 import { InputFileComponent } from './infrastract/input-file/input-file.component';
 import { LgosDraggableDirective } from './views/draw-form/directives/lgos-draggable.directive';
-import { SortableDirective } from './views/draw-form/directives/sortable.directive';
+import { SortableDirective } from './views/draw-form/directives/lgos-sortable.directive';
 //import { ToolsComponent } from './views/draw-form/tools/tools.component';
 import { DeleteComponent } from './views/draw-form/tools/delete/delete.component';
 import { ResizeToolComponent } from './views/draw-form/tools/resize/lgos-resize-tool.component';
