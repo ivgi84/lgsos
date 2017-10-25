@@ -18,18 +18,11 @@ export class SortableDirective {
   
   onImageUpload(){
     $(this.sortableEl).sortable({
-      start:this.onSortStart,
-      change:this.onSortChange,
       beforeStop:this.onBeforeStop.bind(this)
     });
 
     this.thumbnailsOrder = this.order;
   }
-
-  onSortStart(){
-  }
-
-  onSortChange(event, ui){}
 
   onBeforeStop(event, ui){
     setTimeout(()=>{
