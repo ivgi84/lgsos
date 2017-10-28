@@ -24,6 +24,7 @@ export class DrawFormComponent {
 
   public elementsList = [];
   public selectedElm: Element;
+  private prevSelection:Element = null;
 
   @ViewChild(SortableDirective) thumbnails: SortableDirective;
   @ViewChild(LgosDraggableDirective) dragElments: LgosDraggableDirective
@@ -41,29 +42,6 @@ export class DrawFormComponent {
   prevStep() {
     this.step--;
   }
-
-
-  selectElement(elm: Element, e) {
-    if (this.selectedElm)
-      this.selectedElm.toggleSelection();
-
-    this.selectedElm = elm;
-    this.selectedElm.toggleSelection();
-    this.enableDragging();
-  }
-
-  clearSelection(e) {
-    const regex = /playground/g;
-    if (regex.test(e.target.classList.value) && this.selectedElm) {
-      this.selectedElm.deSelect();
-      this.selectedElm = null;
-    }
-  }
-
-  enableDragging(){
-    this.dragElments.enableDrag(this.selectedElm);
-  }
-
   onFileSelect(files: FileList) {
     _.each(files, (file: File) => {
       let fileName = file.name.split('.')[0];
@@ -94,6 +72,44 @@ export class DrawFormComponent {
     });
     this.ref.detectChanges();
   }
+
+  selectElement(elm: Element) {
+    debugger;
+    elm.select();
+    this.selectedElm = elm;
+    this.dragElments.enableDrag(this.selectedElm);
+
+    if(this.prevSelection && this.prevSelection != this.selectedElm)
+      this.prevSelection.deSelect()
+    
+    this.prevSelection = this.selectedElm;
+  }
+
+  clearSelection(e) {
+    const regex = /playground/g;
+    if (regex.test(e.target.classList.value) && this.selectedElm) {
+      this.dragElments.enableDrag(this.selectedElm);
+      this.selectedElm.deSelect();
+      this.selectedElm = null;
+    }
+  }
+
+  onClick(elm:Element, e){
+    this.selectElement(elm);
+    if(this.selectedElm instanceof UserInput && (elm === this.selectedElm)){
+      this.dragElments.disableDrag(this.selectedElm);
+    }
+  }
+  onDrag(elm:Element, e){
+    console.log(e.type);
+  }
+
+
+  enableDragging(){
+    this.dragElments.enableDrag(this.selectedElm);
+  }
+
+
 
   addText() {
     let input = new UserInput('id_' + this.elementsList.length, 100 + this.elementsList.length + this.elementsList.length + 1, false, 100, 100, this.userFreeText);

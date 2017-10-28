@@ -80,7 +80,7 @@
     <mat-card class="draw-area" (click)="clearSelection($event)">
         <mat-card-content>
             <div class="playground" #playground *ngIf="elementsList.length > 0" dragElments lgosDraggable [elements]="elementsList">
-                <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (drag)="selectElement(elm)">
+                <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (drag)="selectElement(elm)" (mousedown)="onClick(elm, $event)">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" [ngStyle]="{ 'max-width':elm.width+ 'px'}" alt="">
                     <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px'}" contenteditable="true" *ngIf="elm.type == 'userInput'">
                         {{elm.text}}

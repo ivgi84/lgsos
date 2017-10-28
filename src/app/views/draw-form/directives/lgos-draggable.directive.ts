@@ -36,7 +36,6 @@ export class LgosDraggableDirective implements OnChanges {
     $('.playground #'+elm.id).draggable({disabled:true});
   }
   enableDrag(elm){
-    debugger;
     $('.playground  #'+elm.id).draggable();
   }
 
