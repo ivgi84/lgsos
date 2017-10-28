@@ -20,7 +20,7 @@ export class LgosDraggableDirective implements OnChanges {
   setAllDraggable(){
     setTimeout(()=>{
       this.elements;
-      _.each(this.elements, (el:Element)=>{
+      _.each(this.elements, (el:any)=>{
         let $el = $('.playground #'+el.id);
         // $el.draggable({
         //   cursor:"move"

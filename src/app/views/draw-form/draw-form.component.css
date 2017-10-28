@@ -1,13 +1,13 @@
 @import 'http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css';
-md-radio-group {
+mat-radio-group {
     display: block;
 }
 
-md-radio-button {
+mat-radio-button {
     margin: 10px;
 }
 
-md-sidenav {
+mat-sidenav {
     box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
     width: 400px;
 }
@@ -62,7 +62,7 @@ md-sidenav {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12)
 }
 
-.thumbnail-card md-card-title {
+.thumbnail-card mat-card-title {
     font-size: 16px;
 }
 

@@ -17,10 +17,13 @@ import 'jqueryui';
   styleUrls: ['./draw-form.component.css']
 })
 export class DrawFormComponent {
-  constructor(private ref: ChangeDetectorRef) { }
+  constructor(private ref: ChangeDetectorRef) {
+      this.elementsList = [];
+      this.selectedElm = null;
+   }
 
-  private elementsList = [];
-  private selectedElm: Element = null;
+  public elementsList = [];
+  public selectedElm: Element;
 
   @ViewChild(SortableDirective) thumbnails: SortableDirective;
   @ViewChild(LgosDraggableDirective) dragElments: LgosDraggableDirective

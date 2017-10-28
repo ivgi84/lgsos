@@ -1,4 +1,4 @@
-<md-toolbar color="accent">
+<mat-toolbar color="accent">
     <h2>Overlay Form</h2>
     <span class="spacer"></span>
     <div class="tools" *ngIf="selectedElm">
@@ -10,75 +10,75 @@
     </div> -->
     <!-- <lgos-draw-tools [(list)]="elementsList"></lgos-draw-tools> -->
     <!-- <lgos-draw-tools [selectedEl]="selectedElement" ></lgos-draw-tools> -->
-</md-toolbar>
-<md-sidenav-container class="sidenav-container">
-    <md-sidenav #sidenav class="sidenav" mode="side" opened="true">
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
         <div class="sidenav-content">
-            <md-accordion class="side-panel">
-                <md-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
-                    <md-expansion-panel-header>
-                        <md-panel-title>
+            <mat-accordion class="side-panel">
+                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
                             Upload
-                        </md-panel-title>
-                        <md-panel-description>
+                        </mat-panel-title>
+                        <mat-panel-description>
                             Upload your files here
-                        </md-panel-description>
+                        </mat-panel-description>
                         <span class="spacer"></span>
-                        <md-icon>file_upload</md-icon>
-                    </md-expansion-panel-header>
-                    <md-action-row class="lgos-side-panel-action-row">
+                        <mat-icon>file_upload</mat-icon>
+                    </mat-expansion-panel-header>
+                    <mat-action-row class="lgos-side-panel-action-row">
                         <div class="side-upload-btn">
                             <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'"></input-file>
                         </div>
-                    </md-action-row>
-                </md-expansion-panel>
-                <md-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
-                    <md-expansion-panel-header>
-                        <md-panel-title>
+                    </mat-action-row>
+                </mat-expansion-panel>
+                <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
                             Layers
-                        </md-panel-title>
-                        <md-panel-description>
+                        </mat-panel-title>
+                        <mat-panel-description>
                             Set up layers order by dragging
-                        </md-panel-description>
+                        </mat-panel-description>
                         <span class="spacer"></span>
-                        <md-icon>reorder</md-icon>
-                    </md-expansion-panel-header>
-                    <md-action-row>
+                        <mat-icon>reorder</mat-icon>
+                    </mat-expansion-panel-header>
+                    <mat-action-row>
                         <div class="thumbnails" #thumbnails lgosSortable [thumbnails]="elementsList" (updateOrder)="onOrderUpdate($event)">
-                            <md-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of elementsList; let i = index;">
-                                <md-card-content class="thumbnail-img">
+                            <mat-card [id]="elm.id" class="thumbnail-card" *ngFor="let elm of elementsList; let i = index;">
+                                <mat-card-content class="thumbnail-img">
                                     <img [src]="elm.src" alt="">
-                                </md-card-content>
-                                <md-card-title class="thumbnail-name">{{elm.id}}</md-card-title>
-                            </md-card>
+                                </mat-card-content>
+                                <mat-card-title class="thumbnail-name">{{elm.id}}</mat-card-title>
+                            </mat-card>
                         </div>
-                    </md-action-row>
-                </md-expansion-panel>
-                <md-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
-                    <md-expansion-panel-header>
-                        <md-panel-title>
+                    </mat-action-row>
+                </mat-expansion-panel>
+                <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
                             Free text
-                        </md-panel-title>
-                        <md-panel-description>
+                        </mat-panel-title>
+                        <mat-panel-description>
                             Add free text
-                        </md-panel-description>
+                        </mat-panel-description>
                         <span class="spacer"></span>
-                        <md-icon>library_add</md-icon>
-                    </md-expansion-panel-header>
-                    <md-action-row>
-                        <md-form-field class="lgos-input-full-width">
-                            <textarea [(ngModel)]="userFreeText" placeholder="Your text" mdInput autocomplete="off"></textarea>
-                        </md-form-field>
-                    </md-action-row>
-                    <md-action-row>
-                        <button md-raised-button color="primary" (click)="addText()">Add text <md-icon>library_add</md-icon></button>
-                    </md-action-row>
-                </md-expansion-panel>
-            </md-accordion>
+                        <mat-icon>library_add</mat-icon>
+                    </mat-expansion-panel-header>
+                    <mat-action-row>
+                        <mat-form-field class="lgos-input-full-width">
+                            <textarea [(ngModel)]="userFreeText" placeholder="Your text" matInput autocomplete="off"></textarea>
+                        </mat-form-field>
+                    </mat-action-row>
+                    <mat-action-row>
+                        <button mat-raised-button color="primary" (click)="addText()">Add text <mat-icon>library_add</mat-icon></button>
+                    </mat-action-row>
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
-    </md-sidenav>
-    <md-card class="draw-area" (click)="clearSelection($event)">
-        <md-card-content>
+    </mat-sidenav>
+    <mat-card class="draw-area" (click)="clearSelection($event)">
+        <mat-card-content>
             <div class="playground" #playground *ngIf="elementsList.length > 0" dragElments lgosDraggable [elements]="elementsList">
                 <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (drag)="selectElement(elm)">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" [ngStyle]="{ 'max-width':elm.width+ 'px'}" alt="">
@@ -87,6 +87,6 @@
                     </p>
                 </div>
             </div>
-        </md-card-content>
-    </md-card>
-</md-sidenav-container>
+        </mat-card-content>
+    </mat-card>
+</mat-sidenav-container>

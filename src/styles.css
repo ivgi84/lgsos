@@ -7,7 +7,7 @@
 html,
 body,
 material-app,
-md-sidenav-container,
+mat-sidenav-container,
 .my-content {
     margin: 0;
     width: 100%;
