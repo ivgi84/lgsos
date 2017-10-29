@@ -74,10 +74,9 @@ export class DrawFormComponent {
   }
 
   selectElement(elm: Element) {
-    debugger;
     elm.select();
     this.selectedElm = elm;
-    this.dragElments.enableDrag(this.selectedElm);
+    this.dragElments.enableModing(this.selectedElm);
 
     if(this.prevSelection && this.prevSelection != this.selectedElm)
       this.prevSelection.deSelect()
@@ -88,7 +87,7 @@ export class DrawFormComponent {
   clearSelection(e) {
     const regex = /playground/g;
     if (regex.test(e.target.classList.value) && this.selectedElm) {
-      this.dragElments.enableDrag(this.selectedElm);
+      this.dragElments.enableModing(this.selectedElm);
       this.selectedElm.deSelect();
       this.selectedElm = null;
     }
@@ -104,12 +103,11 @@ export class DrawFormComponent {
     console.log(e.type);
   }
 
-
-  enableDragging(){
-    this.dragElments.enableDrag(this.selectedElm);
+  disableDrag(elm:Element, e){
+      if(e.type==='dbclick' && elm instanceof UserInput){
+        this.dragElments.disableDrag(elm);
+      }
   }
-
-
 
   addText() {
     let input = new UserInput('id_' + this.elementsList.length, 100 + this.elementsList.length + this.elementsList.length + 1, false, 100, 100, this.userFreeText);
@@ -117,8 +115,6 @@ export class DrawFormComponent {
     this.elementsList = this.elementsList.slice();
     this.userFreeText = '';
   }
-
-
 
   onDelete(ind) {
     this.elementsList.splice(ind, 1);

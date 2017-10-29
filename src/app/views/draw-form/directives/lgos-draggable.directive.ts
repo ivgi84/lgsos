@@ -36,7 +36,21 @@ export class LgosDraggableDirective implements OnChanges {
     $('.playground #'+elm.id).draggable({disabled:true});
   }
   enableDrag(elm){
-    $('.playground  #'+elm.id).draggable();
+    elm.draggable({
+      cursor:"move"
+    });
+    return this;
+  }
+  enableResize(elm){
+    elm.resizable({
+      scale:'auto'
+    });
+    return this;
+  }
+  enableModing(elm){
+    debugger;
+    var $elm = $('.playground  #'+elm.id);
+    this.enableDrag($elm).enableResize($elm);
   }
 
 }
