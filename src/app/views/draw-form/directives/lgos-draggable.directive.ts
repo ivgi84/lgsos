@@ -17,19 +17,35 @@ export class LgosDraggableDirective implements OnChanges {
     this.enableModifications();
   }
 
+  setListener(){
+    $('.playground .draggable-wrap').on('reize', function(e){
+        e.stopImmediatePropagation();
+    });
+  }
+
   enableModifications(){
     setTimeout(()=>{
       this.elements;
       _.each(this.elements, (el:any)=>{
         let $el = $('.playground #'+el.id);
           $el.draggable({
-            cursor:"move"
+            cursor:"move",
+            snap: ".playground"
           });
         $el.resizable({
-          helper: "ui-resizable-helper"
+          helper: "ui-resizable-helper",
+          handles: "n, e, s, w",
+          stop: function( event, ui ) {
+            debugger
+          }
         })
       });
     },100)
+  }
+
+  resizeStop(e){
+    debugger;
+
   }
 
   disableDrag(elm:Element){

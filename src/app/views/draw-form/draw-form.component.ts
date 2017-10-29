@@ -84,6 +84,7 @@ export class DrawFormComponent {
   }
 
   clearSelection(e) {
+    debugger
     const regex = /playground/g;
     if (regex.test(e.target.classList.value) && this.selectedElm) {
       this.selectedElm.deSelect();
