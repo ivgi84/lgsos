@@ -14,17 +14,17 @@ export class LgosDraggableDirective implements OnChanges {
   @Input() elements: Element;
 
   ngOnChanges(changes){
-    //this.setAllDraggable();
+    this.enableModifications();
   }
 
-  setAllDraggable(){
+  enableModifications(){
     setTimeout(()=>{
       this.elements;
       _.each(this.elements, (el:any)=>{
         let $el = $('.playground #'+el.id);
-        // $el.draggable({
-        //   cursor:"move"
-        // })
+          $el.draggable({
+            cursor:"move"
+          });
         $el.resizable({
           helper: "ui-resizable-helper"
         })
@@ -33,24 +33,13 @@ export class LgosDraggableDirective implements OnChanges {
   }
 
   disableDrag(elm:Element){
-    $('.playground #'+elm.id).draggable({disabled:true});
+    let $el = $('.playground #'+elm.id);
+    $el.draggable({disabled:true});
+    $el.attr('contenteditable','true');
   }
-  enableDrag(elm){
-    elm.draggable({
-      cursor:"move"
-    });
-    return this;
+  enableDrag(elm:Element){
+    let $el = $('.playground #'+elm.id);
+    $el.draggable({disabled:false});
+    $el.attr('contenteditable','false');
   }
-  enableResize(elm){
-    elm.resizable({
-      scale:'auto'
-    });
-    return this;
-  }
-  enableModing(elm){
-    debugger;
-    var $elm = $('.playground  #'+elm.id);
-    this.enableDrag($elm).enableResize($elm);
-  }
-
 }

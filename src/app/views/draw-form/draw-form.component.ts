@@ -73,10 +73,9 @@ export class DrawFormComponent {
     this.ref.detectChanges();
   }
 
-  selectElement(elm: Element) {
+  selectElement(elm: Element) { 
     elm.select();
     this.selectedElm = elm;
-    this.dragElments.enableModing(this.selectedElm);
 
     if(this.prevSelection && this.prevSelection != this.selectedElm)
       this.prevSelection.deSelect()
@@ -87,26 +86,23 @@ export class DrawFormComponent {
   clearSelection(e) {
     const regex = /playground/g;
     if (regex.test(e.target.classList.value) && this.selectedElm) {
-      this.dragElments.enableModing(this.selectedElm);
       this.selectedElm.deSelect();
       this.selectedElm = null;
     }
   }
 
-  onClick(elm:Element, e){
+  onMousedown(elm:Element, e){
     this.selectElement(elm);
+  }
+
+  onDbClick(elm:Element, e){
     if(this.selectedElm instanceof UserInput && (elm === this.selectedElm)){
       this.dragElments.disableDrag(this.selectedElm);
     }
   }
-  onDrag(elm:Element, e){
-    console.log(e.type);
-  }
 
-  disableDrag(elm:Element, e){
-      if(e.type==='dbclick' && elm instanceof UserInput){
-        this.dragElments.disableDrag(elm);
-      }
+  onBlur(){
+    this.dragElments.enableDrag(this.selectedElm);
   }
 
   addText() {
