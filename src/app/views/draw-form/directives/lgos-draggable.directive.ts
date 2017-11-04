@@ -36,7 +36,11 @@ export class LgosDraggableDirective implements OnChanges {
           helper: "ui-resizable-helper",
           handles: "n, e, s, w",
           stop: function( event, ui ) {
-            debugger
+            ui.element.parent().addClass('resize-stop');
+            setTimeout(()=>{
+              ui.element.parent().removeClass('resize-stop');
+            },100);
+            event.stopImmediatePropagation();
           }
         })
       });

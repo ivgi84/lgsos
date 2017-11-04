@@ -77,16 +77,20 @@ export class DrawFormComponent {
     elm.select();
     this.selectedElm = elm;
 
-    if(this.prevSelection && this.prevSelection != this.selectedElm)
+    if(this.prevSelection && this.prevSelection != this.selectedElm){
       this.prevSelection.deSelect()
+    }
+    
     
     this.prevSelection = this.selectedElm;
   }
 
   clearSelection(e) {
-    debugger
-    const regex = /playground/g;
-    if (regex.test(e.target.classList.value) && this.selectedElm) {
+    const isPlayground = /playground/g;
+    const isResizing = /resize-stop/g;
+    debugger;
+    if (isPlayground.test(e.target.classList.value) && !isResizing.test(e.target.classList.value) && this.selectedElm) {
+      debugger;
       this.selectedElm.deSelect();
       this.selectedElm = null;
     }
