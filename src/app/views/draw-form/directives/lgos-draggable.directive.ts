@@ -34,7 +34,8 @@ export class LgosDraggableDirective implements OnChanges {
           });
         $el.resizable({
           helper: "ui-resizable-helper",
-          handles: "n, e, s, w",
+          handles: "nw,sw,ne,se",
+          aspectRatio:true,
           stop: function( event, ui ) {
             ui.element.parent().addClass('resize-stop');
             setTimeout(()=>{
@@ -45,11 +46,6 @@ export class LgosDraggableDirective implements OnChanges {
         })
       });
     },100)
-  }
-
-  resizeStop(e){
-    debugger;
-
   }
 
   disableDrag(elm:Element){

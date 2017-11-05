@@ -13,6 +13,7 @@ import { SortableDirective } from './views/draw-form/directives/lgos-sortable.di
 //import { ToolsComponent } from './views/draw-form/tools/tools.component';
 import { DeleteComponent } from './views/draw-form/tools/delete/delete.component';
 import { ResizeToolComponent } from './views/draw-form/tools/resize/lgos-resize-tool.component';
+import { LgosColorPickerComponent } from './views/draw-form/tools/lgos-color-picker/lgos-color-picker.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ResizeToolComponent } from './views/draw-form/tools/resize/lgos-resize-
     SortableDirective,
     //ToolsComponent,
     DeleteComponent,
-    ResizeToolComponent
+    ResizeToolComponent,
+    LgosColorPickerComponent
   ],
   imports: [
     BrowserModule,
