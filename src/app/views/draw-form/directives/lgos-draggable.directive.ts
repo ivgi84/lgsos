@@ -1,5 +1,6 @@
 import { Directive, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Element } from '../models/element';
+import { UserInput } from '../models/user-input';
 import * as _ from 'lodash';
 import * as $ from 'jquery';
 import 'jqueryui';
@@ -35,7 +36,7 @@ export class LgosDraggableDirective implements OnChanges {
         $el.resizable({
           helper: "ui-resizable-helper",
           handles: "nw,sw,ne,se",
-          aspectRatio:true,
+          aspectRatio: el instanceof UserInput ? false : true,
           stop: function( event, ui ) {
             ui.element.parent().addClass('resize-stop');
             setTimeout(()=>{

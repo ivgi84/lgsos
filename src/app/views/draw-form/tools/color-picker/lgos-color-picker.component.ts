@@ -12,7 +12,18 @@ export class LgosColorPickerComponent implements OnInit {
 
   @Input() elm:Element;
 
+  presets = {
+    colors:[]
+  }
+
   ngOnInit() {
+  }
+
+  addColorToPreset(){
+
+  }
+  pickColor(){
+    
   }
 
 }

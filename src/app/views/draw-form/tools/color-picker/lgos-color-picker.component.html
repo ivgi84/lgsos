@@ -1,0 +1,18 @@
+<button class="tool-button" mat-icon-button><mat-icon matTooltip="Set color" (click)="action()">format_color_fill</mat-icon></button>
+<div class="lgos-color-picker-wrap">
+    <!-- preview element -->
+    <div class="preview"></div>
+
+    <!-- colorpicker element -->
+    <div class="colorpicker" style="display:none">
+        <canvas id="picker" var="1" width="300" height="300"></canvas>
+
+        <div class="controls">
+            <div><label>R</label> <input type="text" id="rVal" /></div>
+            <div><label>G</label> <input type="text" id="gVal" /></div>
+            <div><label>B</label> <input type="text" id="bVal" /></div>
+            <div><label>RGB</label> <input type="text" id="rgbVal" /></div>
+            <div><label>HEX</label> <input type="text" id="hexVal" /></div>
+        </div>
+    </div>
+</div>

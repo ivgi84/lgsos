@@ -28,6 +28,9 @@ export class ResizeToolComponent implements OnInit {
   open(){
     this.isOpen = true;
   }
+  close(){
+    this.isOpen = false;
+  }
 
 
 }

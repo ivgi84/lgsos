@@ -6,11 +6,6 @@
         <lgos-resize-tool [elm]="selectedElm"></lgos-resize-tool>
         <lgos-color-picker [elm]="selectedElm"></lgos-color-picker>
     </div>
-    <!-- <div class="tools">
-    
-    </div> -->
-    <!-- <lgos-draw-tools [(list)]="elementsList"></lgos-draw-tools> -->
-    <!-- <lgos-draw-tools [selectedEl]="selectedElement" ></lgos-draw-tools> -->
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
@@ -81,7 +76,8 @@
     <mat-card class="draw-area" (click)="clearSelection($event)">
         <mat-card-content>
             <div class="playground" #playground *ngIf="elementsList.length > 0" dragElments lgosDraggable [elements]="elementsList">
-                <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (mousedown)="onMousedown(elm, $event)" (dblclick)="onDbClick(elm, $event);" (blur)="onBlur(elm)"> 
+                <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (mousedown)="onMousedown(elm, $event)" (dblclick)="onDbClick(elm, $event);"
+                    (blur)="onBlur(elm)">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
                     <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px'}" *ngIf="elm.type == 'userInput'">
                         {{elm.text}}
