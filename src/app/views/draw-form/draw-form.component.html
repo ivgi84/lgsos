@@ -79,7 +79,7 @@
                 <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (mousedown)="onMousedown(elm, $event)" (dblclick)="onDbClick(elm, $event);"
                     (blur)="onBlur(elm)">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
-                    <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px'}" *ngIf="elm.type == 'userInput'">
+                    <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 'color':elm.styles.color}" *ngIf="elm.type == 'userInput'">
                         {{elm.text}}
                     </p>
                 </div>

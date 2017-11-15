@@ -1,18 +1,23 @@
 <button class="tool-button" mat-icon-button><mat-icon matTooltip="Set color" (click)="toggle()">format_color_fill</mat-icon></button>
-<div class="lgos-color-picker-wrap" *ngIf="isEnabled">
-    <!-- preview element -->
-    <div class="preview"></div>
-
-    <!-- colorpicker element -->
-    <div class="colorpicker">
-        <canvas #colorPalete (mousemove)="onMouseMove($event)" var="1" width="300" height="300"></canvas>
-
-        <div class="controls">
-            <div><label>R</label> <input type="text" id="rVal" /></div>
-            <div><label>G</label> <input type="text" id="gVal" /></div>
-            <div><label>B</label> <input type="text" id="bVal" /></div>
-            <div><label>RGB</label> <input type="text" id="rgbVal" /></div>
-            <div><label>HEX</label> <input type="text" id="hexVal" /></div>
+<mat-card class="lgos-color-picker-wrap" *ngIf="isEnabled">
+    <mat-card-title>Color Selector</mat-card-title>
+    <mat-card-content>
+        <div>
+            <!-- preview element -->
+            <div class="preview" [style.background-color]="pixelColor"></div>
+            <div class="presets">
+                <ul>
+                    <li *ngFor="let color of presetColors" [style.background-color]="color" (click)="setColor(color)"></li>
+                </ul>
+            </div>
+            <!-- colorpicker element -->
+            <div class="colorpicker">
+                <canvas #colorPalete (mousemove)="getColor($event)" (click)="setColor()" var="1" width="300" height="300"></canvas>
+                <div class="controls">
+                    <div><label>RGB</label> <input type="text" id="rgbVal" /></div>
+                    <div><label>HEX</label> <input type="text" id="hexVal" /></div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </mat-card-content>
+</mat-card>
