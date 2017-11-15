@@ -1,0 +1,7 @@
+.lgos-color-picker-wrap {
+    border: 1px solid red;
+    position: absolute;
+    top: 140px;
+    right: 10px;
+    z-index: 2;
+}

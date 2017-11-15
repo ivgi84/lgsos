@@ -88,9 +88,7 @@ export class DrawFormComponent {
   clearSelection(e) {
     const isPlayground = /playground/g;
     const isResizing = /resize-stop/g;
-    debugger;
     if (isPlayground.test(e.target.classList.value) && !isResizing.test(e.target.classList.value) && this.selectedElm) {
-      debugger;
       this.selectedElm.deSelect();
       this.selectedElm = null;
     }
