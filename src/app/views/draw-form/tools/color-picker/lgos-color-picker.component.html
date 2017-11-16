@@ -3,19 +3,36 @@
     <mat-card-title>Color Selector</mat-card-title>
     <mat-card-content>
         <div>
-            <!-- preview element -->
+            Current color
             <div class="preview" [style.background-color]="pixelColor"></div>
             <div class="presets">
+                <h4>
+                    Preset Colors
+                </h4>
                 <ul>
                     <li *ngFor="let color of presetColors" [style.background-color]="color" (click)="setColor(color)"></li>
                 </ul>
             </div>
-            <!-- colorpicker element -->
             <div class="colorpicker">
                 <canvas #colorPalete (mousemove)="getColor($event)" (click)="setColor()" var="1" width="300" height="300"></canvas>
                 <div class="controls">
-                    <div><label>RGB</label> <input type="text" id="rgbVal" /></div>
-                    <div><label>HEX</label> <input type="text" id="hexVal" /></div>
+                    <mat-form-field class="example-form-field">
+                        <span matPrefix>RGB(</span>
+                        <input matInput type="text" placeholder="RGB" [(ngModel)]="rgbValue" (keyup)="rgbFormat(rgbValue)" />
+                        <button mat-button *ngIf="rgbValue" matSuffix mat-icon-button aria-label="Clear" (click)="rgbValue=''">
+                            <mat-icon  *ngIf="rgbValue">close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-form-field">
+                        <span matPrefix>#</span>
+                        <input matInput type="text" placeholder="HEX" [(ngModel)]="hexValue" />
+                        <button mat-button *ngIf="hexValue" matSuffix mat-icon-button aria-label="Clear" (click)="hexValue=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button color="primary">Primary</button>
                 </div>
             </div>
         </div>

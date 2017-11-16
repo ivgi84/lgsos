@@ -25,8 +25,8 @@ export class ResizeToolComponent implements OnInit {
     this.changeSize(event.value);
   }
 
-  open(){
-    this.isOpen = true;
+  toggle(){
+    this.isOpen = !this.isOpen;
   }
   close(){
     this.isOpen = false;

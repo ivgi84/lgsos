@@ -17,8 +17,18 @@ export class LgosColorPickerComponent {
   ctx: CanvasRenderingContext2D;
   pixelColor = '';
   presetColors = [
+      '#000',
       '#fff',
-      '#000'
+      '#ff5c5c',
+      '#ffbd4a',
+      '#fff952',
+      '#99e265',
+      '#35b729',
+      '#44d9e6',
+      '#2eb2ff',
+      '#5271ff',
+      '#b760e6',
+      '#ff63b1'
   ]
 
   private isFirstInit = true;
@@ -54,6 +64,11 @@ export class LgosColorPickerComponent {
       let colorObj = { color:data };
       this.elm.addStyle(colorObj);
     }
-     
+  }
+  rgbFormat(value){
+      debugger;
+
+      let colorPattern = /^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
+      
   }
 }
