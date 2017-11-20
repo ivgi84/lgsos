@@ -1,39 +1,27 @@
 <button class="tool-button" mat-icon-button><mat-icon matTooltip="Set color" (click)="toggle()">format_color_fill</mat-icon></button>
 <mat-card class="lgos-color-picker-wrap" *ngIf="isEnabled">
-    <mat-card-title>Color Selector</mat-card-title>
+    <mat-card-title [style.color]="pixelColor">Color Selector</mat-card-title>
     <mat-card-content>
-        <div>
-            Current color
-            <div class="preview" [style.background-color]="pixelColor"></div>
-            <div class="presets">
-                <h4>
-                    Preset Colors
-                </h4>
-                <ul>
-                    <li *ngFor="let color of presetColors" [style.background-color]="color" (click)="setColor(color)"></li>
-                </ul>
-            </div>
-            <div class="colorpicker">
-                <canvas #colorPalete (mousemove)="getColor($event)" (click)="setColor()" var="1" width="300" height="300"></canvas>
-                <div class="controls">
-                    <mat-form-field class="example-form-field">
-                        <span matPrefix>RGB(</span>
-                        <input matInput type="text" placeholder="RGB" [(ngModel)]="rgbValue" (keyup)="rgbFormat(rgbValue)" />
-                        <button mat-button *ngIf="rgbValue" matSuffix mat-icon-button aria-label="Clear" (click)="rgbValue=''">
-                            <mat-icon  *ngIf="rgbValue">close</mat-icon>
-                        </button>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class="example-form-field">
-                        <span matPrefix>#</span>
-                        <input matInput type="text" placeholder="HEX" [(ngModel)]="hexValue" />
-                        <button mat-button *ngIf="hexValue" matSuffix mat-icon-button aria-label="Clear" (click)="hexValue=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
-                    <br>
-                    <button mat-raised-button color="primary">Primary</button>
-                </div>
+        <div class="presets">
+            <h4>
+                Preset Colors
+            </h4>
+            <ul>
+                <li *ngFor="let color of presetColors" [style.background-color]="color" (click)="setColor(color)"></li>
+            </ul>
+        </div>
+        <div class="colorpicker">
+            <div class="canvasWrap"><canvas #colorPalete (mousemove)="getColor($event)" (click)="setColor(null,$event)" var="1" width="300" height="300"></canvas></div>
+            <div class="colorValue" [style.background-color]="pickedColor"></div>
+            <div class="controls">
+                <mat-form-field class="example-form-field">
+                    <input matInput type="text" placeholder="HEX" [(ngModel)]="pickedColor" />
+                    <button mat-button *ngIf="pickedColor" matSuffix mat-icon-button aria-label="Clear" (click)="pickedColor=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="primary">Primary</button>
             </div>
         </div>
     </mat-card-content>

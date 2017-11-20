@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, AfterViewInit, ElementRef} from '@
 import { Element } from '../../models/element';
 import { debug } from 'util';
 import { UserInput } from 'app/views/draw-form/models/user-input';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'lgos-color-picker',
@@ -16,6 +17,7 @@ export class LgosColorPickerComponent {
   isEnabled = false;
   ctx: CanvasRenderingContext2D;
   pixelColor = '';
+  pickedColor= '';
   presetColors = [
       '#000',
       '#fff',
@@ -29,46 +31,66 @@ export class LgosColorPickerComponent {
       '#5271ff',
       '#b760e6',
       '#ff63b1'
-  ]
+  ];
 
   private isFirstInit = true;
 
   toggle(){
     this.isEnabled = !this.isEnabled;
     if(this.isEnabled){
-      setTimeout(()=>{
-        this.setCanvas();
+      setTimeout(()=>{//we need to wait untill dom will be drawn
+        this.ctx = this.colorPalete.nativeElement.getContext('2d');
+        this.draw(-10,-10);
       },10);
       this.isFirstInit = false;
     }
   }
 
-  setCanvas(){
-    this.ctx = this.colorPalete.nativeElement.getContext('2d');
-    let image = new Image();
-    image.src='assets/img/colorwheel.png';
-    image.onload = ()=>{
-      this.ctx.drawImage(image,0,0, image.width, image.height);
-    }
-  }
   getColor(e){
     let canvasElm = this.colorPalete.nativeElement;
     let imageData = this.ctx.getImageData(e.offsetX, e.offsetY,1,1);
     let pixel = imageData.data;
-    this.pixelColor = 'rgb('+pixel[0]+','+pixel[1]+','+pixel[2]+')';
+    var dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0];
+
+    let rgb = 'rgb('+pixel[0]+','+pixel[1]+','+pixel[2]+')';
+    let hex = '#' + ('0000' + dColor.toString(16)).substr(-6);
+    this.pixelColor = hex;
   }
-  setColor(data){
-    if(!data)
-      this.elm.addStyle({'color':this.pixelColor});
-    else{
-      let colorObj = { color:data };
-      this.elm.addStyle(colorObj);
+  draw(x,y){
+    let image = new Image();
+    image.src='assets/img/colorwheel.png';
+    image.onload = ()=>{
+      this.ctx.drawImage(image,0,0, image.width, image.height);
+      
+      this.ctx.beginPath();
+      this.ctx.arc(x,y,5,0,2*Math.PI);
+      this.ctx.stroke();
+      this.ctx.closePath();
     }
   }
-  rgbFormat(value){
-      debugger;
-
-      let colorPattern = /^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
-      
+  setColor(data, e){
+    if(e){
+      this.ctx.clearRect(0,0,300,300);
+      this.draw(e.offsetX, e.offsetY);
+    }
+    this.pickedColor = data ? data : this.pixelColor;
+    this.saveColor();
+    console.log(this.pickedColor);
   }
+
+  private saveColor(){
+      this.elm.addStyle({'color':this.pickedColor})
+  }
+
+  //colorValue, create another cnavas based on picked color
+  //var c = document.getElementById("myCanvas");
+// var ctx = c.getContext("2d");
+
+// var grd = ctx.createLinearGradient(0, 0, 170, 0);
+// grd.addColorStop(0, "black");
+// grd.addColorStop(1, "white");
+
+// ctx.fillStyle = grd;
+// ctx.fillRect(20, 20, 150, 100);
+
 }
