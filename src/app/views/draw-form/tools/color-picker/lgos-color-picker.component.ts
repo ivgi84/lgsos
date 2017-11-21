@@ -12,10 +12,13 @@ import * as _ from 'lodash';
 export class LgosColorPickerComponent {
 
   @ViewChild('colorPalete') colorPalete: ElementRef;
+  @ViewChild('colorBrightness') colorBrightness: ElementRef;
   @Input() elm:UserInput;
 
   isEnabled = false;
-  ctx: CanvasRenderingContext2D;
+  colorPaleteCtx: CanvasRenderingContext2D;
+  colorBrighnrssCtx: CanvasRenderingContext2D;
+
   pixelColor = '';
   pickedColor= '';
   presetColors = [
@@ -38,8 +41,9 @@ export class LgosColorPickerComponent {
   toggle(){
     this.isEnabled = !this.isEnabled;
     if(this.isEnabled){
-      setTimeout(()=>{//we need to wait untill dom will be drawn
-        this.ctx = this.colorPalete.nativeElement.getContext('2d');
+      setTimeout(()=>{//we need timeout, casue we have to wait
+        this.colorPaleteCtx = this.colorPalete.nativeElement.getContext('2d');
+        this.colorBrighnrssCtx = this.colorBrightness.nativeElement.getContext('2d');
         this.draw(-10,-10);
       },10);
       this.isFirstInit = false;
@@ -48,49 +52,44 @@ export class LgosColorPickerComponent {
 
   getColor(e){
     let canvasElm = this.colorPalete.nativeElement;
-    let imageData = this.ctx.getImageData(e.offsetX, e.offsetY,1,1);
-    let pixel = imageData.data;
+    let pixel = this.colorPaleteCtx.getImageData(e.offsetX, e.offsetY,1,1).data;
     var dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0];
 
     let rgb = 'rgb('+pixel[0]+','+pixel[1]+','+pixel[2]+')';
-    let hex = '#' + ('0000' + dColor.toString(16)).substr(-6);
+    let hex = '#' + ('000000' + dColor.toString(16)).substr(-6);
     this.pixelColor = hex;
+    let gradient = this.colorBrighnrssCtx.createLinearGradient(0,0,170,0);
+    gradient.addColorStop(0,hex);
+    gradient.addColorStop(1,'#000000');
+    this.colorBrighnrssCtx.fillStyle = gradient;
+    this.colorBrighnrssCtx.fillRect(20,20,300,20);
+
   }
   draw(x,y){
     let image = new Image();
     image.src='assets/img/colorwheel.png';
     image.onload = ()=>{
-      this.ctx.drawImage(image,0,0, image.width, image.height);
-      
-      this.ctx.beginPath();
-      this.ctx.arc(x,y,5,0,2*Math.PI);
-      this.ctx.stroke();
-      this.ctx.closePath();
+      this.colorPaleteCtx.drawImage(image,0,0, image.width, image.height);
+      this.colorPaleteCtx.beginPath();
+      this.colorPaleteCtx.arc(x,y,5,0,2*Math.PI);
+      this.colorPaleteCtx.stroke();
+      this.colorPaleteCtx.closePath();
     }
   }
   setColor(data, e){
     if(e){
-      this.ctx.clearRect(0,0,300,300);
+      this.colorPaleteCtx.clearRect(0,0,300,300);
       this.draw(e.offsetX, e.offsetY);
     }
     this.pickedColor = data ? data : this.pixelColor;
     this.saveColor();
-    console.log(this.pickedColor);
+  }
+
+  setColorBrightness(e){
+    
   }
 
   private saveColor(){
       this.elm.addStyle({'color':this.pickedColor})
   }
-
-  //colorValue, create another cnavas based on picked color
-  //var c = document.getElementById("myCanvas");
-// var ctx = c.getContext("2d");
-
-// var grd = ctx.createLinearGradient(0, 0, 170, 0);
-// grd.addColorStop(0, "black");
-// grd.addColorStop(1, "white");
-
-// ctx.fillStyle = grd;
-// ctx.fillRect(20, 20, 150, 100);
-
 }
