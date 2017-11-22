@@ -17,10 +17,11 @@ export class LgosColorPickerComponent {
 
   isEnabled = false;
   colorPaleteCtx: CanvasRenderingContext2D;
-  colorBrighnrssCtx: CanvasRenderingContext2D;
+  colorBrighnessCtx: CanvasRenderingContext2D;
 
   pixelColor = '';
   pickedColor= '';
+  palleteColor= '';
   presetColors = [
       '#000',
       '#fff',
@@ -41,31 +42,37 @@ export class LgosColorPickerComponent {
   toggle(){
     this.isEnabled = !this.isEnabled;
     if(this.isEnabled){
-      setTimeout(()=>{//we need timeout, casue we have to wait
+      setTimeout(()=>{ //we need timeout, casue we have to wait
         this.colorPaleteCtx = this.colorPalete.nativeElement.getContext('2d');
-        this.colorBrighnrssCtx = this.colorBrightness.nativeElement.getContext('2d');
-        this.draw(-10,-10);
+        this.colorBrighnessCtx = this.colorBrightness.nativeElement.getContext('2d');
+        this.drawArc(-10,-10); //top left cornet outside of view
       },10);
       this.isFirstInit = false;
     }
   }
 
-  getColor(e){
-    let canvasElm = this.colorPalete.nativeElement;
+  getColor(e){ //hovering
     let pixel = this.colorPaleteCtx.getImageData(e.offsetX, e.offsetY,1,1).data;
-    var dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0];
-
-    let rgb = 'rgb('+pixel[0]+','+pixel[1]+','+pixel[2]+')';
-    let hex = '#' + ('000000' + dColor.toString(16)).substr(-6);
-    this.pixelColor = hex;
-    let gradient = this.colorBrighnrssCtx.createLinearGradient(0,0,170,0);
-    gradient.addColorStop(0,hex);
-    gradient.addColorStop(1,'#000000');
-    this.colorBrighnrssCtx.fillStyle = gradient;
-    this.colorBrighnrssCtx.fillRect(20,20,300,20);
-
+    this.pixelColor = this.parseColor(pixel).hex;
   }
-  draw(x,y){
+  parseColor(pixel){
+    let dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0],
+    rgb = 'rgb('+pixel[0]+','+pixel[1]+','+pixel[2]+')',
+    hex = '#' + ('000000' + dColor.toString(16)).substr(-6);
+
+    return {
+      rgb:rgb,
+      hex:hex
+    }
+  }
+  setBrightnessPallete(color){
+    let gradient = this.colorBrighnessCtx.createLinearGradient(0,0,300,0);
+    gradient.addColorStop(0,color);
+    gradient.addColorStop(1,'#000000');
+    this.colorBrighnessCtx.fillStyle = gradient;
+    this.colorBrighnessCtx.fillRect(0,0,300,20);
+  }
+  drawArc(x,y){
     let image = new Image();
     image.src='assets/img/colorwheel.png';
     image.onload = ()=>{
@@ -76,17 +83,28 @@ export class LgosColorPickerComponent {
       this.colorPaleteCtx.closePath();
     }
   }
-  setColor(data, e){
+  setColor(data, e){ // click on colorPallete
     if(e){
       this.colorPaleteCtx.clearRect(0,0,300,300);
-      this.draw(e.offsetX, e.offsetY);
+      this.drawArc(e.offsetX, e.offsetY);
     }
     this.pickedColor = data ? data : this.pixelColor;
+    this.palleteColor = this.pixelColor;
+    this.setBrightnessPallete(this.pickedColor);
     this.saveColor();
   }
 
-  setColorBrightness(e){
+  setColorBrightness(e){ //click on colorBrightness
+    let pixel = this.colorBrighnessCtx.getImageData(e.offsetX, e.offsetY,1,1).data;
+    this.pickedColor = this.parseColor(pixel).hex;
+    this.saveColor();
     
+    this.colorBrighnessCtx.clearRect(0,0,300,20);
+    this.setBrightnessPallete(this.palleteColor);
+    this.colorBrighnessCtx.beginPath();
+    this.colorBrighnessCtx.arc(e.offsetX,10,7,0,2*Math.PI);
+    this.colorBrighnessCtx.stroke();
+    this.colorBrighnessCtx.closePath();
   }
 
   private saveColor(){

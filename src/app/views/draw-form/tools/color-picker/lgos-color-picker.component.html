@@ -12,7 +12,7 @@
         </div>
         <div class="colorpicker">
             <div class="canvasWrap"><canvas #colorPalete (mousemove)="getColor($event)" (click)="setColor(null,$event)" var="1" width="300" height="300"></canvas></div>
-            <div class="colorValue" [style.background-color]="pickedColor">
+            <div class="colorBrightness">
                 <canvas #colorBrightness (click)="setColorBrightness($event)" var="1" width="300" height="20"></canvas>
             </div>
             <div class="controls">
