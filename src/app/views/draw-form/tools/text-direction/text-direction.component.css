@@ -1,0 +1,20 @@
+.lgos-text-format {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    z-index: 2;
+    max-width: 300px;
+}
+
+.lgos-text-format:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -7px;
+    right: 110px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #fff;
+}

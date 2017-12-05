@@ -118,5 +118,12 @@ export class DrawFormComponent {
   onDelete(ind) {
     this.elementsList.splice(ind, 1);
   }
+  onKeyDown(e){
+    debugger
+    if(e.keyCode == 13){
+      document.execCommand('insertHTML',false,'<br>');
+      return false;
+    }
+  }
 
 }

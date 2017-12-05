@@ -1,7 +1,7 @@
 {
     "name": "stamp-over",
-    "version": "0.0.0",
-    "license": "MIT",
+    "version": "0.0.1",
+    "license": "Leni Graphics",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { UserInput } from '../../models/user-input';
 
 @Component({
@@ -9,6 +9,15 @@ import { UserInput } from '../../models/user-input';
 export class ResizeToolComponent implements OnInit {
 
   @Input() elm:UserInput = null;
+  @ViewChild('resizeToolWrapper') resizeToolWrapper:ElementRef;
+  @HostListener('document:click',['$event'])
+  onclick(e){
+    if(this.isOpen){
+      if(e && e.target){
+          this.isOpen = this.resizeToolWrapper.nativeElement.contains(e.target);
+      }
+    }
+  }
 
   styles = {};
   isOpen = false;

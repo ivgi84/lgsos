@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, ElementRef, HostListener} from '@angular/core';
 import { Element } from '../../models/element';
 import { debug } from 'util';
 import { UserInput } from 'app/views/draw-form/models/user-input';
@@ -13,8 +13,16 @@ export class LgosColorPickerComponent {
 
   @ViewChild('colorPalete') colorPalete: ElementRef;
   @ViewChild('colorBrightness') colorBrightness: ElementRef;
+  @ViewChild('colorPickerWrapper') colorPickerWrapper:ElementRef;
   @Input() elm:UserInput;
-
+  @HostListener('document:click',['$event'])
+  onclick(e){
+    if(this.isEnabled){
+      if(e && e.target) {
+        this.isEnabled = this.colorPickerWrapper.nativeElement.contains(e.target);
+      }
+    }
+  }
   isEnabled = false;
   colorPaleteCtx: CanvasRenderingContext2D;
   colorBrighnessCtx: CanvasRenderingContext2D;
@@ -38,11 +46,21 @@ export class LgosColorPickerComponent {
   ];
 
   private isFirstInit = true;
+  // isDescendant(parent, child) { // not in use, in case not all browsers will correctly work with contains function
+  //     let node = child.parentNode;
+  //     while (node != null) {
+  //         if (node == parent) {
+  //             return true;
+  //         }
+  //         node = node.parentNode;
+  //     }
+  //     return false;
+  // }
 
   toggle(){
     this.isEnabled = !this.isEnabled;
     if(this.isEnabled){
-      setTimeout(()=>{ //we need timeout, casue we have to wait
+      setTimeout(()=>{ //we need timeout, casue we have to wait untill html will be rendered
         this.colorPaleteCtx = this.colorPalete.nativeElement.getContext('2d');
         this.colorBrighnessCtx = this.colorBrightness.nativeElement.getContext('2d');
         this.drawArc(-10,-10); //top left cornet outside of view
@@ -54,20 +72,9 @@ export class LgosColorPickerComponent {
   getColor(e){ //hovering
     let pixel = this.colorPaleteCtx.getImageData(e.offsetX, e.offsetY,1,1).data;
     this.pixelColor = this.parseColor(pixel).hex;
-    console.log(pixel, this.pixelColor);
-  }
-  parseColor(pixel){
-    let dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0],
-    rgb = 'rgb('+pixel[0]+','+pixel[1]+','+pixel[2]+')',
-    hex = '#' + ('000000' + dColor.toString(16)).substr(-6);
-
-    return {
-      rgb:rgb,
-      hex:hex
-    }
   }
   setBrightnessPallete(color){
-    let gradient = this.colorBrighnessCtx.createLinearGradient(0,0,300,0);
+    let gradient = this.colorBrighnessCtx.createLinearGradient(0,0,300,20);
     gradient.addColorStop(0,color);
     gradient.addColorStop(1,'#000000');
     this.colorBrighnessCtx.fillStyle = gradient;
@@ -115,5 +122,15 @@ export class LgosColorPickerComponent {
 
   private saveColor(){
       this.elm.addStyle({'color':this.pickedColor})
+  }
+  private parseColor(pixel){
+    let dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0],
+    rgb = 'rgb('+pixel[0]+','+pixel[1]+','+pixel[2]+')',
+    hex = '#' + ('000000' + dColor.toString(16)).substr(-6);
+
+    return {
+      rgb:rgb,
+      hex:hex
+    }
   }
 }

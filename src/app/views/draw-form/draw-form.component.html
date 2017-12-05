@@ -4,6 +4,7 @@
     <div class="tools" *ngIf="selectedElm">
         <lgos-delete-tool [(list)]="elementsList" (delete)="onDelete($event)"></lgos-delete-tool>
         <lgos-resize-tool [elm]="selectedElm"></lgos-resize-tool>
+        <lgos-text-direction [elm]="selectedElm"></lgos-text-direction>
         <lgos-color-picker [elm]="selectedElm"></lgos-color-picker>
     </div>
 </mat-toolbar>
@@ -75,11 +76,11 @@
     </mat-sidenav>
     <mat-card class="draw-area" (click)="clearSelection($event)">
         <mat-card-content>
-            <div class="playground" #playground *ngIf="elementsList.length > 0" dragElments lgosDraggable [elements]="elementsList">
+            <div class="playground" #playground *ngIf="elementsList.length > 0" dragElments lgosDraggable [elements]="elementsList" (keydown)="onKeyDown($event)">
                 <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (mousedown)="onMousedown(elm, $event)" (dblclick)="onDbClick(elm, $event);"
                     (blur)="onBlur(elm)">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
-                    <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 'color':elm.styles.color}" *ngIf="elm.type == 'userInput'">
+                    <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 'color':elm.styles.color, 'text-align':elm.styles.textAlign, 'direction':elm.styles.direction}" *ngIf="elm.type == 'userInput'" (keydown)="onKeyDown($event)">
                         {{elm.text}}
                     </p>
                 </div>

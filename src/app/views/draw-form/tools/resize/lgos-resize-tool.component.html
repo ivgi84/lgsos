@@ -1,6 +1,8 @@
-<button class="tool-button" mat-icon-button><mat-icon matTooltip="change font size" (click)="toggle()">format_size</mat-icon></button>
-<div class="font-size-selector" [ngClass]="{'isOpen':isOpen}">
-    <div class="font-size-slider">
-        <mat-slider (blur)="close()" (input)="onInputChange($event)" vertical thumbLabel min="6" max="144" step="2" value="14"></mat-slider>
+<div #resizeToolWrapper>
+    <button class="tool-button" mat-icon-button (click)="toggle()"><mat-icon matTooltip="change font size">format_size</mat-icon></button>
+    <div class="font-size-selector" [ngClass]="{'isOpen':isOpen}">
+        <div class="font-size-slider">
+            <mat-slider (blur)="close()" (input)="onInputChange($event)" vertical thumbLabel min="6" max="144" step="2" value="14"></mat-slider>
+        </div>
     </div>
 </div>

@@ -1,0 +1,13 @@
+<div #textDirection class="lgos-text-format-wrapper">
+    <button class="tool-button" mat-icon-button (click)="toggle()"><mat-icon matTooltip="text format">mode_edit</mat-icon></button>
+    <mat-card class="lgos-text-format" *ngIf="isEnabled">
+        <mat-card-title>Text format</mat-card-title>
+        <mat-card-content>
+            <button mat-icon-button (click)="formatText('textAlign','left')"><mat-icon>format_align_left</mat-icon></button>
+            <button mat-icon-button (click)="formatText('textAlign','center')"><mat-icon>format_align_center</mat-icon></button>
+            <button mat-icon-button (click)="formatText('textAlign','right')"><mat-icon>format_align_right</mat-icon></button>
+            <button mat-icon-button (click)="formatText('direction','ltr')"><mat-icon>format_textdirection_l_to_r</mat-icon></button>
+            <button mat-icon-button (click)="formatText('direction','rtl')"><mat-icon>format_textdirection_r_to_l</mat-icon></button>
+        </mat-card-content>
+    </mat-card>
+</div>
