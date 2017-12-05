@@ -54,6 +54,7 @@ export class LgosColorPickerComponent {
   getColor(e){ //hovering
     let pixel = this.colorPaleteCtx.getImageData(e.offsetX, e.offsetY,1,1).data;
     this.pixelColor = this.parseColor(pixel).hex;
+    console.log(pixel, this.pixelColor);
   }
   parseColor(pixel){
     let dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0],
@@ -72,24 +73,26 @@ export class LgosColorPickerComponent {
     this.colorBrighnessCtx.fillStyle = gradient;
     this.colorBrighnessCtx.fillRect(0,0,300,20);
   }
-  drawArc(x,y){
+  drawArc(x?,y?){
     let image = new Image();
     image.src='assets/img/colorwheel.png';
     image.onload = ()=>{
       this.colorPaleteCtx.drawImage(image,0,0, image.width, image.height);
-      this.colorPaleteCtx.beginPath();
-      this.colorPaleteCtx.arc(x,y,5,0,2*Math.PI);
-      this.colorPaleteCtx.stroke();
-      this.colorPaleteCtx.closePath();
+      if(x && y){
+        this.colorPaleteCtx.beginPath();
+        this.colorPaleteCtx.arc(x,y,5,0,2*Math.PI);
+        this.colorPaleteCtx.stroke();
+        this.colorPaleteCtx.closePath();
+      }
     }
   }
-  setColor(data, e){ // click on colorPallete
-    if(e){
-      this.colorPaleteCtx.clearRect(0,0,300,300);
+  setColor(color, e){ // click on colorPallete
+    this.colorPaleteCtx.clearRect(0,0,300,300);
+    if(e)
       this.drawArc(e.offsetX, e.offsetY);
-    }
-    this.pickedColor = data ? data : this.pixelColor;
-    this.palleteColor = this.pixelColor;
+    else
+      this.drawArc();
+    this.palleteColor = this.pickedColor = color ? color : this.pixelColor;
     this.setBrightnessPallete(this.pickedColor);
     this.saveColor();
   }
@@ -105,6 +108,9 @@ export class LgosColorPickerComponent {
     this.colorBrighnessCtx.arc(e.offsetX,10,7,0,2*Math.PI);
     this.colorBrighnessCtx.stroke();
     this.colorBrighnessCtx.closePath();
+  }
+  addToPreset(){
+    this.presetColors.push(this.pickedColor);
   }
 
   private saveColor(){

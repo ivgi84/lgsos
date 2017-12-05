@@ -11,7 +11,7 @@
             </ul>
         </div>
         <div class="colorpicker">
-            <div class="canvasWrap"><canvas #colorPalete (mousemove)="getColor($event)" (click)="setColor(null,$event)" var="1" width="300" height="300"></canvas></div>
+            <div class="canvasWrap"><canvas #colorPalete (mousemove)="getColor($event)" (click)="setColor(null,$event)" var="1" width="280" height="280"></canvas></div>
             <div class="colorBrightness">
                 <canvas #colorBrightness (click)="setColorBrightness($event)" var="1" width="300" height="20"></canvas>
             </div>
@@ -23,7 +23,7 @@
                     </button>
                 </mat-form-field>
                 <br>
-                <button mat-raised-button color="primary">Primary</button>
+                <button mat-raised-button color="primary" (click)="addToPreset();">Add To Preset</button>
             </div>
         </div>
     </mat-card-content>
