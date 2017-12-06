@@ -76,11 +76,13 @@
     </mat-sidenav>
     <mat-card class="draw-area" (click)="clearSelection($event)">
         <mat-card-content>
-            <div class="playground" #playground *ngIf="elementsList.length > 0" dragElments lgosDraggable [elements]="elementsList" (keydown)="onKeyDown($event)">
-                <div class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList" (mousedown)="onMousedown(elm, $event)" (dblclick)="onDbClick(elm, $event);"
-                    (blur)="onBlur(elm)">
+            <div class="playground" #playground *ngIf="elementsList.length > 0" dragElments lgosDraggable [elements]="elementsList">
+                <div (mousedown)="selectElement(elm, $event)" (dblclick)="disableDrag(elm, $event);" class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px'}" *ngFor="let elm of elementsList">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
-                    <p [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 'color':elm.styles.color, 'text-align':elm.styles.textAlign, 'direction':elm.styles.direction}" *ngIf="elm.type == 'userInput'" (keydown)="onKeyDown($event)">
+                    <p (blur)="onBlur(elm)" [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 
+                        'color':elm.styles.color, 'text-align':elm.styles.textAlign, 
+                        'direction':elm.styles.direction,
+                        'font-weight':elm.styles.fontWeight}" *ngIf="elm.type == 'userInput'">
                         {{elm.text}}
                     </p>
                 </div>

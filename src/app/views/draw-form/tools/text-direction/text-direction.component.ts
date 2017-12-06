@@ -20,13 +20,19 @@ export class TextDirectionComponent{
   }
 
   public isEnabled = false;
+  public fontWeightEnabled = false;
 
   toggle(){
     this.isEnabled = !this.isEnabled;
   }
   formatText(prop, val){
-    debugger;
     this.elm.addStyle({[prop]:val});
+  }
+  toggleFontWeight(){
+    this.fontWeightEnabled = !this.fontWeightEnabled;
+  }
+  onFontSizeChange(e){
+      this.elm.addStyle({'fontWeight':e.value});
   }
 
 

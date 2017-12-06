@@ -94,11 +94,7 @@ export class DrawFormComponent {
     }
   }
 
-  onMousedown(elm:Element, e){
-    this.selectElement(elm);
-  }
-
-  onDbClick(elm:Element, e){
+  disableDrag(elm:Element, e){
     if(this.selectedElm instanceof UserInput && (elm === this.selectedElm)){
       this.dragElments.disableDrag(this.selectedElm);
     }
@@ -117,13 +113,6 @@ export class DrawFormComponent {
 
   onDelete(ind) {
     this.elementsList.splice(ind, 1);
-  }
-  onKeyDown(e){
-    debugger
-    if(e.keyCode == 13){
-      document.execCommand('insertHTML',false,'<br>');
-      return false;
-    }
   }
 
 }

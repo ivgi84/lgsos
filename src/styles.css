@@ -23,7 +23,9 @@ body {
     margin: 0 auto;
 }
 
-.clear { clear: both; }
+.clear {
+    clear: both;
+}
 
 .header {
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
@@ -49,51 +51,78 @@ body {
     border: 1px dotted #00F;
 }
 
-.ui-resizable-se {
-    right: -5px!important;
-    bottom: -5px!important;
+.ui-resizable-n {
+    top: -10px!important;
+    left: calc(50% - 10px)!important;
+    width: 20px!important;
+    height: 10px!important;
+    border-top-left-radius: 90px;
+    border-top-right-radius: 90px;
 }
 
-.ui-resizable-s {
-    cursor: ns-resize!important;
+.ui-resizable-w {
+    left: -10px!important;
+    top: calc(50% - 10px)!important;
+    width: 10px!important;
+    height: 20px!important;
+    border-bottom-left-radius: 90px;
+    border-top-left-radius: 90px;
 }
 
 .ui-resizable-e {
-    cursor: ew-resize!important;
+    right: -10px!important;
+    top: calc(50% - 10px)!important;
+    width: 10px!important;
+    height: 20px!important;
+    border-bottom-right-radius: 90px;
+    border-top-right-radius: 90px;
+}
+
+.ui-resizable-s {
+    bottom: -10px!important;
+    left: calc(50% - 10px)!important;
+    width: 20px!important;
+    height: 10px!important;
+    border-bottom-left-radius: 90px;
+    border-bottom-right-radius: 90px;
 }
 
 .ui-icon-gripsmall-diagonal-se {
     background-image: none!important;
 }
+
 .ui-resizable-handle {
     opacity: 0;
     content: '';
     background: #3f4652;
-    width: 16px!important;
-    height: 16px!important;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 3px 1px rgba(0,0,0,.15);
+    border: 1px solid #fff;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, .15);
 }
-.isSelected .ui-resizable-handle{
+
+.isSelected .ui-resizable-handle {
     opacity: 1;
 }
-.ui-resizable-nw{
+
+
+/* .ui-resizable-nw {
     left: 13px;
     top: 13px;
 }
-.ui-resizable-sw{
+
+.ui-resizable-sw {
     left: 13px;
     bottom: 13px;
 }
-.ui-resizable-ne{
+
+.ui-resizable-ne {
     right: 13px;
     top: 13px;
 }
-.ui-resizable-se{
+
+.ui-resizable-se {
     right: 13px;
     bottom: 13px;
-}
+} */
 
 
 /* ANGULAR MATERIALS THEME FIXES  START*/

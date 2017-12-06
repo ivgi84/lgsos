@@ -8,6 +8,11 @@
             <button mat-icon-button (click)="formatText('textAlign','right')"><mat-icon>format_align_right</mat-icon></button>
             <button mat-icon-button (click)="formatText('direction','ltr')"><mat-icon>format_textdirection_l_to_r</mat-icon></button>
             <button mat-icon-button (click)="formatText('direction','rtl')"><mat-icon>format_textdirection_r_to_l</mat-icon></button>
+            <button mat-icon-button (click)="toggleFontWeight()"><mat-icon>format_bold</mat-icon></button>
+            <div class="font-weight" *ngIf="fontWeightEnabled">
+                <h4>Font size change</h4>
+                <mat-slider (input)="onFontSizeChange($event)" displayValue="Set font size" thumbLabel min="100" max="900" step="100" value="200"></mat-slider>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

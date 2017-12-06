@@ -35,7 +35,7 @@ export class LgosDraggableDirective implements OnChanges {
           });
         $el.resizable({
           helper: "ui-resizable-helper",
-          handles: "nw,sw,ne,se",
+          handles: "n,s,e,w",
           aspectRatio: el instanceof UserInput ? false : true,
           stop: function( event, ui ) {
             ui.element.parent().addClass('resize-stop');
@@ -51,12 +51,14 @@ export class LgosDraggableDirective implements OnChanges {
 
   disableDrag(elm:Element){
     let $el = $('.playground #'+elm.id);
+    let cE = $('.playground #'+elm.id+' p'); // ce: contentEditable
     $el.draggable({disabled:true});
-    $el.attr('contenteditable','true');
+    cE.attr('contenteditable','true');
   }
   enableDrag(elm:Element){
     let $el = $('.playground #'+elm.id);
+    let cE = $('.playground #'+elm.id+' p'); // ce: contentEditable
     $el.draggable({disabled:false});
-    $el.attr('contenteditable','false');
+    cE.attr('contenteditable','false');
   }
 }

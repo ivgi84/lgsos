@@ -81,16 +81,33 @@ mat-sidenav {
     background: #ebeced;
 }
 
+.draw-area br {
+    display: none;
+}
+
 .draggable-wrap {
     position: absolute;
     display: inline-block;
     z-index: 0;
     box-sizing: border-box;
+    transition: .5s background-color ease;
+    -webkit-transition: .5s background-color ease;
+    -moz-transition: .5s background-color ease;
 }
 
-.draggable-wrap:hover:not(.isSelected) {
+.draggable-wrap {
     cursor: move;
 }
+
+p[contenteditable="true"] {
+    cursor: text;
+    display: inline-block;
+}
+
+
+/* .draggable-wrap:hover:not(.isSelected) {
+    cursor: move;
+} */
 
 .draggable-wrap>* {
     outline: none;
@@ -105,8 +122,8 @@ mat-sidenav {
 
 .isSelected {
     outline: 1px dashed red;
+    background: rgba(255, 255, 255, 0.6);
 }
-
 
 .text-resize {
     display: block;
