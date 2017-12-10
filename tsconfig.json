@@ -14,7 +14,8 @@
         ],
         "types": [
             "hammerjs",
-            "lodash"
+            "lodash",
+            "html2canvas"
         ],
         "lib": [
             "es2016",

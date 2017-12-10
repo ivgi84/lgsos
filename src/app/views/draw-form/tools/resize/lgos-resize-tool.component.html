@@ -1,8 +1,11 @@
 <div #resizeToolWrapper>
     <button class="tool-button" mat-icon-button (click)="toggle()"><mat-icon matTooltip="change font size">format_size</mat-icon></button>
-    <div class="font-size-selector" [ngClass]="{'isOpen':isOpen}">
-        <div class="font-size-slider">
-            <mat-slider (blur)="close()" (input)="onInputChange($event)" vertical thumbLabel min="6" max="144" step="2" value="14"></mat-slider>
-        </div>
-    </div>
+    <mat-card class="lgos-text-resize" [ngClass]="{'isOpen':isOpen}">
+        <mat-card-title>Text size</mat-card-title>
+        <mat-card-content>
+            <div class="font-size-slider">
+                <mat-slider (blur)="close()" (input)="onInputChange($event)" vertical thumbLabel min="6" max="144" step="2" value="14"></mat-slider>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

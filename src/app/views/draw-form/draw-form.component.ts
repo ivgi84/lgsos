@@ -9,6 +9,7 @@ import { debug } from 'util';
 import * as $ from 'jquery';
 import * as _ from 'lodash';
 import 'jqueryui';
+import * as html2canvas from 'html2canvas';
 //TODO: add image size on upload
 
 @Component({
@@ -28,6 +29,7 @@ export class DrawFormComponent {
 
   @ViewChild(SortableDirective) thumbnails: SortableDirective;
   @ViewChild(LgosDraggableDirective) dragElments: LgosDraggableDirective
+  @ViewChild('playground') playGroundElm: ElementRef;
 
   userFreeText: string = '';
   step = 0;
@@ -44,7 +46,7 @@ export class DrawFormComponent {
   }
   onFileSelect(files: FileList) {
     _.each(files, (file: File) => {
-      let fileName = file.name.split('.')[0];
+      let fileName = file.name.split(/\.| /)[0];
       let reader = new FileReader();
       reader.onload = (e: any) => {
         let image = new Image();
@@ -113,6 +115,12 @@ export class DrawFormComponent {
 
   onDelete(ind) {
     this.elementsList.splice(ind, 1);
+  }
+
+  save(){
+    debugger;
+    //todo: add html to canvas logic
+    //html2canvas(this.playGroundElm)
   }
 
 }

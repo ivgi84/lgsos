@@ -2,8 +2,7 @@ import { Component, Output, EventEmitter, ViewChild, ElementRef, Input } from '@
 
 @Component({
   selector: 'input-file',
-  templateUrl: './input-file.component.html',
-  styleUrls: ['./input-file.component.css']
+  templateUrl: './input-file.component.html'
 })
 export class InputFileComponent {
 

@@ -1,3 +1,29 @@
+.lgos-text-resize {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    z-index: 2;
+    max-width: 300px;
+    display: none;
+}
+
+.lgos-text-resize.isOpen {
+    display: block;
+}
+
+.lgos-text-resize:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -7px;
+    right: 67px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #fff;
+}
+
 .font-size-selector {
     display: none;
     position: relative;
@@ -5,16 +31,13 @@
 }
 
 .font-size-slider {
-    position: absolute;
-    top: 12px;
     height: 200px;
-    right: 0;
 }
 
 .font-size-slider .mat-slider-vertical {
     height: 100%;
 }
 
-.font-size-selector.isOpen {
+.font-size-selector {
     display: block;
 }
