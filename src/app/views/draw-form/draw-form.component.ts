@@ -45,8 +45,8 @@ export class DrawFormComponent {
     this.step--;
   }
   onFileSelect(files: FileList) {
-    _.each(files, (file: File) => {
-      let fileName = file.name.split(/\.| /)[0];
+    _.each(files, (file: File, ind:number) => {
+      let fileName = "Image_"+ind+1
       let reader = new FileReader();
       reader.onload = (e: any) => {
         let image = new Image();
@@ -118,9 +118,9 @@ export class DrawFormComponent {
   }
 
   save(){
-    debugger;
-    //todo: add html to canvas logic
-    //html2canvas(this.playGroundElm)
+    html2canvas(this.playGroundElm.nativeElement).then((res)=>{
+      debugger;
+    })
   }
 
 }
