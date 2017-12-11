@@ -102,7 +102,7 @@ export class DrawFormComponent {
     }
   }
 
-  onBlur(){
+  onBlur(e){
     this.dragElments.enableDrag(this.selectedElm);
   }
 

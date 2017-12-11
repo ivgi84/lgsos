@@ -7,7 +7,7 @@
         <lgos-text-direction [elm]="selectedElm"></lgos-text-direction>
         <lgos-color-picker [elm]="selectedElm"></lgos-color-picker>
     </div>
-    <button mat-raised-button color="primary" (click)="save()">Save template</button>
+    <button mat-raised-button color="primary" (click)="save();">Save template</button>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
@@ -81,7 +81,7 @@
                 <div (mousedown)="selectElement(elm, $event)" (dblclick)="disableDrag(elm, $event);" class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px', 'direction':elm.styles.direction, 'text-align':elm.styles.textAlign}"
                     *ngFor="let elm of elementsList">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
-                    <p (blur)="onBlur(elm)" [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 
+                    <p (blur)="onBlur()" [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 
                         'color':elm.styles.color,
                         'font-weight':elm.styles.fontWeight}" *ngIf="elm.type == 'userInput'">
                         {{elm.text}}
