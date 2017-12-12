@@ -5,6 +5,8 @@ import { Upload } from './models/upload';
 import { UserInput } from './models/user-input';
 import { SortableDirective } from './directives/lgos-sortable.directive';
 import { LgosDraggableDirective } from './directives/lgos-draggable.directive';
+import { DrawService } from './services/draw-service.service';
+import { Observable } from 'rxjs/Observable';
 import { debug } from 'util';
 import * as $ from 'jquery';
 import * as _ from 'lodash';
@@ -18,7 +20,7 @@ import * as html2canvas from 'html2canvas';
   styleUrls: ['./draw-form.component.css']
 })
 export class DrawFormComponent {
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(private ref: ChangeDetectorRef, private drawService:DrawService) {
       this.elementsList = [];
       this.selectedElm = null;
    }
@@ -119,7 +121,7 @@ export class DrawFormComponent {
 
   save(){
     html2canvas(this.playGroundElm.nativeElement).then((res)=>{
-      debugger;
+        
     })
   }
 
