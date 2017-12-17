@@ -12,10 +12,10 @@ export class FontsManagerComponent implements OnInit {
 
   @Input()elm:UserInput;
 
-  private fonts = {
-    en:[],
-    he:[]
-  }
+  // private fonts = {
+  //   en:[],
+  //   he:[]
+  // }
 
   ngOnInit() {
   }
