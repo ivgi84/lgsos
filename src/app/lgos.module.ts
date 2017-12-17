@@ -16,7 +16,8 @@ import { DeleteComponent } from './views/draw-form/tools/delete/delete.component
 import { ResizeToolComponent } from './views/draw-form/tools/resize/lgos-resize-tool.component';
 import { LgosColorPickerComponent } from './views/draw-form/tools/color-picker/lgos-color-picker.component';
 import { TextDirectionComponent } from './views/draw-form/tools/text-direction/text-direction.component';
-import {DrawService} from './views/draw-form/services/draw-service.service' ;
+import { FontsManagerComponent } from './views/draw-form/tools/fonts-manager/fonts-manager.component' ;
+import { DrawService } from './views/draw-form/services/draw-service.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {DrawService} from './views/draw-form/services/draw-service.service' ;
     DeleteComponent,
     ResizeToolComponent,
     LgosColorPickerComponent,
-    TextDirectionComponent
+    TextDirectionComponent,
+    FontsManagerComponent
   ],
   imports: [
     BrowserModule,
