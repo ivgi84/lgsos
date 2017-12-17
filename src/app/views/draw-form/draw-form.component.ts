@@ -120,9 +120,17 @@ export class DrawFormComponent {
   }
 
   save(){
-    html2canvas(this.playGroundElm.nativeElement).then((res)=>{
-        
+    html2canvas(this.playGroundElm.nativeElement).then(canvas=>{
+      this.downloadImage(canvas,'image.png');
     })
+  }
+  private downloadImage(canvas, name){
+    let a = document.createElement('a');
+    a.href = canvas.toDataURL();
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
 }

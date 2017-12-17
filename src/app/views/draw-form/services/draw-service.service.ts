@@ -7,8 +7,10 @@ export class DrawService {
 
   constructor(private http:HttpClient) { }
 
-  getImage(){
-    return this.http.get('/api/test');
+  getImage(canvasData){
+    return this.http.post('http://localhost:4201/api/createImage',{
+      canvas: canvasData
+    });
   }
 
 }
