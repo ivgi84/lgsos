@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build --prod",
+    "buildprod":"ng build --prod --output-path ./prod/public"    
   },
   "engines": {
     "node": "6.10.0",
