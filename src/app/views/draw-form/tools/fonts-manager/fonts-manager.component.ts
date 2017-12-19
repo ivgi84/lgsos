@@ -11,14 +11,40 @@ export class FontsManagerComponent implements OnInit {
   constructor() { }
 
   @Input()elm:UserInput;
+  private isEnabled;
 
-  // private fonts = {
-  //   en:[],
-  //   he:[]
-  // }
+  private fonts = {
+    en:[
+      {
+        value:'arial',
+        family:'arial',
+        text:'Aabc'
+      },
+      {
+        value:'sans-serif',
+        family:'sans-serif',
+        text:'Aabc'
+      },
+      {
+        value:'Georgia',
+        family:'Georgia',
+        text:'Aabc'
+      },
+      {
+        value:'FF Scala',
+        family:'FF Scala',
+        text:'Aabc'
+      }
+    ],
+    he:[]
+  }
 
   ngOnInit() {
+    this.isEnabled = false;
   }
   
+  toggle(){
+    this.isEnabled = !this.isEnabled;
+  }
 
 }
