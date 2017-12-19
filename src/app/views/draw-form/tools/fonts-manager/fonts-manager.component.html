@@ -1,11 +1,24 @@
-<div class="font-manager-wrapper">
-    <button class="tool-button" mat-icon-button (click)="toggle()"><mat-icon matTooltip="Choose font">text_format</mat-icon></button>
-    <mat-card *ngIf="isEnabled">
+<div class="">
+    <button class="tool-button" mat-icon-button (click)="toggle()"><mat-icon matTooltip="Change font">format_color_fill</mat-icon></button>
+    <mat-card *ngIf="isEnabled" class="lgos-fonts-manager-wrapper">
         <mat-card-title>
             
         </mat-card-title>
         <mat-card-content>
-
+          <mat-form-field>
+            <mat-select placeholder="Pick a font">
+              <mat-option *ngFor="let font of fonts.en" [value]="font.value">
+                <p [ngStyle]="{'font-family': font.family}">{{font.text}}</p>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-form-field>
+              <mat-select placeholder="">
+                  <mat-option *ngFor="let font of fonts.he" [value]="font.value">
+                    <p [ngStyle]="{'font-family': font.family}">{{font.text}}</p>
+                  </mat-option>
+                </mat-select>
+          </mat-form-field> -->
         </mat-card-content>
     </mat-card>
 </div>
