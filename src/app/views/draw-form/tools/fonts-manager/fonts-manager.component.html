@@ -1,7 +1,8 @@
 <div class="font-manager-wrapper">
-    <mat-card>
+    <button class="tool-button" mat-icon-button (click)="toggle()"><mat-icon matTooltip="Choose font">text_format</mat-icon></button>
+    <mat-card *ngIf="isEnabled">
         <mat-card-title>
-            Fonts
+            
         </mat-card-title>
         <mat-card-content>
 
