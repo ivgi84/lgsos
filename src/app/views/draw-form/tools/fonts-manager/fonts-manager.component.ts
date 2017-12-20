@@ -12,8 +12,6 @@ export class FontsManagerComponent implements OnInit {
 
   @Input()elm:UserInput;
   private isEnabled;
-  private fonts;
-
 
   private fonts = {
     en:[
