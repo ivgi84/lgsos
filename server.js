@@ -1,23 +1,47 @@
 var express = require('express');
 var path = require('path');
 var http = require('http');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var boydParser = require('body-parser');
+var mongoDb = require('mongodb');
 
 var app = express();
-
 app.use(logger('dev'));
+
 app.use(boydParser.json());
-app.use(boydParser.urlencoded({'extended':'false'}));
-app.use(express.static(path.jsoin(__dirname, 'prod/public')));
 
-// app.get('*', (req, res)=>{
-//     res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
+var distDir = __dirname + '/prod/public';
+app.use(express.static(distDir));
 
-// const port = process.env.PORT || 3001;
-// app.set('port', port)
+// Generic error handler used by all endpoints.
+function handleError(res, reason, message, code){
+    console.log("ERROR: "+ reason);
+    res.status(code || 500).json({'error': message});
+}
 
-// const server = http.createServer(app);
-// server.listen(port, () => console.log('Running'));
+/*  "/api/users"
+ *    GET: finds all users
+ *    POST: creates a new user
+ */
+app.get("/api/users", function(req, res){
+    res.json({message:'Hello'})
+});
+app.post("/api/users", function(req, res){
+
+});
+app.get("/api/user/:id", function(req, res){
+
+});
+app.put("/api/users/:id", function(req, res){
+
+});
+app.delete("/api/users/:id", function(req, res){
+
+});
+
+  // Initialize the app.
+  var port = process.env.PORT || 3000;
+  var server = app.listen(port, function(){
+      console.log('App is running on port ', port);
+  });
+  
