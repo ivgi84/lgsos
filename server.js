@@ -1,23 +1,28 @@
 var express = require('express');
 var path = require('path');
 var http = require('http');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
 var boydParser = require('body-parser');
+
+var api = require('./server/routes/api');
 
 var app = express();
 
-app.use(logger('dev'));
+var renderedFiles = path.join(__dirname, 'prod/public');
+
 app.use(boydParser.json());
 app.use(boydParser.urlencoded({'extended':'false'}));
-app.use(express.static(path.jsoin(__dirname, 'prod/public')));
 
-// app.get('*', (req, res)=>{
-//     res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
+app.use(express.static(renderedFiles));
 
-// const port = process.env.PORT || 3001;
-// app.set('port', port)
+// Set our api routes
+app.use('/api', api);
 
-// const server = http.createServer(app);
-// server.listen(port, () => console.log('Running'));
+app.get('*', (req, res)=>{
+    res.sendFile(renderedFiles + '/index.html');
+});
+
+const port = process.env.PORT || 4000;
+app.set('port', port)
+
+const server = http.createServer(app);
+server.listen(port, () => console.log('Running'));
