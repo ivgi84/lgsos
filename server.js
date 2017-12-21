@@ -4,6 +4,7 @@ var http = require('http');
 var boydParser = require('body-parser');
 
 var api = require('./server/routes/api');
+var fonts = require('./server/routes/fonts');
 
 var app = express();
 
@@ -14,8 +15,16 @@ app.use(boydParser.urlencoded({'extended':'false'}));
 
 app.use(express.static(renderedFiles));
 
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
+  
+
 // Set our api routes
 app.use('/api', api);
+app.use('/fonts', fonts);
 
 app.get('*', (req, res)=>{
     res.sendFile(renderedFiles + '/index.html');

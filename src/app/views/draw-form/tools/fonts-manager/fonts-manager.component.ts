@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserInput } from '../../models/user-input';
+import { FontsService } from './fonts.service';
 
 @Component({
   selector: 'lgos-fonts-manager',
@@ -8,7 +9,7 @@ import { UserInput } from '../../models/user-input';
 })
 export class FontsManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fontsService:FontsService) { }
 
   @Input()elm:UserInput;
   private isEnabled;
@@ -41,6 +42,9 @@ export class FontsManagerComponent implements OnInit {
 
   ngOnInit() {
     this.isEnabled = false;
+    this.fontsService.getGoogleFonts().subscribe(res =>{
+        debugger
+    });
   }
 
   addFont(){
