@@ -7,18 +7,11 @@
         <mat-card-content>
           <mat-form-field>
             <mat-select placeholder="Pick a font">
-              <mat-option *ngFor="let font of fonts.en" [value]="font.value">
-                <p [ngStyle]="{'font-family': font.family}">{{font.text}}</p>
+              <mat-option (click)="setFont(font)" *ngFor="let font of fonts.google.families">
+                <p [ngStyle]="{'font-family': font}">{{font}}</p>
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <mat-form-field>
-              <mat-select placeholder="">
-                  <mat-option *ngFor="let font of fonts.he" [value]="font.value">
-                    <p [ngStyle]="{'font-family': font.family}">{{font.text}}</p>
-                  </mat-option>
-                </mat-select>
-          </mat-form-field> -->
         </mat-card-content>
     </mat-card>
 </div>

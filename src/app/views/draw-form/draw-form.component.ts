@@ -6,6 +6,7 @@ import { UserInput } from './models/user-input';
 import { SortableDirective } from './directives/lgos-sortable.directive';
 import { LgosDraggableDirective } from './directives/lgos-draggable.directive';
 import { DrawService } from './services/draw-service.service';
+import { FontsService } from './tools/fonts-manager/fonts.service';
 import { Observable } from 'rxjs/Observable';
 import { debug } from 'util';
 import * as $ from 'jquery';
@@ -20,7 +21,7 @@ import * as html2canvas from 'html2canvas';
   styleUrls: ['./draw-form.component.css']
 })
 export class DrawFormComponent {
-  constructor(private ref: ChangeDetectorRef, private drawService:DrawService) {
+  constructor(private ref: ChangeDetectorRef, private drawService:DrawService, private fontService:FontsService) {
       this.elementsList = [];
       this.selectedElm = null;
    }
@@ -48,7 +49,20 @@ export class DrawFormComponent {
   }
   onFileSelect(files: FileList) {
     _.each(files, (file: File, ind:number) => {
-      let fileName = "Image_"+ind+1
+      debugger;
+      if(file.type.indexOf('image') > -1)
+        this.uploadImage(file, ind);
+      else
+        this.uploadFont(file);
+    });
+  }
+
+  private uploadFont(file){
+    this.fontService.uploadFont(file);
+  }
+  
+  private uploadImage(file, ind){
+    let fileName = "Image_"+ind+1
       let reader = new FileReader();
       reader.onload = (e: any) => {
         let image = new Image();
@@ -64,7 +78,6 @@ export class DrawFormComponent {
         }
       }
       reader.readAsDataURL(file);
-    })
   }
 
   onOrderUpdate(list: Array<String>) {

@@ -18,6 +18,7 @@ import { LgosColorPickerComponent } from './views/draw-form/tools/color-picker/l
 import { TextDirectionComponent } from './views/draw-form/tools/text-direction/text-direction.component';
 import { FontsManagerComponent } from './views/draw-form/tools/fonts-manager/fonts-manager.component' ;
 import { DrawService } from './views/draw-form/services/draw-service.service';
+import { FontsService } from './views/draw-form/tools/fonts-manager/fonts.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { DrawService } from './views/draw-form/services/draw-service.service';
     MatSliderModule,
     MatSelectModule
   ],
-  providers: [DrawService],
+  providers: [DrawService, FontsService],
   bootstrap: [lgosRootComponent]
 })
 export class LgosModule { }

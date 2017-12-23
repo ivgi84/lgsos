@@ -17,10 +17,10 @@
                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Upload
+                            Upload images
                         </mat-panel-title>
                         <mat-panel-description>
-                            Upload your files here
+                            .jpg | .jpeg | .png
                         </mat-panel-description>
                         <span class="spacer"></span>
                         <mat-icon>file_upload</mat-icon>
@@ -73,6 +73,23 @@
                         <button mat-raised-button color="primary" (click)="addText()">Add text <mat-icon>library_add</mat-icon></button>
                     </mat-action-row>
                 </mat-expansion-panel>
+                <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Upload your font
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            .ttf | .otf | .woff
+                        </mat-panel-description>
+                        <span class="spacer"></span>
+                        <mat-icon>file_upload</mat-icon>
+                    </mat-expansion-panel-header>
+                    <mat-action-row class="lgos-side-panel-action-row">
+                        <div class="side-upload-btn">
+                            <input-file (onFileSelect)="onFileSelect($event)" [accept]="'.ttf, .otf, .woff'"></input-file>
+                        </div>
+                    </mat-action-row>
+                </mat-expansion-panel>
             </mat-accordion>
         </div>
     </mat-sidenav>
@@ -84,6 +101,7 @@
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
                     <p (blur)="onBlur()" [ngStyle]="{'font-size': elm.styles.fontSize + 'px', 
                         'color':elm.styles.color,
+                        'font-family':elm.styles.fontFamily,
                         'font-weight':elm.styles.fontWeight}" *ngIf="elm.type == 'userInput'">
                         {{elm.text}}
                     </p>
