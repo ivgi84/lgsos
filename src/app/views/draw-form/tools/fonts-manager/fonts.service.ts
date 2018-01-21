@@ -28,11 +28,11 @@ export class FontsService {
   }
 
   uploadFont(file){
-    debugger;
     const formData: FormData = new FormData();
     formData.append('font', file, file.name);
     let headers = new HttpHeaders();
-    return this.http.post('http://localhost:4201/fonts/upload',file, {headers:headers}).subscribe(res=>{
+    headers.set('Content-Type', 'multipart/form-data');
+    return this.http.post('http://localhost:4201/fonts/upload',formData, {headers:headers}).subscribe(res=>{
       debugger;
     }, error =>{
       debugger;

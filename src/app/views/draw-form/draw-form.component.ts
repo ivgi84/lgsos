@@ -49,7 +49,6 @@ export class DrawFormComponent {
   }
   onFileSelect(files: FileList) {
     _.each(files, (file: File, ind:number) => {
-      debugger;
       if(file.type.indexOf('image') > -1)
         this.uploadImage(file, ind);
       else

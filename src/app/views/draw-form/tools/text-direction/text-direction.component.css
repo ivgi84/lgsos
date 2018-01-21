@@ -1,7 +1,10 @@
+.lgos-text-format-wrapper{
+    position: relative;
+}
 .lgos-text-format {
     position: absolute;
-    top: 64px;
-    right: 0;
+    top: 52px;
+    left: -132px;
     z-index: 2;
     max-width: 300px;
 }
@@ -11,7 +14,7 @@
     display: block;
     position: absolute;
     top: -7px;
-    right: 110px;
+    right: 140px;
     width: 0;
     height: 0;
     border-left: 7px solid transparent;

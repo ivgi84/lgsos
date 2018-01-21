@@ -1,7 +1,10 @@
+.resize-tool-wrapper{
+    position: relative;
+}
 .lgos-text-resize {
     position: absolute;
-    top: 64px;
-    right: 0;
+    top: 52px;
+    left: -48px;
     z-index: 2;
     max-width: 300px;
     display: none;

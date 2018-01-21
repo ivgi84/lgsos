@@ -1,7 +1,10 @@
+.fonts-manager-wrapper{
+    position: relative;
+}
 .lgos-fonts-manager-wrapper {
     position: absolute;
-    top: 64px;
-    right: 0;
+    top: 52px;
+    left: -105px;
     z-index: 2;
     max-width: 455px;
 }
@@ -11,7 +14,7 @@
     display: block;
     position: absolute;
     top: -7px;
-    right: 310px;
+    right: 115px;
     width: 0;
     height: 0;
     border-left: 7px solid transparent;

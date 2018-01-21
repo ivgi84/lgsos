@@ -1,4 +1,9 @@
 @import 'http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css';
+
+.draw-header{
+    position: relative;
+}
+
 mat-radio-group {
     display: block;
 }
