@@ -13,8 +13,14 @@ export class FontsService {
    }
   public wfSubject = new Subject<Object>();
 
+  private fontsRequestCache = null;
+
   getGoogleFonts():Observable<Response>{
-      return this.http.get('http://localhost:4201/fonts/getAll').map((res:Response)=> res);
+    debugger;
+    if(!this.fontsRequestCache)
+      this.fontsRequestCache =  this.http.get('http://localhost:4201/fonts/getAll').map((res:Response)=> res.json()).publishReplay(1).refCount();
+
+      return this.fontsRequestCache
   }
 
   webFontLoadInit():void {

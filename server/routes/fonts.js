@@ -68,15 +68,12 @@ function getFonts(req, res){
     console.info(request);
 
     axios.get(request).then(response => {
-        console.log('google fonts request success', res);
-
+        console.log('google fonts request success');
         res.status(200).json(response.data);
-        
-        //res.status(200).send(fonts).end();
     })
     .catch(error => {
         console.error('Error loading fonts', error);
-        //res.status(501).end();
+        res.status(501).end();
     });
 
 
