@@ -17,7 +17,7 @@ export class FontsService {
       return this.http.get('http://localhost:4201/fonts/getAll').map((res:Response)=> res);
   }
 
-  webFontLoadInit() {
+  webFontLoadInit():void {
     ((d)=>{
       let wf = d.createElement('script'), s = d.scripts[0];
       wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';

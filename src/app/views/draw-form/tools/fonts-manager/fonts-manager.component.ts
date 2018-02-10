@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { UserInput } from '../../models/user-input';
 import { FontsService } from './fonts.service';
-import { debug } from 'util';
+import { Element } from '@angular/compiler';
 
 declare global {
   interface Window { WebFont: any; }
@@ -17,6 +17,14 @@ export class FontsManagerComponent implements OnInit {
   constructor(private fontsService:FontsService) { }
 
   @Input()elm:UserInput;
+  @ViewChild('fontsMngWrapper') fontsMngWrapper:ElementRef;
+
+  @HostListener('document:click',['$event'])
+  onclick(e){
+    if(this.isEnabled && e && e.target){
+        this.isEnabled = this.fontsMngWrapper.nativeElement.contains(e.target);
+    }
+  }
   private isEnabled;
 
   private fonts = {

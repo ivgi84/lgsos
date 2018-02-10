@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, ElementRef, HostListener} from '@angular/core';
 import { Element } from '../../models/element';
-import { debug } from 'util';
 import { UserInput } from 'app/views/draw-form/models/user-input';
 import * as _ from 'lodash';
 
