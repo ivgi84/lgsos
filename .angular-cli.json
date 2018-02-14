@@ -21,7 +21,9 @@
             "styles.css",
             "lgos_theme.scss"
         ],
-        "scripts": [],
+        "scripts": [
+            "./assets/libs/jquery.ui.rotatable.min.js"
+        ],
         "environmentSource": "environments/environment.ts",
         "environments": {
             "dev": "environments/environment.ts",

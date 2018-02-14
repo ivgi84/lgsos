@@ -17,7 +17,22 @@ mat-sidenav-container,
 body {
     background: #eee;
 }
-
+.ui-rotatable-handle {
+    position: absolute;
+    z-index: 9;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+    background-image: url('/assets/img/rotate.png');
+    /* background-image: url("https://image.flaticon.com/icons/svg/0/22.svg"); */
+    background-size: 100%;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+.isSelected .ui-rotatable-handle{
+    display: block;
+}
 .container {
     max-width: 900px;
     margin: 0 auto;

@@ -4,6 +4,9 @@ import { UserInput } from '../models/user-input';
 import * as _ from 'lodash';
 import * as $ from 'jquery';
 import 'jqueryui';
+import '../../../../assets/libs/jquery.ui.rotatable.min'; 
+
+
 
 @Directive({
   selector: '[lgosDraggable]'
@@ -28,7 +31,7 @@ export class LgosDraggableDirective implements OnChanges {
     setTimeout(()=>{
       this.elements;
       _.each(this.elements, (el:any)=>{
-        let $el = $('.playground #'+el.id);
+        let $el:any = $('.playground #'+el.id);
           $el.draggable({
             cursor:"move",
             snap: ".playground"
@@ -44,7 +47,8 @@ export class LgosDraggableDirective implements OnChanges {
             },100);
             event.stopImmediatePropagation();
           }
-        })
+        });
+        $el.rotatable();
       });
     },100)
   }

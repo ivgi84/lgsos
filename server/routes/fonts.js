@@ -58,11 +58,11 @@ router.get('/getAll',(req, res)=>{
 function getFonts(req, res){
     let options = '';
 
-    // if(req.options){
-    //     _.each(req.options, (val, key)=>{
-    //         options += '&' + key + '=' + val;
-    //     });
-    // }
+    if(req.options){
+        _.each(req.options, (val, key)=>{
+            options += '&' + key + '=' + val;
+        });
+    }
 
     let request = 'https://www.googleapis.com/webfonts/v1/webfonts?key=' + apiKey + options;
     console.info(request);

@@ -9,13 +9,15 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "target": "es5",
+        "allowJs": true,
         "typeRoots": [
             "node_modules/@types"
         ],
         "types": [
             "hammerjs",
             "lodash",
-            "html2canvas"
+            "html2canvas",
+            "rotatable"
         ],
         "lib": [
             "es2016",

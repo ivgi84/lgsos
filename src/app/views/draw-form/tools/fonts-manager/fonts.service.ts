@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map'
+import 'rxjs/add/observable/of';
 
 
 @Injectable()
@@ -13,14 +14,16 @@ export class FontsService {
    }
   public wfSubject = new Subject<Object>();
 
-  private fontsRequestCache = null;
+  private fontsRequestData = null;
 
-  getGoogleFonts():Observable<Response>{
-    debugger;
-    if(!this.fontsRequestCache)
-      this.fontsRequestCache =  this.http.get('http://localhost:4201/fonts/getAll').map((res:Response)=> res.json()).publishReplay(1).refCount();
-
-      return this.fontsRequestCache
+  getGoogleFonts(){
+    if(!this.fontsRequestData){
+      return this.http.get('http://localhost:4201/fonts/getAll').map((res:any)=> {
+        this.fontsRequestData = res.items;
+        return res.items;
+      });
+    }    
+      return Observable.of(this.fontsRequestData); // short way to return observalbe with existing data
   }
 
   webFontLoadInit():void {
