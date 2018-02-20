@@ -3,7 +3,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 @Component({
   selector: 'lgos-draw-tools',
   templateUrl: './tools.component.html',
-  styleUrls: ['./tools.component.css']
+  styleUrls: ['./tools.component.scss']
 })
 export class ToolsComponent implements OnInit, OnChanges {
 

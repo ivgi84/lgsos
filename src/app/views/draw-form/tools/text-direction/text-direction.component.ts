@@ -5,7 +5,7 @@ import { Component, Input, ViewChild, ElementRef, HostListener } from '@angular/
 @Component({
   selector: 'lgos-text-direction',
   templateUrl: './text-direction.component.html',
-  styleUrls: ['./text-direction.component.css']
+  styleUrls: ['./text-direction.component.scss']
 })
 export class TextDirectionComponent{
   @Input() elm:UserInput;

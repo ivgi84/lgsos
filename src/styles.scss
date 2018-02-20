@@ -4,6 +4,7 @@
     box-sizing: border-box
 }
 
+
 html,
 body,
 material-app,
@@ -26,9 +27,19 @@ body {
     background-image: url('/assets/img/rotate.png');
     /* background-image: url("https://image.flaticon.com/icons/svg/0/22.svg"); */
     background-size: 100%;
-    right: 0;
-    bottom: 0;
+    left: calc(50% - 8px);
+    bottom: -55px;
     display: none;
+    &:before{
+        content: '';
+        position: absolute;
+        display: block;
+        border-left:1px dashed #ccc;
+        width: 1px;
+        height: 30px;
+        left: 50%;
+        top:-30px;
+    }
 }
 .isSelected .ui-rotatable-handle{
     display: block;

@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'lgos-delete-tool',
   templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css']
+  styleUrls: ['./delete.component.scss']
 })
 export class DeleteComponent{
 

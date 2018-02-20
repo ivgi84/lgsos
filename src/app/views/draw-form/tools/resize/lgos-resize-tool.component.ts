@@ -4,7 +4,7 @@ import { UserInput } from '../../models/user-input';
 @Component({
   selector: 'lgos-resize-tool',
   templateUrl: './lgos-resize-tool.component.html',
-  styleUrls: ['./lgos-resize-tool.component.css']
+  styleUrls: ['./lgos-resize-tool.component.scss']
 })
 export class ResizeToolComponent implements OnInit {
 

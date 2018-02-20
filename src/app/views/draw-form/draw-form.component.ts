@@ -18,7 +18,7 @@ import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'lgos-draw-form',
   templateUrl: './draw-form.component.html',
-  styleUrls: ['./draw-form.component.css']
+  styleUrls: ['./draw-form.component.scss']
 })
 export class DrawFormComponent {
   constructor(private ref: ChangeDetectorRef, private drawService:DrawService, private fontService:FontsService) {

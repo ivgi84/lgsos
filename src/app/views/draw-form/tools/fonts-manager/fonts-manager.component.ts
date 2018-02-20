@@ -10,7 +10,7 @@ declare global {
 @Component({
   selector: 'lgos-fonts-manager',
   templateUrl: './fonts-manager.component.html',
-  styleUrls: ['./fonts-manager.component.css']
+  styleUrls: ['./fonts-manager.component.scss']
 })
 export class FontsManagerComponent implements OnInit {
 

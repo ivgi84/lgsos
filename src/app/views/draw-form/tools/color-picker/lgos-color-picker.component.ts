@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'lgos-color-picker',
   templateUrl: './lgos-color-picker.component.html',
-  styleUrls: ['./lgos-color-picker.component.css']
+  styleUrls: ['./lgos-color-picker.component.scss']
 })
 export class LgosColorPickerComponent {
 
