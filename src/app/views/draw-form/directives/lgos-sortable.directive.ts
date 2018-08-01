@@ -33,8 +33,8 @@ export class SortableDirective {
 
   private get order(){
     let elOrder = [];
-    $(this.sortableEl).children().each((ind, el)=>{
-      let elInd = $(el).index();
+    $(this.sortableEl).children().each((ind, el:ElementRef)=>{
+      const elInd = $(el).index();
       if(el.innerHTML != '')
         elOrder.push({id:el.id, z:100 - elInd});
     });
