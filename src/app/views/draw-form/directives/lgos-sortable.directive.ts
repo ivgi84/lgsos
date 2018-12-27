@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 
 @Directive({
@@ -8,8 +8,9 @@ export class SortableDirective {
 
   @Input() thumbnails: any;
   @Output() updateOrder = new EventEmitter();
+  @ViewChild('thumbnails') sortableEl:HTMLElement
 
-  private sortableEl:ElementRef
+  //private sortableEl:ElementRef
   private thumbnailsOrder = [];
 
   constructor(elm:ElementRef){
@@ -33,10 +34,9 @@ export class SortableDirective {
 
   private get order(){
     let elOrder = [];
-    $(this.sortableEl).children().each((ind, el:ElementRef)=>{
+    $(this.sortableEl).children().each((ind, el)=>{
       const elInd = $(el).index();
-      if(el.innerHTML != '')
-        elOrder.push({id:el.id, z:100 - elInd});
+      elOrder.push({id:el.id, z:100 - elInd});
     });
       
     return elOrder;
