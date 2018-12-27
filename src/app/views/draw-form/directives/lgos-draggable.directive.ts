@@ -1,4 +1,4 @@
-import { Directive, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Directive, Input, Output, EventEmitter, OnChanges, ViewChild } from '@angular/core';
 import { Element } from '../models/element';
 import { UserInput } from '../models/user-input';
 import * as _ from 'lodash';
@@ -13,16 +13,33 @@ import '../../../../assets/libs/jquery.ui.rotatable.min';
 })
 export class LgosDraggableDirective implements OnChanges {
 
-  constructor() { }
+  private _plagroundClass = '';
+  private _draggableClass = '';
 
   @Input() elements: Element;
+
+  @Input() 
+    set playgroundClass(name: string){
+      this._plagroundClass = '.' + name;
+    }
+    get playgroundClass():string{
+      return this._plagroundClass;
+    }
+
+  @Input()
+    set draggableClass(name: string){
+      this._draggableClass = '.' + name;
+    }
+    get draggableClass():string{
+      return this.playgroundClass + ' ' + this._draggableClass;
+    }
 
   ngOnChanges(changes){
     this.enableModifications();
   }
 
   setListener(){
-    $('.playground .draggable-wrap').on('reize', function(e){
+    $(this.draggableClass).on('resize', function(e){
         e.stopImmediatePropagation();
     });
   }
@@ -31,10 +48,10 @@ export class LgosDraggableDirective implements OnChanges {
     setTimeout(()=>{
       this.elements;
       _.each(this.elements, (el:any)=>{
-        let $el:any = $('.playground #'+el.id);
+        let $el:any = $(this.playgroundClass + ' #'+el.id);
           $el.draggable({
             cursor:"move",
-            snap: ".playground"
+            snap: this.playgroundClass
           });
         $el.resizable({
           helper: "ui-resizable-helper",
@@ -48,20 +65,22 @@ export class LgosDraggableDirective implements OnChanges {
             event.stopImmediatePropagation();
           }
         });
-        $el.rotatable();
+        $el.rotatable({
+          wheelRotate: false
+        });
       });
     },100)
   }
 
   disableDrag(elm:Element){
-    let $el = $('.playground #'+elm.id);
-    let cE = $('.playground #'+elm.id+' p'); // ce: contentEditable
+    let $el = $(this.playgroundClass + ' #'+elm.id);
+    let cE = $(this.playgroundClass + ' #'+elm.id+' p'); // ce: contentEditable
     $el.draggable({disabled:true});
     cE.attr('contenteditable','true');
   }
   enableDrag(elm:Element){
-    let $el = $('.playground #'+elm.id);
-    let cE = $('.playground #'+elm.id+' p'); // ce: contentEditable
+    let $el = $(this.playgroundClass + ' #'+elm.id);
+    let cE = $(this.playgroundClass + ' #'+elm.id+' p'); // ce: contentEditable
     $el.draggable({disabled:false});
     cE.attr('contenteditable','false');
   }

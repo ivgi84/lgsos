@@ -1,5 +1,4 @@
 import { ElementRef, ViewChild, Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { forEach } from '@angular/router/src/utils/collection';
 import { Element } from './models/element';
 import { Upload } from './models/upload';
 import { UserInput } from './models/user-input';
@@ -7,9 +6,6 @@ import { SortableDirective } from './directives/lgos-sortable.directive';
 import { LgosDraggableDirective } from './directives/lgos-draggable.directive';
 import { DrawService } from './services/draw-service.service';
 import { FontsService } from './tools/fonts-manager/fonts.service';
-import { Observable } from 'rxjs/Observable';
-import { debug } from 'util';
-import * as $ from 'jquery';
 import * as _ from 'lodash';
 import 'jqueryui';
 import * as html2canvas from 'html2canvas';
@@ -55,13 +51,21 @@ export class DrawFormComponent {
         this.uploadFont(file);
     });
   }
+  guid(){ // TODO: transfer this method to utils service
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  }
 
   private uploadFont(file){
     this.fontService.uploadFont(file);
   }
   
   private uploadImage(file, ind){
-    let fileName = "Image_"+ind+1
+    let fileName = "Image_" + this.guid();
       let reader = new FileReader();
       reader.onload = (e: any) => {
         let image = new Image();
