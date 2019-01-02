@@ -16,9 +16,18 @@ export class FontsService {
 
   private fontsRequestData = null;
 
+  getLocalFonts(){
+      return this.http.get('http://localhost:4201/fonts/getLocal').map((res:any)=> {
+        debugger
+        this.fontsRequestData = res;
+        return res;
+      });
+  }
+
   getGoogleFonts(){
     if(!this.fontsRequestData){
       return this.http.get('http://localhost:4201/fonts/getAll').map((res:any)=> {
+        debugger
         this.fontsRequestData = res.items;
         return res.items;
       });

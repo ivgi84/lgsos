@@ -25,22 +25,32 @@ export class FontsManagerComponent implements OnInit {
         this.isEnabled = this.fontsMngWrapper.nativeElement.contains(e.target);
     }
   }
-  private isEnabled;
+  isEnabled;
 
   private fonts = {
     google: {
       families:['Droid Sans', 'Bungee','Risque','Pangolin']
+    },
+    local:{
+      families:[]
     }
   }
 
   ngOnInit() {
     this.isEnabled = false;
-    this.fontsService.getGoogleFonts().subscribe(res =>{
-      debugger;
-    });
+    // this.fontsService.getGoogleFonts().subscribe(res =>{
+    //   debugger;
+    // });
 
-    this.fontsService.wfSubject.subscribe(res =>{
+    // this.fontsService.wfSubject.subscribe(res =>{
+    //   debugger;
+    // });
+
+    this.fontsService.getLocalFonts().subscribe(res =>{
       debugger;
+      res.map(font=>{
+        this.fonts.local.families.push(font.family);
+      });
     });
     this.checkWebFonts();
   }

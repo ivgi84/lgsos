@@ -6,6 +6,7 @@ const formidable = require('formidable');
 const path = require('path');
 const fs = require('fs');
 const promise = require('promise');
+const fontManager = require('font-manager');
 
 const fsHelpers = require('../helpers/files');
 
@@ -55,6 +56,10 @@ router.get('/getAll',(req, res)=>{
     getFonts(req, res);
 });
 
+router.get('/getLocal',(req, res)=>{
+    getLocalFonts(req, res);
+});
+
 function getFonts(req, res){
     let options = '';
 
@@ -101,6 +106,12 @@ function getFonts(req, res){
     //     //     });
     //     // }
     // });
+}
+
+function getLocalFonts(req, res){
+    fontManager.getAvailableFonts(fonts=>{
+        res.send(fonts)
+    })
 }
 
 //getFonts({sort:'popularity'});
