@@ -9,6 +9,8 @@ var fonts = require('./server/routes/fonts');
 var app = express();
 var renderedFiles = path.join(__dirname, 'client/lgsos');
 
+console.log('working directory: ', renderedFiles);
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

@@ -4,9 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatRadioModule, MatSidenavModule, MatTabsModule, MatExpansionModule, MatListModule, MatTooltipModule, MatSliderModule, MatSelectModule } from '@angular/material';import { lgosRootComponent } from './lgos-root.component';
-import { LoginFormComponent } from './views/login-form/login-form.component';
-import { RegisterFormComponent } from './views/register-form/register-form.component';
+
+//routing
+import { AppRoutingModule } from './lgos.router.module';
+
+import { lgosRootComponent } from './lgos-root.component';
+
 import { DrawFormComponent } from './views/draw-form/draw-form.component';
 import { InputFileComponent } from './infrastract/input-file/input-file.component';
 import { LgosDraggableDirective } from './views/draw-form/directives/lgos-draggable.directive';
@@ -20,11 +23,11 @@ import { FontsManagerComponent } from './views/draw-form/tools/fonts-manager/fon
 import { DrawService } from './views/draw-form/services/draw-service.service';
 import { FontsService } from './views/draw-form/tools/fonts-manager/fonts.service';
 
+import { MatInputModule, MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatRadioModule, MatSidenavModule, MatTabsModule, MatExpansionModule, MatListModule, MatTooltipModule, MatSliderModule, MatSelectModule } from '@angular/material';
+
 @NgModule({
   declarations: [
     lgosRootComponent,
-    LoginFormComponent,
-    RegisterFormComponent,
     DrawFormComponent,
     InputFileComponent,
     LgosDraggableDirective,
@@ -39,6 +42,7 @@ import { FontsService } from './views/draw-form/tools/fonts-manager/fonts.servic
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,

@@ -1,0 +1,8 @@
+// currently not in use 
+{
+    "/api/*":{
+      "target":"http://localhost:4201",
+      "secure":false,
+      "logLevel":"debug"
+    }
+  }

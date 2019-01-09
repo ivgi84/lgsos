@@ -7,15 +7,17 @@
     <mat-menu #appMenu="matMenu">
         <button mat-menu-item>
             <mat-icon>fingerprint</mat-icon>
-            <span>login</span>
+            <span routerLink="/login">Login</span>
         </button>
         <button mat-menu-item>
             <mat-icon>person_add</mat-icon>
-            <span>Sign up</span>
+            <span routerLink="/register">Sign up</span>
         </button>
     </mat-menu>
 </mat-toolbar>
 
 <!-- <lgos-login-form></lgos-login-form>
 <lgos-register-form></lgos-register-form> -->
-<lgos-draw-form></lgos-draw-form>
+<!-- <lgos-draw-form></lgos-draw-form> -->
+
+<router-outlet></router-outlet>
