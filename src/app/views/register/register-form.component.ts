@@ -9,6 +9,8 @@ export class RegisterFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('register component');
+
   }
 
 }

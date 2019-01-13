@@ -5,6 +5,10 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #appMenu="matMenu">
+            <button mat-menu-item>
+                    <mat-icon>format_paint</mat-icon>
+                    <span routerLink="/draw">Create Image</span>
+                </button>
         <button mat-menu-item>
             <mat-icon>fingerprint</mat-icon>
             <span routerLink="/login">Login</span>
@@ -15,9 +19,4 @@
         </button>
     </mat-menu>
 </mat-toolbar>
-
-<!-- <lgos-login-form></lgos-login-form>
-<lgos-register-form></lgos-register-form> -->
-<!-- <lgos-draw-form></lgos-draw-form> -->
-
 <router-outlet></router-outlet>

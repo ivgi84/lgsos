@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { GoogleMaterialsModule } from '../../infrastract/google-materials.module';
+
+import { LoginFormComponent } from './login-form.component';
+
 
 @NgModule({
-    declarations:[],
-    imports:[
-        CommonModule
+    declarations:[
+        LoginFormComponent
     ],
-    providers:[]
+    imports:[
+        CommonModule,
+        GoogleMaterialsModule
+    ],
+    providers:[]    
 })
 
-export class LgLoginModule{}
+export class LgosLoginModule{}

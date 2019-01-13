@@ -8,6 +8,7 @@ import { routes } from './lgos.routes';
     providers:[],
     imports:[
         RouterModule.forRoot(routes,{
+            enableTracing:true,
             initialNavigation:'enabled'
         })
     ],
