@@ -64,9 +64,7 @@ export class RegisterFormComponent implements OnInit {
     ]),
     'confirmPassword' : new FormControl(this.user.confirmPassword, [
       Validators.required
-    ],{
-      validator:MustMatch('password','confirmPassword')
-    })
+    ])
   });
 }
 

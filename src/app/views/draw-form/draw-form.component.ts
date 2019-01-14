@@ -142,11 +142,9 @@ export class DrawFormComponent {
   }
   private downloadImage(canvas, name){
     let a = document.createElement('a');
-    a.href = canvas.toDataURL();
+    a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
     a.download = name;
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
   }
 
 }

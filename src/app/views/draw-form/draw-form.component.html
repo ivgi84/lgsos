@@ -95,7 +95,7 @@
     </mat-sidenav>
     <mat-card class="draw-area" (click)="clearSelection($event)">
         <mat-card-content>
-            <div class="playground" lgosDraggable [playgroundClass]="'playground'" [draggableClass]="'draggable-wrap'" *ngIf="elementsList.length > 0" dragElments [elements]="elementsList" >
+            <div class="playground" #playground lgosDraggable [playgroundClass]="'playground'" [draggableClass]="'draggable-wrap'" *ngIf="elementsList.length > 0" dragElments [elements]="elementsList" >
                 <div #draggle (mousedown)="selectElement(elm, $event)" (dblclick)="disableDrag(elm, $event);" class="draggable-wrap" id="{{elm.id}}" [ngClass]="{'isSelected':elm.isSelected}" [ngStyle]="{'z-index':elm.z, 'width':elm.width + 'px', 'direction':elm.styles.direction, 'text-align':elm.styles.textAlign}"
                     *ngFor="let elm of elementsList">
                     <img *ngIf="elm.type == 'upload'" [src]="elm.src" alt="">
