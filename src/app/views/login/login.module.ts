@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { GoogleMaterialsModule } from '../../infrastract/google-materials.module';
+import { LgosInfrastructModule } from '../../infrastract/infrastruct.module';
 
 import { LoginFormComponent } from './login-form.component';
 
@@ -11,8 +9,7 @@ import { LoginFormComponent } from './login-form.component';
         LoginFormComponent
     ],
     imports:[
-        CommonModule,
-        GoogleMaterialsModule
+        LgosInfrastructModule
     ],
     providers:[]    
 })

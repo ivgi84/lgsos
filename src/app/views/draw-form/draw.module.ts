@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { GoogleMaterialsModule } from '../../infrastract/google-materials.module';
-import { FormsModule } from '@angular/forms';
+import { LgosInfrastructModule } from '../../infrastract/infrastruct.module';
 
-
-import { InputFileComponent } from '../../infrastract/input-file/input-file.component';
 import { DrawFormComponent } from './draw-form.component';
 import { LgosDraggableDirective } from './directives/lgos-draggable.directive';
 import { SortableDirective } from './directives/lgos-sortable.directive';
@@ -21,7 +17,6 @@ import { FontsService } from './tools/fonts-manager/fonts.service';
 @NgModule({
     declarations:[
         DrawFormComponent,
-        InputFileComponent,
         LgosDraggableDirective,
         SortableDirective,
         ToolsComponent,
@@ -33,9 +28,7 @@ import { FontsService } from './tools/fonts-manager/fonts.service';
     ],
     providers: [DrawService, FontsService],
     imports:[
-        FormsModule,
-        CommonModule,
-        GoogleMaterialsModule
+        LgosInfrastructModule
     ]
 })
 
