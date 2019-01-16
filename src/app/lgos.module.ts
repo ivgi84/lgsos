@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //routing
 import { AppRoutingModule } from './lgos.router.module';
 
+import{ SharedModule } from './shared/shared.module';
 import { LgosInfrastructModule } from './infrastract/infrastruct.module';
 import { LgosDrawModule } from './views/draw-form/draw.module';
 import { LgosLoginModule } from './views/login/login.module';
@@ -24,6 +25,7 @@ import { lgosRootComponent } from './lgos-root.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    SharedModule,
     LgosInfrastructModule,
     LgosDrawModule,
     LgosLoginModule,

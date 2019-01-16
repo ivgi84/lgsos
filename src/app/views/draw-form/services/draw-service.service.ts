@@ -1,14 +1,17 @@
-import { Injectable,  } from '@angular/core';
+import { Injectable  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class DrawService {
-
-  constructor(private http:HttpClient) { }
+  private baseUrl;
+  constructor(private http:HttpClient) {
+    this.baseUrl = environment.baseUrl;
+   }
 
   getImage(canvasData){
-    return this.http.post('http://localhost:4201/api/createImage',{
+    return this.http.post(`${this.baseUrl}api/createImage`,{
       canvas: canvasData
     });
   }

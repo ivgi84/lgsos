@@ -1,33 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
+import { LgosErrorStateMatcher } from '../../shared/formErrorStateMatcher';
+import { AuthService } from '../../shared/core/auth/auth.service';
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class LgosErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 
-// custom validator to check that two fields match
-export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+function passwordMatchValidator(g: FormGroup) {
+  let passwordControl = g.get('password'),
+      confirmPasswordControl = g.get('confirmPassword');
 
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return;
+      if(passwordControl.value === confirmPasswordControl.value){
+        confirmPasswordControl.setErrors(null)
+        return null;
       }
-
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-      } else {
-          matchingControl.setErrors(null);
+      else{
+        confirmPasswordControl.setErrors({'mismatch': true});
+        return {'mismatch': true};
       }
-  }
 }
 
 @Component({
@@ -37,14 +25,16 @@ export function MustMatch(controlName: string, matchingControlName: string) {
 })
 export class RegisterFormComponent implements OnInit {
 
-  constructor() { }
+  constructor( private authService: AuthService ) { }
+
+  matcher = new LgosErrorStateMatcher();
 
   private registerForm: FormGroup;
   private user = {
-    name:'',
-    email:'',
-    password:'',
-    confirmPassword:''
+    name:'aaaaaa',
+    email:'aaa@aaa.co',
+    password:'123qwe',
+    confirmPassword:'123qwe'
   };
 
   ngOnInit() { 
@@ -63,9 +53,8 @@ export class RegisterFormComponent implements OnInit {
       Validators.minLength(6),
     ]),
     'confirmPassword' : new FormControl(this.user.confirmPassword, [
-      Validators.required
-    ])
-  });
+      Validators.required])
+  }, { validators: passwordMatchValidator, updateOn: 'blur'} );
 }
 
   get f(){
@@ -73,8 +62,11 @@ export class RegisterFormComponent implements OnInit {
   }
 
 
-
-
-  matcher = new LgosErrorStateMatcher();
+  sumbit(){
+    debugger
+      this.authService.register(this.user).subscribe(response =>{
+        console.log(response);
+      })
+  }
 
 }

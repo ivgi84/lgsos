@@ -4,7 +4,7 @@
             <!-- <h3>Register form</h3> -->
         </mat-card-title>
         <mat-card-content>
-            <form class="register-form">
+            <form class="register-form" [formGroup]="registerForm" novalidate >
                 <mat-form-field class="example-full-width">
                     <input matInput type="text" placeholder="full name" minlength="5" [formControl]="f.name" [errorStateMatcher]="matcher">
                     <mat-error *ngIf="f.name.hasError('minlength') && !f.name.hasError('required')">
@@ -34,9 +34,9 @@
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
-                    <input matInput type="password" placeholder="repeat password" minlength="6" [formControl]="f.confirmPassword" [errorStateMatcher]="matcher">
-                    <mat-error *ngIf="!f.confirmPassword.hasError('mustMatch')">
-                        Passwords must match
+                    <input matInput type="password" placeholder="repeat password" [formControl]="f.confirmPassword" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="f.confirmPassword.hasError('mismatch')">
+                        Passwords <strong>must match</strong>
                     </mat-error>
                     <mat-error *ngIf="f.confirmPassword.hasError('required')">
                         Password confirmation is <strong>required</strong>
@@ -45,7 +45,7 @@
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary">Sign me up!</button>
+            <button mat-raised-button color="primary" (click)="sumbit()">Sign me up!</button>
         </mat-card-actions>
     </mat-card>
 </section>
