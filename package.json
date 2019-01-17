@@ -5,7 +5,11 @@
   "main": "app.js",
   "scripts": {
     "ng": "ng",
-    "dev": "ng build && node server",
+    "build&run": "ng build && node ./server/server",
+    "start":"node ./server/server",
+    "server:tsc":"tsc ./server/server.ts",
+    "server:dev:start":"nodemon --inspect ./server/server",
+    "full":"ng build && npm run server:dev && npm run server:dev:start",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

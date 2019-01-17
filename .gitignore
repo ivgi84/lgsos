@@ -1,6 +1,7 @@
 /node_modules
 /dist
-/client
+/public
+/server/**/*.js
 # Compiled source #
 ###################
 *.com
