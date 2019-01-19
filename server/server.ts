@@ -1,3 +1,6 @@
-import  lgosApp  from './src/lgos.init'; 
+console.log('server initialization start');
+import LgOverlayApp  from './src/lgos.init'; 
 
-lgosApp.initApp()
+LgOverlayApp.initApp()
+
+

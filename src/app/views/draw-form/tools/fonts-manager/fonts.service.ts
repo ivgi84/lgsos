@@ -17,7 +17,7 @@ export class FontsService {
   private fontsRequestData = null;
 
   getLocalFonts(){
-      return this.http.get('http://localhost:4201/fonts/getLocal').map((res:any)=> {
+      return this.http.get('http://localhost:4000/api/fonts/local').map((res:any)=> {
         debugger
         this.fontsRequestData = res;
         return res;
@@ -26,7 +26,7 @@ export class FontsService {
 
   getGoogleFonts(){
     if(!this.fontsRequestData){
-      return this.http.get('http://localhost:4201/fonts/getAll').map((res:any)=> {
+      return this.http.get('http://localhost:4000/api/fonts/getAll').map((res:any)=> {
         debugger
         this.fontsRequestData = res.items;
         return res.items;
@@ -50,7 +50,7 @@ export class FontsService {
     formData.append('font', file, file.name);
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'multipart/form-data');
-    return this.http.post('http://localhost:4201/fonts/upload',formData, {headers:headers}).subscribe(res=>{
+    return this.http.post('http://localhost:4000/api/fonts/upload',formData, {headers:headers}).subscribe(res=>{
       debugger;
     }, error =>{
       debugger;

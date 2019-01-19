@@ -1,7 +1,6 @@
-// currently not in use 
 {
     "/api/*":{
-      "target":"http://localhost:4201",
+      "target":"http://localhost:4000",
       "secure":false,
       "logLevel":"debug"
     }

@@ -1,11 +1,10 @@
-import { Logger } from '../infrastruct/logger';
 
 console.log('init services');
 
 export class Services {
 
      _services = {
-        logger:{},
+        //logger:{},
     };
 
     private static _instance: Services = null;
@@ -18,9 +17,9 @@ export class Services {
 
         Services._instance = this;
         
-        const logger = Logger;        
+        //const logger = new Logger({key:'ssss'});        
 
-        this._services.logger = logger;
+        //this._services.logger = logger;
     }
 
     public get services(){

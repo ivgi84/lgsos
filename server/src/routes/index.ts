@@ -1,23 +1,28 @@
 import * as Router from 'express';
-import { Services } from '../services';
 
-import {AuthRouter} from './api';
+import {AuthRouter} from './auth';
+import { FontRouter } from './fonts';
 
 export class LgosRouter{
 
-    router: Router;
-    private services: any;
-    authRouter: Router;
+    router;
+    authRouter;
+    fontsRouter;
 
     constructor(){
+        console.log('Building routes');
         this.router = Router();
-        this.services = new Services().services;
+        
+        this.authRouter = new AuthRouter();
+        this.fontsRouter = new FontRouter()
+        
+        this.setRoutes();
 
-        this.authRouter = new AuthRouter().setRoutes()
     }
 
     setRoutes(){
         this.router.use('/auth', this.authRouter.router);
+        this.router.use('/fonts', this.fontsRouter.router)    
     }
 
 }

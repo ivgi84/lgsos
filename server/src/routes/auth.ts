@@ -1,21 +1,18 @@
 import { Router } from 'express';
-import { Services } from '../services';
-import { LogSeverityLevels } from '../services/enums/log-security.levels';
 
 export class AuthRouter {
 
     router: Router;
     readonly packageJson = require('../../../package.json');
-    private services: any;
 
     constructor() {
         this.router = Router();
-        this.services = new Services().services;
+        this.setRoutes();
     }
 
 
-    registerHandler(){
-
+    registerHandler(req, res){
+        res.send(JSON.stringify('register route works'));
     }
 
     setRoutes() {
