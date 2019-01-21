@@ -1,18 +1,24 @@
 import mongoose from 'mongoose';
 
-class User{
+const Schema = mongoose.Schema;
 
-    standUpSchema = new mongoose.Schema({
-        fName: { type: String},
-        lName: { type: String },
-        email: { type: String },
-        password: { type: String },
-        createdOn: { type: Date, default: Date.now }
-    })
-
-    constructor(){
-        
+export const UserSchema = new Schema({
+    firstName :{
+        type: String,
+        required: 'Enter a first name'
+    },
+    lastName:{
+        type: String,
+        required: 'Enter a last name'
+    },
+    email:{
+         type: String,        
+    },
+    password:{
+        type:String
+    },
+    createed_data:{
+        type: Date,
+        default: Date.now
     }
-}
-
-export default User;
+});

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { UserSchema } from '../../models/user';
 
 export class AuthRouter {
 
@@ -11,7 +12,7 @@ export class AuthRouter {
     }
 
 
-    registerHandler(req, res){
+    registerHandler(req:any, res:any){
         res.send(JSON.stringify('register route works'));
     }
 
