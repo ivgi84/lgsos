@@ -4,10 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "server:tsc": "tsc --target es5 --lib es6 --watch ./server.ts",
-    "server:dev": "nodemon --inspect ./server.js"
+    "build": "tsc",
+    "dev": "ts-node ./src/server.ts",        
+    "compile":"tsc --watch",
+    "start": "nodemon ../public/server/src/server.js",
+    "prod": "npm run build && npm run start"
   },
   "author": "Evgeny Smolovich",
   "license": "ISC",
