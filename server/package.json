@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node ./src/server.ts",        
-    "compile":"tsc --watch",
-    "start": "nodemon ../public/server/src/server.js",
+    "dev": "ts-node ./src/server.ts",
+    "compile": "tsc --watch",
+    "start": "nodemon ../public/server/server.js",
     "prod": "npm run build && npm run start"
   },
   "author": "Evgeny Smolovich",
@@ -27,6 +27,7 @@
     "@types/cors": "^2.8.4",
     "@types/express": "^4.16.0",
     "@types/formidable": "^1.0.31",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "nodemon": "^1.18.9"
   }
 }

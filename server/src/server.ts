@@ -1,5 +1,5 @@
 console.log('server initialization start');
-import app  from './lgos.init'; 
+import app from './lgos.init';
 import { LgosConfig } from './config/config';
 
 const PORT = LgosConfig.config.defaultPort;

@@ -9,7 +9,7 @@
       "baseUrl": "../public"
   },
   "include": [
-    "src/*.ts",
+      "src/*.ts",
       "src/**/*.ts"
   ],
   "exclude": [

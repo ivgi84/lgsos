@@ -1,22 +1,19 @@
 import { Router } from 'express';
-import { UserSchema } from '../../models/user';
+import { RegisterController } from '../controllers/register';
 
-export class AuthRouter {
+class AuthRouter {
 
-    router: Router;
-    readonly packageJson = require('../../../package.json');
+    router;
+    registerController: RegisterController;
 
     constructor() {
         this.router = Router();
-        this.setRoutes();
+        this.setRoutes.bind(this);
+        this.registerController = new RegisterController();
     }
-
-
-    registerHandler(req:any, res:any){
-        res.send(JSON.stringify('register route works'));
-    }
-
     setRoutes() {
-        this.router.get('/register', this.registerHandler.bind(this));
+        this.router.post('/register/new',  this.registerController.registerUser);
     }
 }
+
+export default new AuthRouter().router;
