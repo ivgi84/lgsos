@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { RegisterController } from '../controllers/register';
 
+console.log('import ', RegisterController);
+
 class AuthRouter {
 
     router;
@@ -8,11 +10,13 @@ class AuthRouter {
 
     constructor() {
         this.router = Router();
-        this.setRoutes.bind(this);
         this.registerController = new RegisterController();
+        this.setRoutes.call(this);
     }
     setRoutes() {
-        this.router.post('/register/new',  this.registerController.registerUser);
+        this.router.post('/register/new', (req, res) => {
+            this.registerController.registerUser(req, res);
+        });
     }
 }
 
