@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev": "ts-node ./src/server.ts",
     "compile": "tsc --watch",
-    "start": "nodemon ../public/server/server.js",
+    "start": "nodemon %NODE_DEBUG_OPTION% ../public/server/server.js",
     "prod": "npm run build && npm run start"
   },
   "author": "Evgeny Smolovich",

@@ -4,9 +4,9 @@
             <!-- <h3>Register form</h3> -->
         </mat-card-title>
         <mat-card-content>
-            <form class="register-form" [formGroup]="registerForm" novalidate >
+            <form class="register-form" [formGroup]="registerForm" novalidate>
                 <mat-form-field class="example-full-width">
-                    <input matInput type="text" placeholder="full name" minlength="5" [formControl]="f.name" [errorStateMatcher]="matcher">
+                    <input matInput type="text" placeholder="Full Name" minlength="5" [formControl]="f.name" [errorStateMatcher]="matcher">
                     <mat-error *ngIf="f.name.hasError('minlength') && !f.name.hasError('required')">
                         Please enter a valid name
                     </mat-error>
@@ -17,15 +17,24 @@
                 <mat-form-field class="example-full-width">
                     <input matInput type="mail" placeholder="email" [formControl]="f.email" [errorStateMatcher]="matcher">
                     <!-- <mat-hint>Any message could be here</mat-hint> -->
-                    <mat-error *ngIf="f.email.hasError('email') && !f.email.hasError('required')">
-                        Please enter a valid email address
-                    </mat-error>
+                    <!--<mat-error *ngIf="f.email.hasError('email') && !f.email.hasError('required')">-->
+                        <!--Please enter a valid email address-->
+                    <!--</mat-error>-->
                     <mat-error *ngIf="f.email.hasError('required')">
                         Email is <strong>required</strong>
                     </mat-error>
+                    <mat-error *ngIf="f.email.hasError('emailPattern') && !f.email.hasError('required')">
+                        Please enter a <strong>valid</strong> email address
+                    </mat-error>
                 </mat-form-field>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width password-input">
                     <input matInput type="password" placeholder="Password" minlength="6" [formControl]="f.password" [errorStateMatcher]="matcher">
+                    <div *ngIf="f.password.dirty || f.password.touched" class="password-strength {{passwordStrengthName}}">
+                        {{passwordStrengthName}}
+                        <!--<ul>-->
+                            <!--<li *ngFor="let bar of passwordStrength"></li>-->
+                        <!--</ul>-->
+                    </div>
                     <mat-error *ngIf="f.password.hasError('minlength') && !f.password.hasError('required')">
                         Password must be at least 6 characters
                     </mat-error>
@@ -45,7 +54,7 @@
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="sumbit()">Sign me up!</button>
+            <button mat-raised-button color="primary" (click)="submit()">Sign me up!</button>
         </mat-card-actions>
     </mat-card>
 </section>

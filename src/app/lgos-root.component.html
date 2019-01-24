@@ -5,17 +5,17 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #appMenu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item routerLink="/draw">
                     <mat-icon>format_paint</mat-icon>
-                    <span routerLink="/draw">Create Image</span>
+                    <span>Create Image</span>
                 </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/login">
             <mat-icon>fingerprint</mat-icon>
-            <span routerLink="/login">Login</span>
+            <span>Login</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/register">
             <mat-icon>person_add</mat-icon>
-            <span routerLink="/register">Sign up</span>
+            <span >Sign up</span>
         </button>
     </mat-menu>
 </mat-toolbar>

@@ -3,27 +3,21 @@ import { UserSchema } from '../models/user';
 import { Request, Response } from 'express';
 
 const User = mongoose.model('User', UserSchema);
-console.log('register controller start');
 export class RegisterController {
-    constructor() {}
+    constructor() {
+        console.log('register controller start');
+    }
     // @ts-ignore
     public registerUser(req: Request, res: Response) {
-        //console.log('Register user request', req);
+        console.log('New user register request, user: ', req.body);
         const nUser = new User(req.body);
-        console.log('nUser: ', nUser);
         nUser.save().then(response => {
+            console.log('success');
             res.json(response)
         }).catch(err => {
+            console.log('failure');
             res.json(err);
-        })
-        // nUser.save((err, user) => {
-        //     if (err) {
-        //         console.log('err ',err);
-        //         res.send(err);
-        //     }
-        //     console.log('user ',user)
-        //     res.json(user);
-        // });
+        });
     }
 }
 

@@ -5,3 +5,44 @@
 .mat-form-field{
     display: block;
 }
+.password-input{
+    position: relative;
+    .password-strength{
+        position: absolute;
+        right: 0;
+        top: 2px;
+        width: 70px;
+        background: #777777;
+        height: 20px;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        transition: all 1s;
+        padding-top: 2px;
+        &.strong{
+            background-color: green;
+        }
+        &.medium{
+            background-color: darkorange;
+        }
+        &.weak{
+            background-color: red;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li{
+                -webkit-transition: all 1s;
+                transition: all 1s;
+                display: inline-block;
+                background: #777777;
+                width: 0px;
+                height: 5px;
+                border-radius: 100px;
+                margin-right: 3px;
+
+            }
+        }
+    }
+}

@@ -8,8 +8,6 @@ class ApiRouter {
     constructor() {
         this.router = Router();
         this.setRoutes();
-
-        console.log('authRouter: ', authRouter);
     }
 
     setRoutes() {
