@@ -4,14 +4,23 @@
             <!-- <h3>Register form</h3> -->
         </mat-card-title>
         <mat-card-content>
-            <form class="register-form" [formGroup]="registerForm" novalidate>
+            <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
                 <mat-form-field class="example-full-width">
-                    <input matInput type="text" placeholder="Full Name" minlength="5" [formControl]="f.name" [errorStateMatcher]="matcher">
-                    <mat-error *ngIf="f.name.hasError('minlength') && !f.name.hasError('required')">
+                    <input matInput type="text" placeholder="Fist Name" minlength="2" [formControl]="f.firstName" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="f.firstName.hasError('minlength') && !f.firstName.hasError('required')">
                         Please enter a valid name
                     </mat-error>
-                    <mat-error *ngIf="f.name.hasError('required')">
-                        Name is <strong>required</strong>
+                    <mat-error *ngIf="f.firstName.hasError('required')">
+                        First Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput type="text" placeholder="Last Name" minlength="2" [formControl]="f.lastName" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="f.lastName.hasError('minlength') && !f.lastName.hasError('required')">
+                        Please enter a valid name
+                    </mat-error>
+                    <mat-error *ngIf="f.lastName.hasError('required')">
+                        Last Name is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
@@ -54,7 +63,7 @@
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="submit()">Sign me up!</button>
+            <button type="submit" mat-raised-button color="primary">Sign me up!</button>
         </mat-card-actions>
     </mat-card>
 </section>

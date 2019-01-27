@@ -13,7 +13,8 @@ export class AuthService {
     }
 
     register(user) {
-        return this.http.post(`${this.baseUrl}api/auth/register`, {
+        console.log(user);
+        return this.http.post(`${this.baseUrl}api/auth/register/new`, {
             user: user
         })
     }

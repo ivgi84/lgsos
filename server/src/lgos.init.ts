@@ -28,8 +28,8 @@ class LgOverlayApp {
         this.app = express();
         this.router = express.Router();
         this.appConfig = LgosConfig.config;
+
         this.config();
-        this.dbSetup();
 
         this.app.use(LgOverlayApp.allowCORS);
         this.app.use('/api', apiRouter );
@@ -55,7 +55,7 @@ class LgOverlayApp {
     private dbSetup(): void {
         // @ts-ignore
         mongoose.Promise = global.Promise;
-        mongoose.connect(this.appConfig.db.mLabDbConnectionString, { useNewUrlParser: true })
+        mongoose.connect(this.appConfig.mLabDbConnectionString, { useNewUrlParser: true })
     }
 }
 

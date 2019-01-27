@@ -42,7 +42,8 @@ export class RegisterFormComponent implements OnInit {
   private registerForm: FormGroup;
   private passwordStrength = [];
   private user = {
-    name: '',
+    firstName: '',
+    lastName:'',
     email: '',
     password: '',
     confirmPassword: ''
@@ -63,7 +64,8 @@ export class RegisterFormComponent implements OnInit {
     }
   }
 
-  submit() {
+  onSubmit() {
+    console.log(this.user)
     this.authService.register(this.user).subscribe(response => {
       console.log(response);
     })
@@ -71,9 +73,13 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit() {
       this.registerForm = new FormGroup({
-        'name' : new FormControl(this.user.name, [
+        'firstName' : new FormControl(this.user.firstName, [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(2),
+        ]),
+        'lastName': new FormControl(this.user.lastName, [
+          Validators.required,
+          Validators.minLength(2)
         ]),
         'email' : new FormControl(this.user.email, [
           Validators.required,
