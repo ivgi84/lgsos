@@ -11,11 +11,10 @@ import { LgosConfig } from './config/config';
 
 class LgOverlayApp {
     public app: express.Application;
-    public dbUrl = 'mongodb://localhost/lgOs';
     router: any;
     appConfig: any;
     cors: any;
-    private allowCORS(req, res, next) {
+    private static allowCORS(req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -32,13 +31,13 @@ class LgOverlayApp {
         this.config();
         this.dbSetup();
 
-        this.app.use(this.allowCORS);
+        this.app.use(LgOverlayApp.allowCORS);
         this.app.use('/api', apiRouter );
     }
     private config(): void {
         console.log('config init');
         const PORT = process.env.PORT || this.appConfig.defaultPort;
-        const DIST_FOLDER = path.join(__dirname, '../../assets');
+        const DIST_FOLDER = path.join(__dirname, `../${this.appConfig.distanationFolder}`);
         console.log(`DISTANATION FOLDER: ${DIST_FOLDER}`);
 
         // // this.app.use(cors()); // only for dev
@@ -56,7 +55,7 @@ class LgOverlayApp {
     private dbSetup(): void {
         // @ts-ignore
         mongoose.Promise = global.Promise;
-        mongoose.connect(this.dbUrl, { useNewUrlParser: true })
+        mongoose.connect(this.appConfig.db.mLabDbConnectionString, { useNewUrlParser: true })
     }
 }
 

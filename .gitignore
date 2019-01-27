@@ -3,6 +3,7 @@
 /dist
 /public
 /server/**/*.js
+/server/data/
 # Compiled source #
 ###################
 *.com
