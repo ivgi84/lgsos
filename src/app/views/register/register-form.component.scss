@@ -5,16 +5,19 @@
 .mat-form-field{
     display: block;
 }
+.action-button-wrapper{
+    padding: 15px 0;
+}
 .password-input{
     position: relative;
     .password-strength{
         position: absolute;
         right: 0;
-        top: 2px;
+        top: 6px;
         width: 70px;
         background: #777777;
         height: 20px;
-        border-radius: 10px;
+        border-radius: 3px;
         text-align: center;
         color: white;
         transition: all 1s;

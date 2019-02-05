@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { LgosErrorStateMatcher } from '../../shared/formErrorStateMatcher';
 import { AuthService } from '../../shared/core/auth/auth.service';
+import { RegUser } from 'app/shared/models/user';
 
 
 function passwordMatchValidator(g: FormGroup) {
@@ -37,23 +38,56 @@ function validateEmail(control: FormControl) {
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
-
   matcher = new LgosErrorStateMatcher();
-  private registerForm: FormGroup;
+  registerForm: FormGroup;
+  isSubmitted: boolean;
+  isLoading: boolean;
+  events:any[];
   private passwordStrength = [];
-  private user = {
-    firstName: '',
-    lastName:'',
-    email: '',
-    password: '',
-    confirmPassword: ''
+  private user: RegUser = {
+    firstName: 'ivgi11',
+    lastName:'smol11',
+    email: 'ivgi11@mail.com',
+    password: '123qwe',
+    confirmPassword: '123qwe',
+    allowPromoEmails: true
   };
 
-  constructor( private authService: AuthService ) { }
+  constructor( private authService: AuthService, private fb:FormBuilder ) {
+    this.events = [];
+    this.isLoading = false;
+    this.isSubmitted = false;
+   }
 
-  get f() {
-    return this.registerForm.controls;
+  ngOnInit() {
+    this.registerForm = this.fb.group({
+      'firstName':[this.user.firstName,[Validators.required, Validators.minLength(2),]],
+      'lastName':[this.user.lastName,[Validators.required, Validators.minLength(2)]],
+      'email' : [this.user.email, [Validators.required, validateEmail]],
+      'password' : [this.user.password, [Validators.required, Validators.minLength(6),]],
+      'confirmPassword' : [this.user.confirmPassword, [Validators.required]],
+      'allowPromoEmails': [this.user.allowPromoEmails]
+    }, { validators: passwordMatchValidator, updateOn: 'change'})
+
+    this.subscribeToFormChanges();
+}
+
+  get firstName(){
+    return this.registerForm.get('firstName');
   }
+  get lastName(){
+    return this.registerForm.get('lastName');
+  }
+  get email(){
+    return this.registerForm.get('email');
+  }
+  get password(){
+    return this.registerForm.get('password');
+  }
+  get confirmPassword(){
+    return this.registerForm.get('confirmPassword');
+  }
+
   get passwordStrengthName() {
     if (this.passwordStrength.length === 5) {
       return 'strong';
@@ -64,40 +98,34 @@ export class RegisterFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    console.log(this.user)
-    this.authService.register(this.user).subscribe(response => {
-      console.log(response);
-    })
+  submitHandler() {
+    debugger;
+    this.isLoading = true;
+    this.isSubmitted = true;
+    const formValue = this.registerForm.value;
+
+    try{
+      this.authService.register(formValue).then(result =>{
+        console.log(result);
+      })
+    }
+    catch(e){
+      console.log('error', e);
+    }
+
   }
 
-  ngOnInit() {
-      this.registerForm = new FormGroup({
-        'firstName' : new FormControl(this.user.firstName, [
-          Validators.required,
-          Validators.minLength(2),
-        ]),
-        'lastName': new FormControl(this.user.lastName, [
-          Validators.required,
-          Validators.minLength(2)
-        ]),
-        'email' : new FormControl(this.user.email, [
-          Validators.required,
-          validateEmail
-        ]),
-        'password' : new FormControl(this.user.password, [
-          Validators.required,
-          Validators.minLength(6),
-        ]),
-        'confirmPassword' : new FormControl(this.user.confirmPassword, [
-          Validators.required])
-      }, { validators: passwordMatchValidator, updateOn: 'change'} );
+  private subscribeToFormChanges(){
+    const registerFormStatusChanges$ = this.registerForm.statusChanges;
+    const registerFormValueChanges$ = this.registerForm.valueChanges
+    
+    registerFormStatusChanges$.subscribe(console.log);
+    registerFormValueChanges$.subscribe(console.log);
 
-
-      this.registerForm.get('password').valueChanges.subscribe(this.onPasswordChange.bind(this));
+    this.registerForm.get('password').valueChanges.subscribe(this.onPasswordChange.bind(this));
   }
 
-  private  onPasswordChange(password: string) {
+  private onPasswordChange(password: string) {
     const STRONG_REGEX = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
     const MEDIUM_REGEX = new RegExp('^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})');
 

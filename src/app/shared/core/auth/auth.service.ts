@@ -13,9 +13,12 @@ export class AuthService {
     }
 
     register(user) {
-        console.log(user);
         return this.http.post(`${this.baseUrl}api/auth/register/new`, {
             user: user
+        }).toPromise().then(response =>{
+            debugger;
+        }).catch(error =>{
+            debugger;
         })
     }
 

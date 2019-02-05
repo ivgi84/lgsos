@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +31,9 @@ import { lgosRootComponent } from './lgos-root.component';
     LgosLoginModule,
     LgosRegistrationModule
   ],
-  bootstrap: [lgosRootComponent]
+  bootstrap: [lgosRootComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class LgosModule { }

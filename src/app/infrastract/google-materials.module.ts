@@ -1,8 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { MatInputModule, MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatRadioModule, MatSidenavModule, MatTabsModule, MatExpansionModule, MatListModule, MatTooltipModule, MatSliderModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatRadioModule, MatSidenavModule, MatTabsModule, MatExpansionModule, MatListModule, MatTooltipModule, MatSliderModule, MatSelectModule, MatCheckboxModule } from '@angular/material';
 
-const modulesList = [
+
+@NgModule({
+  exports: [
     MatButtonModule,
     MatInputModule,
     MatMenuModule,
@@ -16,11 +19,9 @@ const modulesList = [
     MatListModule,
     MatTooltipModule,
     MatSliderModule,
-    MatSelectModule
-]
-
-@NgModule({
-  imports: modulesList,
-  exports: modulesList
+    MatSelectModule,
+    MatCheckboxModule
+  ],
+  imports: [ CommonModule ]
 })
 export class GoogleMaterialsModule { }

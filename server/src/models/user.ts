@@ -19,6 +19,9 @@ export const UserSchema = new Schema({
         type: String,
         required: 'Enter a password'
     },
+    allowPromoEmail: {
+        type: Boolean
+    },
     createed_data: {
         type: Date,
         default: Date.now

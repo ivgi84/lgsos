@@ -11,13 +11,13 @@ export class RegisterController {
     public registerUser(req: Request, res: Response) {
         console.log('New user register request, user: ', req.body);
         const nUser = new User(req.body);
-        nUser.save().then(response => {
-            console.log('success');
-            res.json(response)
-        }).catch(err => {
-            console.log('failure');
-            res.json(err);
-        });
+        // nUser.save().then(response => {
+        //     console.log('success');
+        //     res.json(response)
+        // }).catch(err => {
+        //     console.log('failure');
+        //     res.json(err);
+        // });
     }
 }
 
