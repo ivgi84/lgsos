@@ -8,6 +8,9 @@ import * as mongoose from 'mongoose';
 // import routes
 import apiRouter from './routes/api';
 import { LgosConfig } from './config/config';
+const addRequestId = require('express-request-id')();
+import { Morgan } from 'morgan';
+import morgan = require('morgan');
 
 class LgOverlayApp {
     public app: express.Application;
@@ -30,6 +33,28 @@ class LgOverlayApp {
         this.appConfig = LgosConfig.config;
 
         this.config();
+        this.app.use(addRequestId); // add request id to every request
+
+        morgan.token('id', req => {
+            debugger
+            return req['id'];
+        });
+
+        const loggerFormat = ':id [:date[web]]" :method :url" :status :responsetime';
+        this.app.use(morgan(loggerFormat, {
+            skip: (req, res) => {
+                return res.statusCode < 400
+            },
+            stream: process.stderr
+        }));
+
+        this.app.use(morgan(loggerFormat, {
+            skip: (req, res) => {
+                return res.statusCode >= 400
+            },
+            stream: process.stdout
+        }));
+        
 
         this.app.use(LgOverlayApp.allowCORS);
         this.app.use('/api', apiRouter );

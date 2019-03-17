@@ -7,6 +7,14 @@
         {
             "type": "node",
             "request": "attach",
+            "name": "Node: Nodemon",
+            "processId": "${command:PickProcess}",
+            "restart": true,
+            "protocol": "inspector",
+        },
+        {
+            "type": "node",
+            "request": "attach",
             "name": "Attach by Process ID",
             "processId": "${command:PickProcess}"
         },
@@ -20,26 +28,27 @@
                 "debug"
             ],
             "port": 9229
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "nodemon",
-            "runtimeExecutable": "nodemon",
-            "program": "${workspaceFolder}/app.js",
-            "restart": true,
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\app.js",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/dist/out-tsc/**/*.js"
-            ]
         }
+        // ,
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "nodemon",
+        //     "runtimeExecutable": "nodemon",
+        //     "program": "${workspaceFolder}/app.js",
+        //     "restart": true,
+        //     "console": "integratedTerminal",
+        //     "internalConsoleOptions": "neverOpen"
+        // },
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "Launch Program",
+        //     "program": "${workspaceFolder}\\app.js",
+        //     "preLaunchTask": "tsc: build - tsconfig.json",
+        //     "outFiles": [
+        //         "${workspaceFolder}/dist/out-tsc/**/*.js"
+        //     ]
+        // }
     ]
 }
