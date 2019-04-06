@@ -1,8 +1,7 @@
 console.log('server initialization start');
 import app from './lgos.init';
-import { LgosConfig } from './config/config';
 
-const PORT = LgosConfig.config.defaultPort;
+const PORT = app.get('port');
 
 app.listen(PORT, () => {
     console.log('Lg Overlay server us up and running on port ' + PORT);

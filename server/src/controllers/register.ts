@@ -13,7 +13,8 @@ export class RegisterController {
     // @ts-ignore
     public registerUser(req: Request, res: Response) {
         console.log('New user register request, user: ', req.body);
-        let result = this.validateUserData(req.body);
+        //let result = this.validateUserData(req.body);
+        return res.status(200).json('user');
         
         // nUser.save().then(response => {
         //     console.log('success');

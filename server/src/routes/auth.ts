@@ -12,7 +12,7 @@ class AuthRouter {
     }
     setRoutes() {
         this.router.post('/register/new', (req, res) => {
-            this.registerController.registerUser(req, res);
+            return this.registerController.registerUser(req, res);
         });
     }
 }
