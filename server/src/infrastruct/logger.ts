@@ -1,15 +1,32 @@
 import MORGAN = require('morgan');
+import bunyan = require('bunyan');
+import {logLevels} from '../enums/log-security-levels';
 export class Logger{
     app:any;
     morgan = MORGAN;
+    bunyan = bunyan;
+    log:any;
     constructor(app){
         this.app = app;
         this.init();
     }
 
+    public info(message: String){
+        this.log.info({
+            message: message,
+            level: logLevels.info
+        })
+    }
+    public warn(message:Object){
+        this.log.warn(message)
+    }
+
     private init(){
         this.morgan('dev');
-
+        this.log = this.bunyan.createLogger({
+            name: 'LeniGraphics Overlay System';
+        })
+        
         this.morgan.token('id', req => {
             return req['id'];
         });
